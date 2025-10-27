@@ -1,0 +1,237 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 0,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "AWS/Lambda", "Duration", "FunctionName", "job-lander-blockchain-dev" ],
+          [ ".", "Invocations", ".", "." ],
+          [ ".", "Errors", ".", "." ],
+          [ ".", "Throttles", ".", "." ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "us-east-1",
+        "title": "Lambda Function Performance",
+        "period": 300,
+        "stat": "Average",
+        "yAxis": {
+          "left": {
+            "min": 0
+          }
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 0,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "AWS/Amplify", "Requests", "App", "job-lander-prod" ],
+          [ ".", "BytesDownloaded", ".", "." ],
+          [ ".", "4XXError", ".", "." ],
+          [ ".", "5XXError", ".", "." ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "us-east-1",
+        "title": "Frontend Performance",
+        "period": 300,
+        "stat": "Sum"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 6,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "JobLander/CustomMetrics", "DatabaseConnections", "Environment", "production" ],
+          [ ".", "DatabaseQueryTime", ".", "." ],
+          [ ".", "DatabaseErrors", ".", "." ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "us-east-1",
+        "title": "Database Performance",
+        "period": 300,
+        "stat": "Average",
+        "yAxis": {
+          "left": {
+            "min": 0
+          }
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 8,
+      "y": 6,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "JobLander/AI", "LLMRequests", "Provider", "gemini" ],
+          [ ".", "LLMResponseTime", ".", "." ],
+          [ ".", "LLMTokensUsed", ".", "." ],
+          [ ".", "LLMErrors", ".", "." ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "us-east-1",
+        "title": "AI Service Performance",
+        "period": 300,
+        "stat": "Sum"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 16,
+      "y": 6,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "JobLander/Blockchain", "TransactionCount", "Network", "polygon-mumbai" ],
+          [ ".", "TransactionGasUsed", ".", "." ],
+          [ ".", "TransactionErrors", ".", "." ],
+          [ ".", "VerificationRequests", ".", "." ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "us-east-1",
+        "title": "Blockchain Operations",
+        "period": 300,
+        "stat": "Sum"
+      }
+    },
+    {
+      "type": "log",
+      "x": 0,
+      "y": 12,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "query": "SOURCE '/aws/lambda/job-lander-blockchain-dev'\n| fields @timestamp, @message, level, error\n| filter level = \"ERROR\"\n| sort @timestamp desc\n| limit 50",
+        "region": "us-east-1",
+        "title": "Recent Application Errors",
+        "view": "table",
+        "stacked": false
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 12,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "JobLander/Security", "FailedLoginAttempts", "Endpoint", "/api/auth/login" ],
+          [ ".", "RateLimitHits", ".", "." ],
+          [ ".", "SecurityViolations", ".", "." ],
+          [ ".", "SuspiciousActivity", ".", "." ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "us-east-1",
+        "title": "Security Metrics",
+        "period": 300,
+        "stat": "Sum",
+        "annotations": {
+          "horizontal": [
+            {
+              "label": "Security Threshold",
+              "value": 10
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 18,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "JobLander/Business", "UserRegistrations" ],
+          [ ".", "ResumeUploads" ],
+          [ ".", "JobSearches" ],
+          [ ".", "ResumeVerifications" ]
+        ],
+        "view": "singleValue",
+        "region": "us-east-1",
+        "title": "Business KPIs (Daily)",
+        "period": 86400,
+        "stat": "Sum"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 6,
+      "y": 18,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "JobLander/Performance", "PageLoadTime", "Page", "homepage" ],
+          [ ".", "APIResponseTime", "Endpoint", "/api/resumes" ],
+          [ ".", "DatabaseResponseTime", "Operation", "SELECT" ]
+        ],
+        "view": "singleValue",
+        "region": "us-east-1",
+        "title": "Performance Summary",
+        "period": 300,
+        "stat": "Average"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 18,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", "job-lander-db" ],
+          [ ".", "DatabaseConnections", ".", "." ],
+          [ ".", "ReadLatency", ".", "." ],
+          [ ".", "WriteLatency", ".", "." ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "us-east-1",
+        "title": "Database Infrastructure",
+        "period": 300,
+        "stat": "Average",
+        "yAxis": {
+          "left": {
+            "min": 0,
+            "max": 100
+          }
+        }
+      }
+    }
+  ],
+  "annotations": {
+    "horizontal": [
+      {
+        "color": "#d62728",
+        "label": "Error Rate Threshold",
+        "value": 5,
+        "fill": "above"
+      }
+    ]
+  }
+}

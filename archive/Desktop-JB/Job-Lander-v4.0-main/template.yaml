@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Job Lander v5.0 - Serverless Backend API
+
+Globals:
+  Function:
+    Timeout: 20
+    MemorySize: 512
+    Runtime: nodejs20.x
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        NODE_ENV: production
+        AWS_SECRET_ID: joblander/prod/config
+        REGION: us-east-1
+
+Resources:
+  # ===========================
+  # Lambda Function Definition
+  # ===========================
+  JobLanderApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: joblander-api
+      Description: Backend API for Job Lander v5.0
+      CodeUri: lambda-backend/
+      Handler: server.handler
+      Role: !GetAtt JobLanderApiRole.Arn
+      Events:
+        ApiRoot:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+        ApiAll:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+
+  # ===========================
+  # IAM Role for Lambda
+  # ===========================
+  JobLanderApiRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: joblander-api-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: 
+                - lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/SecretsManagerReadWrite
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      Policies:
+        - PolicyName: CloudWatchLogs
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+
+Outputs:
+  ApiEndpoint:
+    Description: "API Gateway endpoint URL for Job Lander"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  LambdaFunctionName:
+    Description: "Name of the deployed Lambda function"
+    Value: !Ref JobLanderApi
+  LambdaRoleArn:
+    Description: "ARN of the IAM Role for Lambda"
+    Value: !GetAtt JobLanderApiRole.Arn

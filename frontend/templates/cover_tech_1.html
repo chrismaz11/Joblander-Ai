@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cover Letter - {{position}} - {{name}}</title>
+<style>
+  body{font-family: Arial,Helvetica,sans-serif; color:#111; padding:20px;}
+  .cover{max-width:800px;margin:0 auto;}
+  header{margin-bottom:14px;}
+  h1{font-size:20px;margin:0 0 6px 0;color:#222;}
+  .contact{font-size:13px;color:#666;margin-bottom:12px;}
+  p{margin:10px 0;}
+  .signature{margin-top:18px;}
+  @media print{ .no-print{display:none;} }
+</style>
+</head>
+<body>
+<div class="cover">
+  <header>
+    <div class="contact">{{name}} | {{email}} | {{phone}} | {{location}}</div>
+    <div><strong>{{date}}</strong></div>
+  </header>
+
+  <p>Hiring Manager<br/>{{company}}<br/>{{company_address}}</p>
+
+  <p>Dear {{hiring_manager|Hiring Manager}},</p>
+
+  <p>I am writing to express my interest in the <strong>{{position}}</strong> role at {{company}}. With {{years}} years of experience in {{industry}}, I bring a proven record of delivering measurable results, including {{achievement_1}} and {{achievement_2}}.</p>
+
+  <p>My background includes: <strong>{{key_skill_1}}</strong>, <strong>{{key_skill_2}}</strong>, and a track record of success with {{relevant_tech_or_method}}. I am confident these skills make me a strong fit for the needs described in your job posting.</p>
+
+  <p>I have attached my resume and relevant publications (verifiable via the credential link below). I would welcome the opportunity to discuss how my background aligns with your team’s goals.</p>
+
+  <p class="signature">Sincerely,<br/><strong>{{name}}</strong><br/>{{linkedin}} • {{portfolio}}</p>
+
+  <section class="small">
+    <p><em>Credential verification:</em> <a href="{{blockchain_proof_url}}">Verify publications & certificates</a></p>
+  </section>
+</div>
+</body>
+</html>

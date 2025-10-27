@@ -1,0 +1,1802 @@
+[
+  {
+    "template_id": "classic_blue",
+    "name": "Classic Blue",
+    "category": "ATS-Friendly",
+    "free": true,
+    "ats_score": 98,
+    "photo_option": false,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#004E92",
+        "#FFFFFF",
+        "#1F1F1F"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Clean corporate layout with blue header bar and simple section dividers.",
+      "sample_content": {
+        "name": "Emily Roberts",
+        "title": "Project Manager",
+        "summary": "Experienced professional with a proven record of success in ats-friendly.",
+        "experience": [
+          {
+            "role": "Lead Project Manager",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Project Manager",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#004E92",
+        "#FFFFFF",
+        "#1F1F1F"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Matching professional letter with right-aligned contact info and clean margins.",
+      "tone": "Formal Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Project Manager role at your organization. With extensive experience in ats-friendly and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Emily Roberts"
+      }
+    },
+    "recommended_for": [
+      "Corporate",
+      "Finance",
+      "Consulting"
+    ]
+  },
+  {
+    "template_id": "modern_minimalist",
+    "name": "Modern Minimalist",
+    "category": "ATS-Friendly",
+    "free": true,
+    "ats_score": 95,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#2E2E2E",
+        "#FFFFFF",
+        "#DDDDDD"
+      ],
+      "font_family": "Roboto",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Minimal design with bold section titles and soft gray accents.",
+      "sample_content": {
+        "name": "Marcus Rivera",
+        "title": "Software Engineer",
+        "summary": "Experienced professional with a proven record of success in ats-friendly.",
+        "experience": [
+          {
+            "role": "Lead Software Engineer",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Software Engineer",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#2E2E2E",
+        "#FFFFFF",
+        "#DDDDDD"
+      ],
+      "font_family": "Roboto",
+      "preview_description": "Minimalist matching letter with balanced spacing.",
+      "tone": "Professional Neutral",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Software Engineer role at your organization. With extensive experience in ats-friendly and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Marcus Rivera"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Startups",
+      "General Business"
+    ]
+  },
+  {
+    "template_id": "timeline_pro",
+    "name": "Timeline Pro",
+    "category": "Modern",
+    "free": false,
+    "ats_score": 88,
+    "photo_option": false,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#32465a",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Modern layout emphasizing timeline pro style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Timeline",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in modern.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#32465a",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using timeline pro theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in modern and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Timeline"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "executive_gold",
+    "name": "Executive Gold",
+    "category": "Minimal",
+    "free": false,
+    "ats_score": 89,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#394b5d",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Minimal layout emphasizing executive gold style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Executive",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in minimal.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#394b5d",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using executive gold theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in minimal and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Executive"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "creative_grid",
+    "name": "Creative Grid",
+    "category": "Creative",
+    "free": false,
+    "ats_score": 90,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#405060",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Creative layout emphasizing creative grid style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Creative",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in creative.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#405060",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using creative grid theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in creative and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Creative"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "academic_scholar",
+    "name": "Academic Scholar",
+    "category": "Executive",
+    "free": false,
+    "ats_score": 91,
+    "photo_option": true,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#475563",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Executive layout emphasizing academic scholar style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Academic",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in executive.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#475563",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using academic scholar theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in executive and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Academic"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "tech_stack",
+    "name": "Tech Stack",
+    "category": "Academic",
+    "free": false,
+    "ats_score": 92,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#4e5a66",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Academic layout emphasizing tech stack style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Tech",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in academic.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#4e5a66",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using tech stack theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in academic and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Tech"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "board_member",
+    "name": "Board Member",
+    "category": "Technical",
+    "free": false,
+    "ats_score": 93,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#555f69",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Technical layout emphasizing board member style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Board",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in technical.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#555f69",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using board member theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in technical and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Board"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "portfolio_slate",
+    "name": "Portfolio Slate",
+    "category": "Modern",
+    "free": false,
+    "ats_score": 94,
+    "photo_option": false,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#5c646c",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Modern layout emphasizing portfolio slate style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Portfolio",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in modern.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#5c646c",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using portfolio slate theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in modern and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Portfolio"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "startup_vibe",
+    "name": "Startup Vibe",
+    "category": "Minimal",
+    "free": false,
+    "ats_score": 95,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#63696f",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Minimal layout emphasizing startup vibe style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Startup",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in minimal.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#63696f",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using startup vibe theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in minimal and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Startup"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "gradient_edge",
+    "name": "Gradient Edge",
+    "category": "Creative",
+    "free": false,
+    "ats_score": 96,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#6a6e72",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Creative layout emphasizing gradient edge style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Gradient",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in creative.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#6a6e72",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using gradient edge theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in creative and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Gradient"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "elite_executive",
+    "name": "Elite Executive",
+    "category": "Executive",
+    "free": false,
+    "ats_score": 97,
+    "photo_option": true,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#717375",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Executive layout emphasizing elite executive style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Elite",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in executive.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#717375",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using elite executive theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in executive and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Elite"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "research_cv",
+    "name": "Research CV",
+    "category": "Academic",
+    "free": false,
+    "ats_score": 88,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#787878",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Academic layout emphasizing research cv style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Research",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in academic.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#787878",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using research cv theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in academic and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Research"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "designer_pulse",
+    "name": "Designer Pulse",
+    "category": "Technical",
+    "free": false,
+    "ats_score": 89,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#7f7d7b",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Technical layout emphasizing designer pulse style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Designer",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in technical.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#7f7d7b",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using designer pulse theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in technical and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Designer"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "innovator_resume",
+    "name": "Innovator Resume",
+    "category": "Modern",
+    "free": false,
+    "ats_score": 90,
+    "photo_option": false,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#86827e",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Modern layout emphasizing innovator resume style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Innovator",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in modern.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#86827e",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using innovator resume theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in modern and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Innovator"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "bold_vision",
+    "name": "Bold Vision",
+    "category": "Minimal",
+    "free": false,
+    "ats_score": 91,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#8d8781",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Minimal layout emphasizing bold vision style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Bold",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in minimal.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#8d8781",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using bold vision theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in minimal and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Bold"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "streamline",
+    "name": "Streamline",
+    "category": "Creative",
+    "free": false,
+    "ats_score": 92,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#948c84",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Creative layout emphasizing streamline style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Streamline",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in creative.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#948c84",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using streamline theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in creative and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Streamline"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "digital_blueprint",
+    "name": "Digital Blueprint",
+    "category": "Executive",
+    "free": false,
+    "ats_score": 93,
+    "photo_option": true,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#9b9187",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Executive layout emphasizing digital blueprint style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Digital",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in executive.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#9b9187",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using digital blueprint theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in executive and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Digital"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "sleek_contrast",
+    "name": "Sleek Contrast",
+    "category": "Academic",
+    "free": false,
+    "ats_score": 94,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#a2968a",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Academic layout emphasizing sleek contrast style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Sleek",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in academic.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#a2968a",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using sleek contrast theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in academic and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Sleek"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "monochrome_classic",
+    "name": "Monochrome Classic",
+    "category": "Technical",
+    "free": false,
+    "ats_score": 95,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#a99b8d",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Technical layout emphasizing monochrome classic style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Monochrome",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in technical.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#a99b8d",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using monochrome classic theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in technical and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Monochrome"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "urban_professional",
+    "name": "Urban Professional",
+    "category": "Modern",
+    "free": false,
+    "ats_score": 96,
+    "photo_option": false,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#b0a090",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Modern layout emphasizing urban professional style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Urban",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in modern.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#b0a090",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using urban professional theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in modern and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Urban"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "consultant_gray",
+    "name": "Consultant Gray",
+    "category": "Minimal",
+    "free": false,
+    "ats_score": 97,
+    "photo_option": true,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#b7a593",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Minimal layout emphasizing consultant gray style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Consultant",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in minimal.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#b7a593",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using consultant gray theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in minimal and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Consultant"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "scholar_plus",
+    "name": "Scholar Plus",
+    "category": "Creative",
+    "free": false,
+    "ats_score": 88,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#beaa96",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Creative layout emphasizing scholar plus style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Scholar",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in creative.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#beaa96",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using scholar plus theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in creative and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Scholar"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "tech_vanguard",
+    "name": "Tech Vanguard",
+    "category": "Executive",
+    "free": false,
+    "ats_score": 89,
+    "photo_option": true,
+    "resume": {
+      "layout": "single_column",
+      "color_scheme": [
+        "#c5af99",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Executive layout emphasizing tech vanguard style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Tech",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in executive.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#c5af99",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Poppins",
+      "preview_description": "Complementary cover letter using tech vanguard theme with consistent header design.",
+      "tone": "Professional",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in executive and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Tech"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  },
+  {
+    "template_id": "creative_aura",
+    "name": "Creative Aura",
+    "category": "Academic",
+    "free": false,
+    "ats_score": 90,
+    "photo_option": false,
+    "resume": {
+      "layout": "two_column",
+      "color_scheme": [
+        "#ccb49c",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "sections": [
+        "Header",
+        "Summary",
+        "Experience",
+        "Education",
+        "Skills"
+      ],
+      "preview_description": "Academic layout emphasizing creative aura style with modern section placement and clean typography.",
+      "sample_content": {
+        "name": "Alex Creative",
+        "title": "Specialist",
+        "summary": "Experienced professional with a proven record of success in academic.",
+        "experience": [
+          {
+            "role": "Lead Specialist",
+            "company": "TechNova",
+            "years": "2020\u2013Present",
+            "details": "Managed a team of 8 in delivering high-quality solutions with measurable business impact."
+          },
+          {
+            "role": "Associate Specialist",
+            "company": "NextGen Solutions",
+            "years": "2016\u20132020",
+            "details": "Developed and implemented strategic initiatives that improved efficiency by 25%."
+          }
+        ],
+        "education": "B.S. in Business Administration, State University",
+        "skills": [
+          "Leadership",
+          "Communication",
+          "Team Management"
+        ]
+      }
+    },
+    "cover_letter": {
+      "layout": "letter_format",
+      "color_scheme": [
+        "#ccb49c",
+        "#FFFFFF",
+        "#222222"
+      ],
+      "font_family": "Inter",
+      "preview_description": "Complementary cover letter using creative aura theme with consistent header design.",
+      "tone": "Modern Polite",
+      "sample_content": {
+        "greeting": "Dear Hiring Manager,",
+        "body": "I am excited to apply for the Specialist role at your organization. With extensive experience in academic and a commitment to excellence, I am confident my skills align with your company\u2019s goals.",
+        "closing": "Thank you for considering my application. I look forward to discussing how I can contribute to your team.",
+        "signature": "Alex Creative"
+      }
+    },
+    "recommended_for": [
+      "Tech",
+      "Creative",
+      "Business"
+    ]
+  }
+]

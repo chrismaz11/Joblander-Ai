@@ -1,0 +1,278 @@
+{
+  "alarms": [
+    {
+      "AlarmName": "JobLander-Lambda-HighErrorRate",
+      "AlarmDescription": "Lambda function error rate is too high",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-critical-alerts"
+      ],
+      "MetricName": "Errors",
+      "Namespace": "AWS/Lambda",
+      "Statistic": "Sum",
+      "Dimensions": [
+        {
+          "Name": "FunctionName",
+          "Value": "job-lander-blockchain-dev"
+        }
+      ],
+      "Period": 300,
+      "EvaluationPeriods": 2,
+      "Threshold": 5,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Lambda-HighDuration",
+      "AlarmDescription": "Lambda function execution time is too high",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-performance-alerts"
+      ],
+      "MetricName": "Duration",
+      "Namespace": "AWS/Lambda",
+      "Statistic": "Average",
+      "Dimensions": [
+        {
+          "Name": "FunctionName",
+          "Value": "job-lander-blockchain-dev"
+        }
+      ],
+      "Period": 300,
+      "EvaluationPeriods": 3,
+      "Threshold": 10000,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Frontend-HighErrorRate",
+      "AlarmDescription": "Frontend 4XX/5XX error rate is too high",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-critical-alerts"
+      ],
+      "MetricName": "4XXError",
+      "Namespace": "AWS/Amplify",
+      "Statistic": "Sum",
+      "Dimensions": [
+        {
+          "Name": "App",
+          "Value": "job-lander-prod"
+        }
+      ],
+      "Period": 300,
+      "EvaluationPeriods": 2,
+      "Threshold": 50,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Database-HighCPU",
+      "AlarmDescription": "Database CPU utilization is too high",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-performance-alerts"
+      ],
+      "MetricName": "CPUUtilization",
+      "Namespace": "AWS/RDS",
+      "Statistic": "Average",
+      "Dimensions": [
+        {
+          "Name": "DBInstanceIdentifier",
+          "Value": "job-lander-db"
+        }
+      ],
+      "Period": 300,
+      "EvaluationPeriods": 2,
+      "Threshold": 80,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Database-HighConnections",
+      "AlarmDescription": "Database connection count is too high",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-performance-alerts"
+      ],
+      "MetricName": "DatabaseConnections",
+      "Namespace": "AWS/RDS",
+      "Statistic": "Average",
+      "Dimensions": [
+        {
+          "Name": "DBInstanceIdentifier",
+          "Value": "job-lander-db"
+        }
+      ],
+      "Period": 300,
+      "EvaluationPeriods": 2,
+      "Threshold": 80,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Security-HighFailedLogins",
+      "AlarmDescription": "High number of failed login attempts detected",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-security-alerts"
+      ],
+      "MetricName": "FailedLoginAttempts",
+      "Namespace": "JobLander/Security",
+      "Statistic": "Sum",
+      "Dimensions": [
+        {
+          "Name": "Endpoint",
+          "Value": "/api/auth/login"
+        }
+      ],
+      "Period": 300,
+      "EvaluationPeriods": 1,
+      "Threshold": 20,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Blockchain-HighGasUsage",
+      "AlarmDescription": "Blockchain gas usage is unusually high",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-cost-alerts"
+      ],
+      "MetricName": "TransactionGasUsed",
+      "Namespace": "JobLander/Blockchain",
+      "Statistic": "Average",
+      "Dimensions": [
+        {
+          "Name": "Network",
+          "Value": "polygon-mumbai"
+        }
+      ],
+      "Period": 600,
+      "EvaluationPeriods": 2,
+      "Threshold": 100000,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-AI-HighTokenUsage",
+      "AlarmDescription": "AI token usage is unusually high",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-cost-alerts"
+      ],
+      "MetricName": "LLMTokensUsed",
+      "Namespace": "JobLander/AI",
+      "Statistic": "Sum",
+      "Dimensions": [
+        {
+          "Name": "Provider",
+          "Value": "gemini"
+        }
+      ],
+      "Period": 3600,
+      "EvaluationPeriods": 1,
+      "Threshold": 1000000,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Performance-HighResponseTime",
+      "AlarmDescription": "API response time is too slow",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-performance-alerts"
+      ],
+      "MetricName": "APIResponseTime",
+      "Namespace": "JobLander/Performance",
+      "Statistic": "Average",
+      "Dimensions": [
+        {
+          "Name": "Endpoint",
+          "Value": "/api/resumes"
+        }
+      ],
+      "Period": 300,
+      "EvaluationPeriods": 3,
+      "Threshold": 2000,
+      "ComparisonOperator": "GreaterThanThreshold",
+      "TreatMissingData": "notBreaching"
+    },
+    {
+      "AlarmName": "JobLander-Business-LowUserActivity",
+      "AlarmDescription": "User activity is unusually low",
+      "ActionsEnabled": true,
+      "AlarmActions": [
+        "arn:aws:sns:us-east-1:ACCOUNT_ID:job-lander-business-alerts"
+      ],
+      "MetricName": "UserRegistrations",
+      "Namespace": "JobLander/Business",
+      "Statistic": "Sum",
+      "Period": 86400,
+      "EvaluationPeriods": 1,
+      "Threshold": 5,
+      "ComparisonOperator": "LessThanThreshold",
+      "TreatMissingData": "breaching"
+    }
+  ],
+  "sns_topics": [
+    {
+      "TopicName": "job-lander-critical-alerts",
+      "DisplayName": "Job Lander Critical Alerts",
+      "Subscriptions": [
+        {
+          "Protocol": "email",
+          "Endpoint": "alerts@joblander.com"
+        },
+        {
+          "Protocol": "sms",
+          "Endpoint": "+1234567890"
+        }
+      ]
+    },
+    {
+      "TopicName": "job-lander-performance-alerts",
+      "DisplayName": "Job Lander Performance Alerts",
+      "Subscriptions": [
+        {
+          "Protocol": "email",
+          "Endpoint": "performance@joblander.com"
+        }
+      ]
+    },
+    {
+      "TopicName": "job-lander-security-alerts",
+      "DisplayName": "Job Lander Security Alerts",
+      "Subscriptions": [
+        {
+          "Protocol": "email",
+          "Endpoint": "security@joblander.com"
+        },
+        {
+          "Protocol": "sms",
+          "Endpoint": "+1234567890"
+        }
+      ]
+    },
+    {
+      "TopicName": "job-lander-cost-alerts",
+      "DisplayName": "Job Lander Cost Alerts",
+      "Subscriptions": [
+        {
+          "Protocol": "email",
+          "Endpoint": "finance@joblander.com"
+        }
+      ]
+    },
+    {
+      "TopicName": "job-lander-business-alerts",
+      "DisplayName": "Job Lander Business Alerts",
+      "Subscriptions": [
+        {
+          "Protocol": "email",
+          "Endpoint": "business@joblander.com"
+        }
+      ]
+    }
+  ]
+}

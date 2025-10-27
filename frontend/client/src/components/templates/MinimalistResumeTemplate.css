@@ -1,0 +1,146 @@
+.minimalist-resume {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  background: white;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  line-height: 1.8;
+  color: #2c3e50;
+}
+
+.resume-header-minimal {
+  text-align: center;
+  margin-bottom: 50px;
+  border-bottom: 2px solid #34495e;
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.resume-header-minimal::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: #e74c3c;
+}
+
+.name-minimal {
+  font-size: 2.8rem;
+  font-weight: 300;
+  margin-bottom: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #2c3e50;
+}
+
+.contact-minimal {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 1rem;
+  color: #7f8c8d;
+  flex-wrap: wrap;
+}
+
+.contact-minimal span {
+  position: relative;
+  padding: 0 15px;
+}
+
+.contact-minimal span:not(:last-child)::after {
+  content: '|';
+  position: absolute;
+  right: -20px;
+  color: #bdc3c7;
+}
+
+.section-minimal {
+  margin-bottom: 45px;
+}
+
+.section-minimal h2 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+  color: #34495e;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-minimal h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background: #34495e;
+}
+
+.skills-minimal {
+  font-size: 1.1rem;
+  color: #555;
+  font-style: italic;
+  text-align: justify;
+}
+
+.experience-minimal {
+  font-size: 1rem;
+  color: #555;
+  white-space: pre-line;
+  text-align: justify;
+}
+
+.summary-minimal {
+  font-size: 1.1rem;
+  color: #555;
+  text-align: justify;
+  font-style: italic;
+  position: relative;
+  padding: 20px;
+  background: #f8f9fa;
+  border-left: 4px solid #e74c3c;
+  margin: 20px 0;
+}
+
+.summary-minimal::before {
+  content: '"';
+  font-size: 4rem;
+  color: #e74c3c;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-family: serif;
+}
+
+@media (max-width: 768px) {
+  .minimalist-resume {
+    padding: 40px 20px;
+  }
+  
+  .name-minimal {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+  
+  .contact-minimal {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .contact-minimal span::after {
+    display: none;
+  }
+}
+
+@media print {
+  .minimalist-resume {
+    max-width: none;
+    padding: 40px;
+  }
+}

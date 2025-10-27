@@ -1,0 +1,156 @@
+version: 1
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            # Install dependencies
+            - npm ci --only=production
+            # Set build timestamp
+            - export BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            # Validate environment variables
+            - |
+              if [ -z "$VITE_COGNITO_USER_POOL_ID" ]; then
+                echo "Error: VITE_COGNITO_USER_POOL_ID is not set"
+                exit 1
+              fi
+            - |
+              if [ -z "$VITE_STRIPE_PUBLISHABLE_KEY" ]; then
+                echo "Error: VITE_STRIPE_PUBLISHABLE_KEY is not set"
+                exit 1
+              fi
+            # Run type checking
+            - npm run check
+            # Clean any existing dist directory
+            - rm -rf dist/
+        build:
+          commands:
+            # Build the application with production optimizations
+            - echo "Building Job Lander v4.0 for production..."
+            - NODE_ENV=production npm run build
+            # Generate bundle analysis report
+            - ls -la dist/
+            - |
+              if [ -f "dist/bundle-analysis.html" ]; then
+                echo "Bundle analysis report generated"
+                cp dist/bundle-analysis.html dist/public/bundle-analysis.html
+              fi
+            # Verify critical files exist
+            - |
+              if [ ! -f "dist/public/index.html" ]; then
+                echo "Error: index.html not found in build output"
+                exit 1
+              fi
+        postBuild:
+          commands:
+            # Generate build manifest
+            - echo "Build completed at $(date)" > dist/public/build-info.txt
+            - echo "Commit SHA: ${AWS_COMMIT_ID}" >> dist/public/build-info.txt
+            - echo "Build Number: ${AWS_BUILD_ID}" >> dist/public/build-info.txt
+            # Validate build output
+            - du -sh dist/public
+            - find dist/public -name "*.js" -o -name "*.css" | head -20
+      artifacts:
+        baseDirectory: dist/public
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+          - .vite/**/*
+    appRoot: /
+  - backend:
+      phases:
+        preBuild:
+          commands:
+            # Install backend dependencies
+            - cd server && npm ci --only=production
+            # Validate environment variables for backend
+            - |
+              if [ -z "$DATABASE_URL" ]; then
+                echo "Error: DATABASE_URL is not set"
+                exit 1
+              fi
+            - |
+              if [ -z "$GEMINI_API_KEY" ]; then
+                echo "Error: GEMINI_API_KEY is not set"
+                exit 1
+              fi
+        build:
+          commands:
+            # Build backend if needed
+            - echo "Backend build phase (API endpoints handled by Amplify Functions)"
+            # Run database migrations if needed
+            - |
+              if [ "$AWS_BRANCH" = "main" ]; then
+                echo "Running production database setup..."
+                npm run db:push
+              fi
+        postBuild:
+          commands:
+            - echo "Backend build completed"
+      artifacts:
+        baseDirectory: server
+        files:
+          - '**/*'
+    appRoot: server
+# Custom headers for security and performance
+customHeaders:
+  - pattern: '**/*'
+    headers:
+      - key: 'Strict-Transport-Security'
+        value: 'max-age=31536000; includeSubDomains'
+      - key: 'X-Frame-Options'
+        value: 'DENY'
+      - key: 'X-Content-Type-Options'
+        value: 'nosniff'
+      - key: 'Referrer-Policy'
+        value: 'strict-origin-when-cross-origin'
+      - key: 'Permissions-Policy'
+        value: 'camera=(), microphone=(), geolocation=()'
+  - pattern: '*.js'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=31536000, immutable'
+  - pattern: '*.css'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=31536000, immutable'
+  - pattern: '*.woff2'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=31536000, immutable'
+  - pattern: '/api/*'
+    headers:
+      - key: 'Cache-Control'
+        value: 'no-cache, no-store, must-revalidate'
+# Redirects and rewrites
+redirects:
+  - source: '/<*>'
+    target: '/index.html'
+    status: '200'
+    condition: null
+  # API redirects to backend functions
+  - source: '/api/<path*>'
+    target: 'https://${AWS_LAMBDA_API_GATEWAY_URL}/api/<path*>'
+    status: '200'
+    condition: null
+  # Blockchain verification redirects
+  - source: '/verify/<hash>'
+    target: '/verify?hash=<hash>'
+    status: '301'
+    condition: null
+# Environment-specific configurations
+test:
+  phases:
+    preTest:
+      commands:
+        - npm install
+        - npm run test:unit
+    test:
+      commands:
+        - npm run test:e2e
+        - npm run test:performance
+    postTest:
+      commands:
+        - echo "Tests completed"

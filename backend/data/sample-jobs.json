@@ -1,0 +1,109 @@
+{
+  "jobs": [
+    {
+      "id": "job-1",
+      "title": "Director of AI Product Strategy",
+      "company": "NeuralBridge Labs",
+      "location": "San Francisco, CA",
+      "city": "San Francisco",
+      "state": "CA",
+      "remote": false,
+      "employmentType": "Full-time",
+      "salary": "$210k - $260k + equity",
+      "salaryMin": 210000,
+      "salaryMax": 260000,
+      "description": "Lead cross-functional AI product initiatives and drive go-to-market strategy for enterprise offerings.",
+      "requirements": [
+        "10+ years in product leadership",
+        "Experience with AI/ML products",
+        "Track record of shipping enterprise solutions"
+      ],
+      "postedDate": "2025-02-19T10:00:00Z",
+      "jobUrl": "https://jobs.neuralbridge.ai/director-product-strategy"
+    },
+    {
+      "id": "job-2",
+      "title": "Principal UX Researcher",
+      "company": "Lumina Analytics",
+      "location": "Remote - US",
+      "city": "Remote",
+      "state": "Remote",
+      "remote": true,
+      "employmentType": "Full-time",
+      "salary": "$180k - $220k base + bonus",
+      "salaryMin": 180000,
+      "salaryMax": 220000,
+      "description": "Design and execute global research programs that inform product vision, pricing, and adoption strategy.",
+      "requirements": [
+        "Expert in mixed-method research",
+        "Comfortable with enterprise SaaS",
+        "Demonstrated influence at executive level"
+      ],
+      "postedDate": "2025-02-15T13:15:00Z",
+      "jobUrl": "https://lumina.design/careers/principal-ux-researcher"
+    },
+    {
+      "id": "job-3",
+      "title": "Head of Growth Marketing",
+      "company": "Orbit Talent",
+      "location": "Austin, TX",
+      "city": "Austin",
+      "state": "TX",
+      "remote": false,
+      "employmentType": "Full-time",
+      "salary": "$180k - $200k base + bonuses",
+      "salaryMin": 180000,
+      "salaryMax": 200000,
+      "description": "Own customer acquisition, activation, and expansion with a focus on PLG funnels and revenue velocity.",
+      "requirements": [
+        "8+ years in growth marketing",
+        "Experience scaling B2B demand gen",
+        "Strong analytical and leadership skills"
+      ],
+      "postedDate": "2025-02-10T08:00:00Z",
+      "jobUrl": "https://orbitalent.com/careers/head-of-growth"
+    },
+    {
+      "id": "job-4",
+      "title": "Senior Data Scientist",
+      "company": "Nova Insights",
+      "location": "New York, NY",
+      "city": "New York",
+      "state": "NY",
+      "remote": true,
+      "employmentType": "Contract",
+      "salary": "$140k - $170k",
+      "salaryMin": 140000,
+      "salaryMax": 170000,
+      "description": "Build predictive analytics models for enterprise clients and mentor a distributed data science team.",
+      "requirements": [
+        "Expertise in Python and SQL",
+        "Experience with ML deployment",
+        "Client-facing communication skills"
+      ],
+      "postedDate": "2025-02-08T11:00:00Z",
+      "jobUrl": "https://nova-insights.com/jobs/senior-data-scientist"
+    },
+    {
+      "id": "job-5",
+      "title": "Lead Product Designer",
+      "company": "Atlas Systems",
+      "location": "Chicago, IL",
+      "city": "Chicago",
+      "state": "IL",
+      "remote": false,
+      "employmentType": "Full-time",
+      "salary": "$150k - $190k + stock",
+      "salaryMin": 150000,
+      "salaryMax": 190000,
+      "description": "Drive end-to-end product experiences for enterprise AI products and lead a multidisciplinary design team.",
+      "requirements": [
+        "7+ years of product design experience",
+        "Background in enterprise SaaS",
+        "Strong portfolio showcasing AI/ML interfaces"
+      ],
+      "postedDate": "2025-02-20T09:30:00Z",
+      "jobUrl": "https://atlas.systems/careers/lead-product-designer"
+    }
+  ]
+}
