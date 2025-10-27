@@ -1,0 +1,24 @@
+{
+  "name": "job-lander-infrastructure",
+  "version": "1.0.0",
+  "description": "AWS CDK Infrastructure for Job-Lander",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "deploy:dev": "cdk deploy JobLanderDev",
+    "deploy:staging": "cdk deploy JobLanderStaging",
+    "deploy:prod": "cdk deploy JobLanderProd",
+    "synth": "cdk synth",
+    "diff": "cdk diff"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "aws-cdk": "^2.115.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.115.0",
+    "constructs": "^10.3.0"
+  }
+}
