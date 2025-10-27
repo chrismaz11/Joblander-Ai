@@ -81,3 +81,8 @@ amplify/backend/.temp/
 # CDK
 cdk.out/
 *.d.ts.map
+
+# Archive directories with git repos
+archive/Desktop-JB-2/job-lander-v4.0/
+archive/Desktop-JB/job-lander-v4.0/
+archive/Job-Lander-v4.0-git/
