@@ -2,7 +2,9 @@
   "name": "job-lander-v4",
   "version": "4.0.0",
   "type": "module",
-  "license": "MIT",
+  "license": "PROPRIETARY",
+  "author": "Christopher Mazzola",
+  "copyright": "Copyright (c) 2024 Christopher Mazzola. All Rights Reserved.",
   "workspaces": [
     "apps/marketing-site"
   ],
