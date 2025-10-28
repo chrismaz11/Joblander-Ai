@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { getDb } from "./db.js";
 import { jobs as jobsTable } from "../drizzle/schema.js";
-import { desc } from "drizzle-orm";
+import { desc, like, and, gte, lte } from "drizzle-orm";
 
 const sampleJobsPath = path.join(process.cwd(), "data", "sample-jobs.json");
 
@@ -14,9 +14,89 @@ const SALARY_RANGES = {
 };
 
 let sampleJobsCache = null;
-let cachedJobs = null;
-let loadingPromise = null;
-let seedingAttempted = false;
+
+// Multiple job API integrations
+async function fetchRealJobs(query, location) {
+  const rapidApiKey = process.env.RAPIDAPI_KEY;
+  
+  if (!rapidApiKey || rapidApiKey === "your_rapidapi_key") {
+    console.log("[jobService] APIs not configured, using sample data");
+    return null;
+  }
+
+  // Fetch from multiple sources in parallel
+  const sources = [
+    fetchJSearchJobs(query, location, rapidApiKey),
+    fetchIndeedJobs(query, location, rapidApiKey),
+    fetchLinkedInJobs(query, location, rapidApiKey)
+  ];
+
+  try {
+    const results = await Promise.allSettled(sources);
+    const allJobs = results
+      .filter(result => result.status === 'fulfilled' && result.value)
+      .flatMap(result => result.value);
+    
+    return allJobs.length > 0 ? allJobs : null;
+  } catch (error) {
+    console.error("[jobService] Error fetching from multiple sources:", error);
+    return null;
+  }
+}
+
+// JSearch API (current)
+async function fetchJSearchJobs(query, location, apiKey) {
+
+  try {
+    const searchParams = new URLSearchParams({
+      query: query || "software engineer",
+      page: "1",
+      num_pages: "1",
+      date_posted: "all"
+    });
+    
+    if (location) {
+      searchParams.set("location", location);
+    }
+
+    const response = await fetch(`https://jsearch.p.rapidapi.com/search?${searchParams}`, {
+      headers: {
+        'X-RapidAPI-Key': rapidApiKey,
+        'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`API responded with ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    // Transform API response to our format
+    return data.data?.map(job => ({
+      id: job.job_id || `api-${Date.now()}-${Math.random()}`,
+      title: job.job_title,
+      company: job.employer_name,
+      location: job.job_city && job.job_state ? `${job.job_city}, ${job.job_state}` : job.job_country,
+      city: job.job_city,
+      state: job.job_state,
+      remote: job.job_is_remote || false,
+      employmentType: job.job_employment_type || "Full-time",
+      salary: job.job_salary || undefined,
+      salaryMin: job.job_min_salary,
+      salaryMax: job.job_max_salary,
+      description: job.job_description || "",
+      requirements: job.job_highlights?.Qualifications || [],
+      postedDate: job.job_posted_at_datetime_utc ? new Date(job.job_posted_at_datetime_utc) : new Date(),
+      jobUrl: job.job_apply_link,
+      source: "jsearch"
+    })) || [];
+
+  } catch (error) {
+    console.warn("[jobService] Real job API failed:", error.message);
+    return null;
+  }
+}
 
 function readSampleJobs() {
   if (sampleJobsCache) return sampleJobsCache;
@@ -49,201 +129,125 @@ function normalizeJob(job) {
     salaryMax: job.salaryMax ?? undefined,
     description: job.description ?? "",
     requirements: Array.isArray(job.requirements) ? job.requirements : [],
-    postedDate:
-      job.postedDate instanceof Date
-        ? job.postedDate.toISOString()
-        : typeof job.postedDate === "string"
-        ? job.postedDate
-        : undefined,
-    jobUrl: job.jobUrl ?? job.url ?? undefined,
-  };
-}
-
-async function seedSampleJobs() {
-  if (seedingAttempted) return;
-  seedingAttempted = true;
-  const db = getDb();
-  if (!db) return;
-
-  const jobs = readSampleJobs();
-  if (!jobs.length) return;
-
-  try {
-    await db
-      .insert(jobsTable)
-      .values(
-        jobs.map((job) => ({
-          id: job.id,
-          title: job.title,
-          company: job.company,
-          location: job.location,
-          city: job.city,
-          state: job.state,
-          remote: job.remote ? "yes" : "no",
-          employmentType: job.employmentType ?? "Full-time",
-          salary: job.salary ?? null,
-          salaryMin: job.salaryMin ?? null,
-          salaryMax: job.salaryMax ?? null,
-          description: job.description ?? null,
-          requirements: job.requirements ?? [],
-          postedDate: job.postedDate ? new Date(job.postedDate) : null,
-          jobUrl: job.jobUrl ?? null,
-          source: "sample",
-        }))
-      )
-      .onConflictDoNothing({ target: jobsTable.id });
-  } catch (error) {
-    console.warn("[jobService] Unable to seed jobs table:", error);
-  }
-}
-
-async function loadJobs() {
-  if (cachedJobs) return cachedJobs;
-  if (loadingPromise) return loadingPromise;
-
-  loadingPromise = (async () => {
-    const db = getDb();
-    if (db) {
-      try {
-        const records = await db
-          .select()
-          .from(jobsTable)
-          .orderBy(desc(jobsTable.postedDate));
-        if (records.length) {
-          cachedJobs = records.map(normalizeJob).filter(Boolean);
-          return cachedJobs;
-        }
-      } catch (error) {
-        console.warn("[jobService] Failed to read jobs from database:", error);
-      }
-    }
-
-    cachedJobs = readSampleJobs().map(normalizeJob).filter(Boolean);
-    return cachedJobs;
-  })();
-
-  const data = await loadingPromise;
-  loadingPromise = null;
-  return data;
-}
-
-seedSampleJobs();
-
-function filterJobs(jobs, filters) {
-  let results = [...jobs];
-
-  if (filters.query) {
-    const query = filters.query.toLowerCase();
-    results = results.filter((job) =>
-      [job.title, job.description, job.company, ...(job.requirements ?? [])]
-        .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(query)),
-    );
-  }
-
-  if (filters.city && filters.city !== "Any") {
-    const city = filters.city.toLowerCase();
-    results = results.filter((job) => {
-      if (city === "remote") return job.remote === true;
-      return (
-        job.city?.toLowerCase().includes(city) ||
-        job.location?.toLowerCase().includes(city)
-      );
-    });
-  } else if (filters.location) {
-    const location = filters.location.toLowerCase();
-    results = results.filter((job) =>
-      [job.location, job.city, job.state]
-        .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(location)),
-    );
-  }
-
-  if (filters.remote && filters.remote !== "any") {
-    results = results.filter((job) =>
-      filters.remote === "yes" ? job.remote === true : job.remote === false,
-    );
-  }
-
-  if (filters.employmentType?.length) {
-    results = results.filter((job) =>
-      filters.employmentType.includes(job.employmentType),
-    );
-  }
-
-  if (filters.salaryRange && filters.salaryRange !== "any") {
-    const { min, max } = parseSalaryRange(filters.salaryRange);
-    results = results.filter((job) => {
-      const jobMin = job.salaryMin ?? 0;
-      const jobMax = job.salaryMax ?? Number.MAX_VALUE;
-      return (jobMin >= min && jobMin <= max) || (jobMax >= min && jobMax <= max);
-    });
-  }
-
-  return results;
-}
-
-function paginate(jobs, page = 1, limit = 10) {
-  const normalizedPage = Math.max(1, page);
-  const normalizedLimit = Math.max(1, Math.min(50, limit));
-  const start = (normalizedPage - 1) * normalizedLimit;
-  const data = jobs.slice(start, start + normalizedLimit);
-  return {
-    data,
-    pagination: {
-      page: normalizedPage,
-      limit: normalizedLimit,
-      totalJobs: jobs.length,
-      totalPages: Math.ceil(jobs.length / normalizedLimit),
-      hasNext: start + normalizedLimit < jobs.length,
-      hasPrev: normalizedPage > 1,
-    },
+    postedDate: job.postedDate ? new Date(job.postedDate) : new Date(),
+    jobUrl: job.jobUrl,
+    source: job.source || "sample"
   };
 }
 
 export async function getJobs(filters = {}) {
-  const jobs = await loadJobs();
-  const filtered = filterJobs(jobs, filters);
-  return paginate(filtered, filters.page ?? 1, filters.limit ?? 10);
-}
+  const { query, location, salary, limit = 20 } = filters;
 
-export async function getJobStats() {
-  const jobs = await loadJobs();
-  const remoteCount = jobs.filter((job) => job.remote === true).length;
-  const cities = new Set(
-    jobs
-      .map((job) => job.city)
-      .filter((city) => city && city.toLowerCase() !== "remote"),
-  );
-  const salaryValues = jobs
-    .map((job) => job.salaryMin)
-    .filter((value) => typeof value === "number");
-  const avgSalary =
-    salaryValues.reduce((sum, value) => sum + value, 0) /
-    (salaryValues.length || 1);
+  // Try real API first
+  const realJobs = await fetchRealJobs(query, location);
+  if (realJobs && realJobs.length > 0) {
+    console.log(`[jobService] Fetched ${realJobs.length} real jobs from API`);
+    return {
+      data: realJobs.slice(0, limit).map(normalizeJob),
+      total: realJobs.length,
+      source: "api"
+    };
+  }
+
+  // Fallback to database + sample data
+  const db = getDb();
+  let dbJobs = [];
+
+  if (db) {
+    try {
+      let dbQuery = db.select().from(jobsTable);
+      
+      const conditions = [];
+      if (query) {
+        conditions.push(like(jobsTable.title, `%${query}%`));
+      }
+      if (location) {
+        conditions.push(like(jobsTable.location, `%${location}%`));
+      }
+      if (salary) {
+        const range = parseSalaryRange(salary);
+        if (range.min > 0) conditions.push(gte(jobsTable.salaryMin, range.min));
+        if (range.max < Number.MAX_VALUE) conditions.push(lte(jobsTable.salaryMax, range.max));
+      }
+
+      if (conditions.length > 0) {
+        dbQuery = dbQuery.where(and(...conditions));
+      }
+
+      dbJobs = await dbQuery.orderBy(desc(jobsTable.postedDate)).limit(limit);
+    } catch (error) {
+      console.warn("[jobService] Database query failed:", error);
+    }
+  }
+
+  // Add sample jobs if needed
+  const sampleJobs = readSampleJobs();
+  let filteredSampleJobs = sampleJobs;
+
+  if (query) {
+    filteredSampleJobs = filteredSampleJobs.filter(job =>
+      job.title?.toLowerCase().includes(query.toLowerCase()) ||
+      job.company?.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  if (location) {
+    filteredSampleJobs = filteredSampleJobs.filter(job =>
+      job.location?.toLowerCase().includes(location.toLowerCase())
+    );
+  }
+
+  const allJobs = [...dbJobs.map(normalizeJob), ...filteredSampleJobs.map(normalizeJob)]
+    .filter(Boolean)
+    .slice(0, limit);
 
   return {
-    totalJobs: jobs.length,
-    remoteJobs: remoteCount,
-    citiesAvailable: cities.size,
-    avgSalary: Math.round(avgSalary || 0),
+    data: allJobs,
+    total: allJobs.length,
+    source: dbJobs.length > 0 ? "database" : "sample"
   };
 }
 
-export async function getJobCities(search) {
-  const jobs = await loadJobs();
-  const cities = new Set(
-    jobs
-      .map((job) => job.city)
-      .filter((city) => city && city.toLowerCase() !== "remote"),
-  );
-  const list = Array.from(cities).sort();
-  if (!search) {
-    return ["Remote", ...list];
+export async function getJobCities() {
+  const db = getDb();
+  if (!db) {
+    return { data: ["San Francisco, CA", "New York, NY", "Seattle, WA", "Austin, TX", "Remote"] };
   }
-  const query = search.toLowerCase();
-  return [
-    "Remote",
-    ...list.filter((city) => city.toLowerCase().includes(query)),
-  ];
+
+  try {
+    const cities = await db.selectDistinct({ city: jobsTable.city }).from(jobsTable);
+    return { data: cities.map(c => c.city).filter(Boolean) };
+  } catch (error) {
+    console.warn("[jobService] Failed to fetch cities:", error);
+    return { data: [] };
+  }
+}
+
+export async function getJobStats() {
+  const db = getDb();
+  
+  try {
+    const jobs = await getJobs({ limit: 1000 });
+    const totalJobs = jobs.data.length;
+    
+    const remoteJobs = jobs.data.filter(job => job.remote).length;
+    const recentJobs = jobs.data.filter(job => {
+      const daysSincePosted = (Date.now() - new Date(job.postedDate).getTime()) / (1000 * 60 * 60 * 24);
+      return daysSincePosted <= 7;
+    }).length;
+
+    return {
+      data: {
+        total: totalJobs,
+        remote: remoteJobs,
+        recent: recentJobs,
+        companies: [...new Set(jobs.data.map(job => job.company))].length
+      }
+    };
+  } catch (error) {
+    console.warn("[jobService] Failed to get stats:", error);
+    return {
+      data: { total: 0, remote: 0, recent: 0, companies: 0 }
+    };
+  }
 }

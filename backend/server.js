@@ -16,6 +16,7 @@ import {
 } from "./services/storage.js";
 import { enhanceResumeContent } from "./services/aiService.js";
 import { renderResume, listTemplates } from "./services/resumeGenerator.js";
+import { generateResumePDF } from "./services/pdfGenerator.js";
 import { buildCoverLetter } from "./services/coverLetterService.js";
 import {
   canCreateResume,
@@ -46,225 +47,188 @@ app.get("/api/health", (req, res) =>
   }),
 );
 
+// Jobs endpoints
 app.get("/api/jobs", async (req, res) => {
   try {
-    const {
-      query,
-      location,
-      city,
-      remote,
-      employmentType,
-      salaryRange,
-      page,
-      limit,
-    } = req.query;
-
-    const filters = {
-      query: typeof query === "string" ? query : undefined,
-      location: typeof location === "string" ? location : undefined,
-      city: typeof city === "string" ? city : undefined,
-      remote: typeof remote === "string" ? remote : undefined,
-      salaryRange: typeof salaryRange === "string" ? salaryRange : undefined,
-      page: page ? Number(page) : undefined,
-      limit: limit ? Number(limit) : undefined,
-      employmentType:
-        typeof employmentType === "string"
-          ? employmentType.split(",")
-          : undefined,
-    };
-
-    const result = await getJobs(filters);
+    const { query, location, salary, limit } = req.query;
+    const result = await getJobs({ query, location, salary, limit: parseInt(limit) || 20 });
     res.json(result);
   } catch (error) {
-    console.error("[GET /api/jobs]", error);
-    res.status(500).json({ error: "Failed to fetch job listings" });
+    console.error("Jobs fetch error:", error);
+    res.status(500).json({ error: "Failed to fetch jobs" });
   }
 });
 
 app.get("/api/jobs/cities", async (req, res) => {
   try {
-    const { search } = req.query;
-    const cities = await getJobCities(
-      typeof search === "string" ? search : undefined,
-    );
-    res.json({ cities });
+    const result = await getJobCities();
+    res.json(result);
   } catch (error) {
-    console.error("[GET /api/jobs/cities]", error);
     res.status(500).json({ error: "Failed to fetch cities" });
   }
 });
 
 app.get("/api/jobs/stats", async (req, res) => {
   try {
-    const stats = await getJobStats();
-    res.json(stats);
+    const result = await getJobStats();
+    res.json(result);
   } catch (error) {
-    console.error("[GET /api/jobs/stats]", error);
     res.status(500).json({ error: "Failed to fetch job stats" });
   }
 });
 
-app.get("/api/resume/templates", (req, res) => {
-  res.json(listTemplates());
-});
-
-app.post("/api/resume/parse", upload.single("file"), async (req, res) => {
+// Resume endpoints
+app.post("/api/resumes", async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
-    }
-    const parsed = await parseResumeFile(req.file);
-    res.json(parsed);
-  } catch (error) {
-    console.error("[POST /api/resume/parse]", error);
-    res.status(500).json({ error: error.message ?? "Parsing failed" });
-  }
-});
-
-app.post("/api/resume/generate", async (req, res) => {
-  try {
-    const {
-      userId = "guest-user",
-      tier = "free",
-      personalInfo,
-      experience = [],
-      education = [],
-      skills = [],
-      templateId = "modern",
-    } = req.body ?? {};
-
-    const usageSnapshot = await getUsage(userId);
-    if (!canCreateResume(tier, usageSnapshot.resumesThisMonth ?? 0)) {
-      const limits = getTierLimits(tier);
-      return res.status(403).json({
-        error: "Resume limit reached for this tier",
-        upgradeRequired: true,
-        usage: usageSnapshot,
-        limits,
-      });
+    const userId = req.body.userId || "anonymous";
+    
+    if (!(await canCreateResume(userId))) {
+      return res.status(403).json({ error: "Resume limit reached for your tier" });
     }
 
-    const enhanced = await enhanceResumeContent({
-      personalInfo,
-      experience,
-      education,
-      skills,
-    });
-
-    const resumeRecord = await createResume({
-      userId,
-      tier,
-      personalInfo: enhanced.personalInfo ?? personalInfo,
-      experience: enhanced.experience ?? experience,
-      education: enhanced.education ?? education,
-      skills: enhanced.skills ?? skills,
-      suggestions: enhanced.suggestions ?? [],
-      templateId,
-    });
-
-    const preview = renderResume(resumeRecord, templateId);
+    const result = await createResume(req.body);
     await trackUsage(userId, "resume");
-
-    res.json({
-      resume: resumeRecord,
-      preview,
-    });
+    res.json(result);
   } catch (error) {
-    console.error("[POST /api/resume/generate]", error);
-    res.status(500).json({ error: error.message ?? "Failed to generate resume" });
+    console.error("Resume creation error:", error);
+    res.status(500).json({ error: "Failed to create resume" });
   }
 });
 
 app.get("/api/resumes", async (req, res) => {
-  const records = await listResumes();
-  res.json(records);
+  try {
+    const userId = req.query.userId || "anonymous";
+    const result = await listResumes(userId);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch resumes" });
+  }
 });
 
 app.get("/api/resumes/:id", async (req, res) => {
-  const resume = await getResume(req.params.id);
-  if (!resume) {
-    return res.status(404).json({ error: "Resume not found" });
-  }
-  res.json(resume);
-});
-
-app.patch("/api/resumes/:id", async (req, res) => {
-  const updated = await updateResume(req.params.id, req.body ?? {});
-  if (!updated) {
-    return res.status(404).json({ error: "Resume not found" });
-  }
-  res.json(updated);
-});
-
-app.post("/api/cover-letters", async (req, res) => {
   try {
-    const {
-      resumeId,
-      userId = "guest-user",
-      tier = "free",
-      tone = "professional",
-      companyName,
-      position,
-      jobDescription,
-    } = req.body ?? {};
+    const result = await getResume(req.params.id);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch resume" });
+  }
+});
 
-    if (!resumeId || !companyName || !position) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
+app.put("/api/resumes/:id", async (req, res) => {
+  try {
+    const result = await updateResume(req.params.id, req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update resume" });
+  }
+});
 
-    const resume = await getResume(resumeId);
-    if (!resume) {
+app.post("/api/resumes/enhance", async (req, res) => {
+  try {
+    const enhanced = await enhanceResumeContent(req.body);
+    res.json({ success: true, data: enhanced });
+  } catch (error) {
+    console.error("Enhancement error:", error);
+    res.status(500).json({ error: "Failed to enhance resume" });
+  }
+});
+
+// PDF generation endpoint
+app.post("/api/resumes/:id/pdf", async (req, res) => {
+  try {
+    const resume = await getResume(req.params.id);
+    if (!resume.success) {
       return res.status(404).json({ error: "Resume not found" });
     }
 
-    const usageSnapshot = await getUsage(userId);
-    if (!canCreateCoverLetter(tier, usageSnapshot.coverLettersThisMonth ?? 0)) {
-      const limits = getTierLimits(tier);
-      return res.status(403).json({
-        error: "Cover letter limit reached for this tier",
-        upgradeRequired: true,
-        usage: usageSnapshot,
-        limits,
+    const templateId = req.body.templateId || "template-1";
+    const pdfResult = await generateResumePDF(resume.data, templateId);
+    
+    if (pdfResult.success) {
+      res.json({
+        success: true,
+        filename: pdfResult.filename,
+        html: pdfResult.html,
+        message: pdfResult.message
       });
+    } else {
+      res.status(500).json({ error: pdfResult.error });
+    }
+  } catch (error) {
+    console.error("PDF generation error:", error);
+    res.status(500).json({ error: "Failed to generate PDF" });
+  }
+});
+
+// Resume parsing endpoint
+app.post("/api/parse-resume", upload.single("resume"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
     }
 
-    const coverLetterData = await buildCoverLetter({
-      resumeId,
-      companyName,
-      position,
-      tone,
-      jobDescription,
-      personalInfo: resume.personalInfo,
-      personalPitch: resume.personalInfo?.summary,
-    });
-
-    const record = await createCoverLetter({
-      resumeId,
-      userId,
-      tier,
-      tone: coverLetterData.tone,
-      variants: coverLetterData.variants,
-      content: coverLetterData.content,
-      companyName,
-      position,
-      jobDescription,
-    });
-
-    await trackUsage(userId, "coverLetter");
-
-    res.json(record);
+    const result = await parseResumeFile(req.file);
+    res.json(result);
   } catch (error) {
-    console.error("[POST /api/cover-letters]", error);
-    res.status(500).json({ error: error.message ?? "Failed to generate cover letter" });
+    console.error("Resume parsing error:", error);
+    res.status(500).json({ error: "Failed to parse resume" });
+  }
+});
+
+// Templates endpoint
+app.get("/api/templates", async (req, res) => {
+  try {
+    const result = await listTemplates();
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch templates" });
+  }
+});
+
+// Cover letter endpoints
+app.post("/api/cover-letters", async (req, res) => {
+  try {
+    const userId = req.body.userId || "anonymous";
+    
+    if (!(await canCreateCoverLetter(userId))) {
+      return res.status(403).json({ error: "Cover letter limit reached for your tier" });
+    }
+
+    const result = await createCoverLetter(req.body);
+    await trackUsage(userId, "coverLetter");
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to create cover letter" });
   }
 });
 
 app.get("/api/cover-letters", async (req, res) => {
-  const { resumeId } = req.query;
-  const records = await listCoverLetters(
-    typeof resumeId === "string" ? { resumeId } : undefined,
-  );
-  res.json(records);
+  try {
+    const userId = req.query.userId || "anonymous";
+    const result = await listCoverLetters(userId);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch cover letters" });
+  }
+});
+
+// Usage tracking
+app.get("/api/usage/:userId", async (req, res) => {
+  try {
+    const result = await getUsage(req.params.userId);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch usage" });
+  }
+});
+
+app.get("/api/tier-limits/:userId", async (req, res) => {
+  try {
+    const result = await getTierLimits(req.params.userId);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch tier limits" });
+  }
 });
 
 app.listen(PORT, () => {

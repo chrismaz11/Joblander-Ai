@@ -60,7 +60,6 @@ tmp/
 temp/
 
 # AWS
-.aws-sam/
 
 # Large files and archives
 *.zip
@@ -76,14 +75,8 @@ playwright-report/
 test-results/
 
 # Amplify
-amplify/team-provider-info.json
-amplify/.config/local-*
-amplify/mock-data/
-amplify/backend/amplify-meta.json
-amplify/backend/.temp/
 
 # CDK
-cdk.out/
 *.d.ts.map
 
 # Archive directories with git repos

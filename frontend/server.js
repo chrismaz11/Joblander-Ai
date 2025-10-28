@@ -51,8 +51,7 @@ app.get("/auth/login", (req, res) => {
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
-    region: process.env.AWS_REGION,
-    userPool: process.env.USER_POOL_ID,
+    supabase: process.env.SUPABASE_URL ? "connected" : "not configured",
   });
 });
 
@@ -65,10 +64,9 @@ import serverless from "serverless-http";
 
 const PORT = process.env.PORT || 3000;
 
-// Local dev mode
-if (!process.env.AWS_LAMBDA_FUNCTION_NAME) {
-  app.listen(PORT, () => console.log(`✅ Running locally at http://localhost:${PORT}`));
-}
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Running at http://localhost:${PORT}`));
 
 // Export for Lambda
 export const handler = serverless(app);
