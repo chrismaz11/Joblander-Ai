@@ -1,6 +1,10 @@
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import * as schema from "../drizzle/schema.js";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
 
 let database = null;
 let sqlClient = null;
@@ -15,8 +19,9 @@ export function getDb() {
 
   initialized = true;
 
-  const connectionString =
-    process.env.DATABASE_URL ?? process.env.SUPABASE_DB_URL ?? null;
+  const connectionString = process.env.DATABASE_URL;
+
+  console.log('[db] DATABASE_URL:', connectionString ? 'Found' : 'Not found');
 
   if (!connectionString) {
     console.info(
