@@ -1,68 +1,131 @@
 # JobLander v4.0
 
-A comprehensive job search and resume customization platform with AI-powered features.
+> **⚠️ PROPRIETARY SOFTWARE** - All rights reserved. See [LICENSE](./LICENSE) for usage terms.
 
-## Project Structure
+A comprehensive job application management platform with AI-powered resume generation and job tracking capabilities.
+
+## 🚀 Features
+
+- **AI-Powered Resume Generation** - Multiple professional templates with intelligent content generation
+- **Job Application Tracking** - Comprehensive application management and status tracking  
+- **Interview Management** - Scheduling, preparation tools, and follow-up tracking
+- **Analytics Dashboard** - Insights into application success rates and trends
+- **Multi-Platform Support** - Web and mobile-responsive design
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework**: Next.js 14+ with TypeScript
+- **UI**: React, Tailwind CSS
+- **State Management**: React Context/Zustand
+- **Authentication**: Supabase Auth
+
+### Backend  
+- **Runtime**: Node.js with Express
+- **Database**: PostgreSQL with Supabase
+- **AI Services**: OpenAI GPT, Google Gemini
+- **File Storage**: Supabase Storage
+
+### Infrastructure
+- **Deployment**: Vercel (Frontend), Railway/Render (Backend)
+- **Monitoring**: PostHog Analytics
+- **Payments**: Stripe Integration
+
+## 📁 Project Structure
 
 ```
 JobLander/
-├── frontend/          # React frontend application
-├── backend/           # Node.js backend API
+├── frontend/           # Next.js application
+│   ├── apps/
+│   │   └── marketing-site/  # Main web application
+│   ├── components/     # Reusable UI components
+│   └── lib/           # Utilities and configurations
+├── backend/           # Express.js API server
+│   ├── routes/        # API endpoints
+│   ├── models/        # Database models
+│   └── middleware/    # Authentication & validation
 ├── docs/             # Documentation
-├── assets/           # Static assets and templates
-└── archive/          # Archived files and backups
+└── assets/           # Static assets and templates
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
-### Frontend Development
-```bash
-cd frontend
-npm install
-npm run dev
-```
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database
+- Supabase account
+- API keys for AI services
 
-### Backend Development
-```bash
-cd backend
-npm install
-npm run dev
-```
+### Installation
 
-### Run Tests
-```bash
-cd frontend
-npm test
-npm run test:e2e
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/chrismaz11/joblander-v4.git
+   cd joblander-v4
+   ```
 
-## Features
+2. **Install dependencies**
+   ```bash
+   # Frontend
+   cd frontend && npm install
+   
+   # Backend  
+   cd ../backend && npm install
+   ```
 
-- AI-powered resume generation
-- Job matching and recommendations
-- Cover letter automation
-- Document parsing and analysis
-- Multi-tier subscription system
-- AWS integration
+3. **Environment Setup**
+   ```bash
+   # Copy example environment files
+   cp backend/.env.example backend/.env
+   cp frontend/apps/marketing-site/.env.example frontend/apps/marketing-site/.env.local
+   
+   # Edit with your actual values
+   ```
 
-## Tech Stack
+4. **Database Setup**
+   ```bash
+   # Run migrations
+   cd backend && npm run migrate
+   ```
 
-- **Frontend**: React, TypeScript, Vite, Tailwind CSS
-- **Backend**: Node.js, Express, PostgreSQL
-- **Database**: Drizzle ORM
-- **AI**: OpenAI, AWS Bedrock
-- **Cloud**: AWS (Amplify, S3, CloudFront)
-- **Testing**: Vitest, Playwright
+5. **Start Development Servers**
+   ```bash
+   # Terminal 1 - Backend
+   cd backend && npm run dev
+   
+   # Terminal 2 - Frontend  
+   cd frontend && npm run dev
+   ```
 
-## Environment Setup
+Visit `http://localhost:3000` to see the application.
 
-1. Copy `.env.example` to `.env` in both frontend and backend directories
-2. Configure your environment variables
-3. Run database migrations
-4. Start development servers
+## 🔐 Security & Environment Variables
 
-## Deployment
+**CRITICAL**: Never commit `.env` files containing real API keys. Use `.env.example` files as templates.
 
-- **Development**: `npm run deploy:dev`
-- **Staging**: `npm run deploy:staging`
-- **Production**: `npm run deploy:prod`
+Required environment variables:
+- `SUPABASE_URL` & `SUPABASE_ANON_KEY`
+- `OPENAI_API_KEY` or `GEMINI_API_KEY`  
+- `STRIPE_PUBLISHABLE_KEY` & `STRIPE_SECRET_KEY`
+- `NEXTAUTH_SECRET`
+
+## 📄 License & Usage
+
+This software is **proprietary and protected by copyright**. 
+
+- ✅ **Permitted**: Personal evaluation, educational use with attribution
+- ❌ **Prohibited**: Commercial use, redistribution, modification without permission
+
+See [LICENSE](./LICENSE) for complete terms.
+
+## 🤝 Contributing
+
+This is a private project. Contributions require explicit approval from the owner.
+
+## 📞 Contact
+
+For licensing inquiries or support: [Contact Information]
+
+---
+
+**© 2024 Christopher Mazzola. All Rights Reserved.**
