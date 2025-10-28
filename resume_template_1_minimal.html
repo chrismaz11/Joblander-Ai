@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Template - Minimal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .name { font-size: 48px; font-weight: bold; margin-bottom: 10px; }
+        .title { font-size: 18px; color: #666; margin-bottom: 30px; }
+        .section { margin-bottom: 30px; }
+        .section-title { font-size: 20px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #333; padding-bottom: 5px; }
+        .contact-info { display: flex; flex-direction: column; gap: 8px; }
+        .contact-info li { list-style: none; }
+        .contact-info li:before { content: "• "; color: #333; }
+        .job { margin-bottom: 20px; }
+        .job-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .job-title { font-weight: bold; }
+        .job-location { color: #666; font-style: italic; }
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .skills-column ul { list-style: none; }
+        .skills-column li { margin-bottom: 8px; }
+        .skills-column li:before { content: "• "; color: #333; }
+        [contenteditable="true"] { outline: 2px dashed transparent; }
+        [contenteditable="true"]:focus { outline: 2px dashed #007acc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="name" contenteditable="true">Fred Lynch</h1>
+            <p class="title" contenteditable="true">Web Designer</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Summary</h2>
+            <p contenteditable="true">Graphic designer with +8 years of experience in branding and print design. Skilled at Adobe Creative Suite (Photoshop, Illustrator, InDesign) as well as sketching and hand drawing. Supervised 23 print design projects that resulted in an increase of 32% in savings.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Contacts</h2>
+            <ul class="contact-info">
+                <li contenteditable="true">2207 Beach Avenue, Los Angeles</li>
+                <li contenteditable="true">fredlynch@mail.me</li>
+                <li contenteditable="true">(914) 479-6342</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Profile</h2>
+            <p contenteditable="true">Graphic designer with +8 years of experience in branding and print design. Skilled at Adobe Creative Suite (Photoshop, Illustrator, InDesign) as well as sketching and hand drawing. Supervised 23 print design projects that resulted in an increase of 32% in savings.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title" contenteditable="true">2005 – 2007 — Los Angeles University</span>
+                    <span class="job-location" contenteditable="true">Los Angeles</span>
+                </div>
+                <p contenteditable="true">Master of Graphic Design</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Employment</h2>
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title" contenteditable="true">2005 – 2007 — UI Designer at Market Studios</span>
+                    <span class="job-location" contenteditable="true">New York</span>
+                </div>
+                <p contenteditable="true">Successfully translated subject matter into concrete design for newsletters, promotional materials and sales collateral. Created design theme and graphics for marketing and sales presentations, training videos and corporate websites.</p>
+            </div>
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title" contenteditable="true">2007 – 2009 — Graphic Designer at FireWeb</span>
+                    <span class="job-location" contenteditable="true">Los Angeles</span>
+                </div>
+                <p contenteditable="true">Created new design themes for marketing and collateral materials. Collaborated with creative team to design and produce computer-generated artwork for marketing and promotional materials.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Soft skills</h2>
+            <div class="skills-grid">
+                <div class="skills-column">
+                    <ul>
+                        <li contenteditable="true">Communication</li>
+                        <li contenteditable="true">Time management</li>
+                        <li contenteditable="true">Teamwork</li>
+                        <li contenteditable="true">Creativity</li>
+                    </ul>
+                </div>
+                <div class="skills-column">
+                    <ul>
+                        <li contenteditable="true">Attention to details</li>
+                        <li contenteditable="true">Desire to learn</li>
+                        <li contenteditable="true">Meeting deadlines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Technical skills</h2>
+            <div class="skills-grid">
+                <div class="skills-column">
+                    <ul>
+                        <li contenteditable="true">Figma</li>
+                        <li contenteditable="true">Sketch</li>
+                        <li contenteditable="true">Adobe Photoshop</li>
+                        <li contenteditable="true">Adobe Illustrator</li>
+                    </ul>
+                </div>
+                <div class="skills-column">
+                    <ul>
+                        <li contenteditable="true">Web Design (HTML/CSS)</li>
+                        <li contenteditable="true">Premiere Pro</li>
+                        <li contenteditable="true">After Effects</li>
+                        <li contenteditable="true">Photography</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

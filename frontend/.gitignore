@@ -32,3 +32,4 @@ tests/reports/
 
 # Drizzle-kit output
 drizzle-kit/
+.vercel

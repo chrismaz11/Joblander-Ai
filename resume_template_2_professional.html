@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Template - Professional</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; display: grid; grid-template-columns: 1fr 2fr; gap: 40px; }
+        .left-column { }
+        .right-column { }
+        .profile-section { text-align: center; margin-bottom: 30px; }
+        .profile-photo { width: 120px; height: 120px; border-radius: 50%; background: #ddd; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: #666; }
+        .name { font-size: 28px; font-weight: bold; margin-bottom: 5px; }
+        .title { color: #666; margin-bottom: 20px; }
+        .contact-info { font-size: 14px; color: #666; }
+        .contact-info div { margin-bottom: 5px; }
+        .section { margin-bottom: 30px; }
+        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+        .job { margin-bottom: 20px; }
+        .job-header { margin-bottom: 8px; }
+        .job-title { font-weight: bold; }
+        .job-period { color: #666; font-size: 14px; }
+        .job-company { color: #333; margin-bottom: 5px; }
+        .skills-section { }
+        .skills-category { margin-bottom: 20px; }
+        .skills-category h4 { font-weight: bold; margin-bottom: 10px; }
+        .skills-list { list-style: none; }
+        .skills-list li { margin-bottom: 8px; font-size: 14px; }
+        [contenteditable="true"] { outline: 2px dashed transparent; }
+        [contenteditable="true"]:focus { outline: 2px dashed #007acc; }
+        .photo-placeholder { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-column">
+            <div class="profile-section">
+                <div class="profile-photo photo-placeholder" contenteditable="false" onclick="alert('Click to upload photo')">
+                    Photo
+                </div>
+                <h1 class="name" contenteditable="true">Barry Lucero</h1>
+                <p class="title" contenteditable="true">Web Designer</p>
+                <div class="contact-info">
+                    <div contenteditable="true">2207 Beach Avenue, Los Angeles</div>
+                    <div contenteditable="true">barry@design.mail</div>
+                    <div contenteditable="true">www.barry.design</div>
+                    <div contenteditable="true">(914) 479-6342</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Profile</h2>
+                <p contenteditable="true">Graphic designer with +8 years of experience in branding and print design. Skilled at Adobe Creative Suite (Photoshop, Illustrator) as well as sketching and hand drawing. Supervised 23 print design projects that resulted in an increase of 32% in savings.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                <div class="job">
+                    <div class="job-period" contenteditable="true">2005</div>
+                    <div class="job-company" contenteditable="true">Los Angeles University</div>
+                    <div class="job-period" contenteditable="true">2010</div>
+                    <p contenteditable="true">Bachelor of Fine Arts in Graphic Design, GPA: 3.4/4.0</p>
+                </div>
+                <div class="job">
+                    <div class="job-period" contenteditable="true">2010</div>
+                    <div class="job-company" contenteditable="true">New York University</div>
+                    <div class="job-period" contenteditable="true">2012</div>
+                    <p contenteditable="true">Master of Graphic Design, GPA: 3.8/4.0</p>
+                </div>
+            </div>
+
+            <div class="section skills-section">
+                <h2 class="section-title">Key Skills</h2>
+                <div class="skills-category">
+                    <h4>Professional</h4>
+                    <ul class="skills-list">
+                        <li contenteditable="true">Figma</li>
+                        <li contenteditable="true">Sketch App</li>
+                        <li contenteditable="true">Adobe Photoshop</li>
+                        <li contenteditable="true">Adobe Illustrator</li>
+                        <li contenteditable="true">HTML/CSS</li>
+                        <li contenteditable="true">Premiere Pro</li>
+                        <li contenteditable="true">After Effects</li>
+                    </ul>
+                </div>
+                <div class="skills-category">
+                    <h4>Personal</h4>
+                    <ul class="skills-list">
+                        <li contenteditable="true">Communication</li>
+                        <li contenteditable="true">Time management</li>
+                        <li contenteditable="true">Teamwork</li>
+                        <li contenteditable="true">Creativity</li>
+                        <li contenteditable="true">Attention to details</li>
+                        <li contenteditable="true">Desire to learn</li>
+                        <li contenteditable="true">Meeting deadlines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="section">
+                <h2 class="section-title">Employment</h2>
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-period" contenteditable="true">2012 — 2015</div>
+                        <div class="job-title" contenteditable="true">UI Designer at Market Studios</div>
+                    </div>
+                    <p contenteditable="true">Successfully translated subject matter into concrete design for newsletters, promotional materials and sales collateral. Created design theme and graphics for marketing and sales presentations, training videos and corporate websites.</p>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-period" contenteditable="true">2015 — 2016</div>
+                        <div class="job-title" contenteditable="true">Graphic Designer at FireWeb</div>
+                    </div>
+                    <p contenteditable="true">Created new design themes for marketing and collateral materials. Collaborated with creative team to design and produce computer-generated artwork for marketing and promotional materials.</p>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-period" contenteditable="true">2016 — 2018</div>
+                        <div class="job-title" contenteditable="true">Graphic Designer at 5Tech</div>
+                    </div>
+                    <p contenteditable="true">Developed numerous marketing programs (logos, brochures, newsletters, infographics, presentations, and advertisements) and guaranteed that they exceeded the expectations of our clients.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
