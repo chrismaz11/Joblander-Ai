@@ -61,6 +61,7 @@ export interface LLMConfig {
     jobMatching: number; // 2 hours
     templateSuggestions: number; // 7 days
     skillsExtraction: number; // 24 hours
+    textCleaning: number; // 1 hour
     default: number; // 1 hour
   };
 
@@ -287,7 +288,7 @@ export function validateLLMConfig(): string[] {
 
   // Check API keys for enabled providers
   for (const [provider, config] of enabledProviders) {
-    if (provider !== "mock" && !config.apiKey) {
+    if (provider !== "mock" && "apiKey" in config && !config.apiKey) {
       errors.push(`API key missing for enabled provider: ${provider}`);
     }
   }

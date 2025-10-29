@@ -1,4 +1,5 @@
 import type { Express } from "express";
+import type Stripe from "stripe";
 import { createServer, type Server } from "http";
 import multer from "multer";
 import mammoth from "mammoth";
@@ -85,9 +86,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create subscription
       const subscription = await createSubscription(customer.id, priceId);
       
+      let clientSecret: string | undefined;
+      const latestInvoice = subscription.latest_invoice;
+
+      if (latestInvoice && typeof latestInvoice !== "string") {
+        const invoice = latestInvoice as Stripe.Invoice;
+        const paymentIntent = invoice.payment_intent;
+
+        if (paymentIntent && typeof paymentIntent !== "string") {
+          clientSecret = paymentIntent.client_secret ?? undefined;
+        }
+      }
+
       res.json({
         subscriptionId: subscription.id,
-        clientSecret: subscription.latest_invoice?.payment_intent?.client_secret,
+        clientSecret,
         customerId: customer.id
       });
     } catch (error: any) {
@@ -183,7 +196,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Step 1: Library-based text extraction
       try {
         if (mimeType === "application/pdf") {
-          const pdfParse = await import("pdf-parse");
+          const { default: pdfParse } = await import("pdf-parse");
           const pdfData = await pdfParse(req.file.buffer);
           rawText = pdfData.text;
           console.log('Extracted text length (pdf-parse):', rawText.length);

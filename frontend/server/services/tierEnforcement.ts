@@ -59,9 +59,11 @@ export async function getUserTier(userId: string) {
 }
 
 export async function incrementUserUsage(userId: string, action: string) {
-  await db.insert(usageTracking).values({
+  const usageRecord: typeof usageTracking.$inferInsert = {
     userId,
     action,
     count: '1'
-  });
+  };
+
+  await db.insert(usageTracking).values(usageRecord);
 }
