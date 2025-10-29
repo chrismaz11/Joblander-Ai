@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const isProduction = mode === 'production';
+  const enablePWA = process.env.ENABLE_PWA === 'true';
   
   return {
     plugins: [
@@ -27,56 +28,37 @@ export default defineConfig(({ command, mode }) => {
         gzipSize: true,
         brotliSize: true,
       }),
-      // PWA plugin for better caching and offline support
-      VitePWA({
-        registerType: 'autoUpdate',
-        workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-          runtimeCaching: [
-            {
-              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'google-fonts-cache',
-                expiration: {
-                  maxEntries: 10,
-                  maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
-                },
+      // PWA plugin (opt-in via ENABLE_PWA=true)
+      enablePWA &&
+        VitePWA({
+          disable: !isProduction,
+          minify: false,
+          registerType: 'autoUpdate',
+          strategies: 'injectManifest',
+          srcDir: 'src',
+          filename: 'sw.ts',
+          injectManifest: {
+            minify: false,
+          },
+          manifest: {
+            name: 'Job Lander',
+            short_name: 'JobLander',
+            description: 'AI-Powered Resume Builder with Blockchain Verification',
+            theme_color: '#000000',
+            icons: [
+              {
+                src: 'icon-192x192.png',
+                sizes: '192x192',
+                type: 'image/png',
               },
-            },
-            {
-              urlPattern: /^https:\/\/api\..*/i,
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'api-cache',
-                networkTimeoutSeconds: 10,
-                expiration: {
-                  maxEntries: 16,
-                  maxAgeSeconds: 60 * 60 * 24, // 24 hours
-                },
+              {
+                src: 'icon-512x512.png',
+                sizes: '512x512',
+                type: 'image/png',
               },
-            },
-          ],
-        },
-        manifest: {
-          name: 'Job Lander',
-          short_name: 'JobLander',
-          description: 'AI-Powered Resume Builder with Blockchain Verification',
-          theme_color: '#000000',
-          icons: [
-            {
-              src: 'icon-192x192.png',
-              sizes: '192x192',
-              type: 'image/png',
-            },
-            {
-              src: 'icon-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-            },
-          ],
-        },
-      }),
+            ],
+          },
+        }),
     ].filter(Boolean),
     css: {
       postcss: {

@@ -145,17 +145,17 @@ export interface CoverLetterVariants {
 export const insertResumeSchema = createInsertSchema(resumes).omit({
   id: true,
   createdAt: true,
-});
+} as any);
 
 export const insertCoverLetterSchema = createInsertSchema(coverLetters).omit({
   id: true,
   createdAt: true,
-});
+} as any);
 
 export const insertTemplateSchema = createInsertSchema(templates).omit({
   id: true,
   createdAt: true,
-});
+} as any);
 
 // Infer types
 export type InsertResume = z.infer<typeof insertResumeSchema>;

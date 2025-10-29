@@ -405,7 +405,8 @@ export async function estimateVerificationGas(resumeHash: string): Promise<{
     const contractWithSigner = contract.connect(dummySigner);
     
     // Estimate gas
-    const estimatedGas = await contractWithSigner.verifyResume.estimateGas(formattedHash);
+    const verifyResumeFn = contractWithSigner.getFunction("verifyResume");
+    const estimatedGas = await verifyResumeFn.estimateGas(formattedHash);
     const feeData = await provider.getFeeData();
     const gasPrice = feeData.gasPrice || ethers.parseUnits("30", "gwei");
     
