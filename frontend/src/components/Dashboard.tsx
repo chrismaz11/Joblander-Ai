@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Card } from '@/components/ui/card.tsx';
-import { Progress } from '@/components/ui/progress.tsx';
-import { Badge } from '@/components/ui/badge.tsx';
-import { Button } from '@/components/ui/button.tsx';
-import { Checkbox } from '@/components/ui/checkbox.tsx';
+import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Sparkles, TrendingUp, AlertCircle, Lightbulb, CheckCircle2, Circle } from 'lucide-react';
 
 export function Dashboard() {

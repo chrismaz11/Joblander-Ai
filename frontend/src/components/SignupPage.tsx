@@ -3,18 +3,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-interface LoginPageProps {
-  onNavigateToSignup: () => void;
-  onLogin: () => void;
+interface SignupPageProps {
+  onNavigateToLogin: () => void;
+  onSignup: () => void;
 }
 
-export function LoginPage({ onNavigateToSignup, onLogin }: LoginPageProps) {
+export function SignupPage({ onNavigateToLogin, onSignup }: SignupPageProps) {
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin();
+    onSignup();
   };
 
   return (
@@ -27,17 +29,34 @@ export function LoginPage({ onNavigateToSignup, onLogin }: LoginPageProps) {
         </div>
         
         <div className="space-y-6">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-            <p className="text-white">
-              "JobLander helped me organize my job search and land my dream role in just 3 months!"
-            </p>
-            <div className="mt-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/20"></div>
-              <div>
-                <p className="text-white">Sarah Johnson</p>
-                <p className="text-indigo-200">Software Engineer at Tech Corp</p>
-              </div>
-            </div>
+          <div>
+            <h3 className="text-white mb-4">Why JobLander?</h3>
+            <ul className="space-y-3 text-indigo-100">
+              <li className="flex items-start gap-3">
+                <svg className="w-6 h-6 text-green-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Track all your applications in one place
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-6 h-6 text-green-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                AI-powered resume builder
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-6 h-6 text-green-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Interview preparation tools
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-6 h-6 text-green-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Analytics and insights
+              </li>
+            </ul>
           </div>
         </div>
         
@@ -46,17 +65,29 @@ export function LoginPage({ onNavigateToSignup, onLogin }: LoginPageProps) {
         </div>
       </div>
 
-      {/* Right Side - Login Form */}
+      {/* Right Side - Signup Form */}
       <div className="flex-1 flex items-center justify-center p-8 bg-white dark:bg-gray-900">
         <div className="w-full max-w-md space-y-8">
           <div>
-            <h2 className="text-gray-900 dark:text-white">Welcome back</h2>
+            <h2 className="text-gray-900 dark:text-white">Create your account</h2>
             <p className="mt-2 text-gray-600 dark:text-gray-400">
-              Sign in to your account to continue
+              Start tracking your job search today
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="fullName">Full name</Label>
+              <Input
+                id="fullName"
+                type="text"
+                placeholder="John Doe"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+              />
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="email">Email address</Label>
               <Input
@@ -70,12 +101,7 @@ export function LoginPage({ onNavigateToSignup, onLogin }: LoginPageProps) {
             </div>
 
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <a href="#" className="text-indigo-600 dark:text-indigo-400 hover:underline">
-                  Forgot password?
-                </a>
-              </div>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -86,19 +112,39 @@ export function LoginPage({ onNavigateToSignup, onLogin }: LoginPageProps) {
               />
             </div>
 
-            <div className="flex items-center">
-              <input
-                id="remember"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirm password</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
               />
-              <label htmlFor="remember" className="ml-2 text-gray-900 dark:text-gray-300">
-                Remember me
+            </div>
+
+            <div className="flex items-start">
+              <input
+                id="terms"
+                type="checkbox"
+                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 mt-1"
+                required
+              />
+              <label htmlFor="terms" className="ml-2 text-gray-900 dark:text-gray-300">
+                I agree to the{' '}
+                <a href="#" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                  Terms of Service
+                </a>{' '}
+                and{' '}
+                <a href="#" className="text-indigo-600 dark:text-indigo-400 hover:underline">
+                  Privacy Policy
+                </a>
               </label>
             </div>
 
             <Button type="submit" className="w-full">
-              Sign in
+              Create account
             </Button>
           </form>
 
@@ -130,12 +176,12 @@ export function LoginPage({ onNavigateToSignup, onLogin }: LoginPageProps) {
           </div>
 
           <p className="text-center text-gray-600 dark:text-gray-400">
-            Don't have an account?{' '}
+            Already have an account?{' '}
             <button
-              onClick={onNavigateToSignup}
+              onClick={onNavigateToLogin}
               className="text-indigo-600 dark:text-indigo-400 hover:underline"
             >
-              Sign up
+              Sign in
             </button>
           </p>
         </div>
