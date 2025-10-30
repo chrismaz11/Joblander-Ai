@@ -33,3 +33,6 @@ tests/reports/
 # Drizzle-kit output
 drizzle-kit/
 .vercel
+
+*storybook.log
+storybook-static
