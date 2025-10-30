@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui/card.tsx';
+import { Card } from '@/components/ui/card';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export function Analytics() {
