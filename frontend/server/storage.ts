@@ -20,6 +20,7 @@ export interface IStorage {
   createCoverLetter(coverLetter: InsertCoverLetter): Promise<CoverLetter>;
   getCoverLetter(id: string): Promise<CoverLetter | undefined>;
   getCoverLettersByResumeId(resumeId: string): Promise<CoverLetter[]>;
+  getCoverLettersByUserId(userId: string): Promise<CoverLetterWithResume[]>;
   
   // Job operations
   createJob(job: Omit<Job, "id">): Promise<Job>;
@@ -33,6 +34,10 @@ export interface IStorage {
   getAllTemplates(): Promise<Template[]>;
   getTemplatesByCategory(category: string): Promise<Template[]>;
 }
+
+export type CoverLetterWithResume = CoverLetter & {
+  resumeTitle?: string | null;
+};
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
@@ -139,6 +144,22 @@ export class MemStorage implements IStorage {
     return Array.from(this.coverLetters.values()).filter(
       (cl) => cl.resumeId === resumeId
     );
+  }
+
+  async getCoverLettersByUserId(userId: string): Promise<CoverLetterWithResume[]> {
+    return Array.from(this.coverLetters.values())
+      .filter((cl) => {
+        if (!cl.resumeId) return false;
+        const resume = this.resumes.get(cl.resumeId);
+        return resume?.userId === userId;
+      })
+      .map((cl) => {
+        const resume = cl.resumeId ? this.resumes.get(cl.resumeId) : undefined;
+        return {
+          ...cl,
+          resumeTitle: resume?.personalInfo.fullName || null,
+        };
+      });
   }
 
   // Job operations
@@ -290,6 +311,24 @@ export class DatabaseStorage implements IStorage {
 
   async getCoverLettersByResumeId(resumeId: string): Promise<CoverLetter[]> {
     return await db.select().from(coverLetters).where(eq(coverLetters.resumeId, resumeId));
+  }
+
+  async getCoverLettersByUserId(userId: string): Promise<CoverLetterWithResume[]> {
+    const rows = await db
+      .select({
+        coverLetter: coverLetters,
+        resume: resumes,
+      })
+      .from(coverLetters)
+      .leftJoin(resumes, eq(coverLetters.resumeId, resumes.id))
+      .where(eq(resumes.userId, userId));
+
+    return rows
+      .filter((row) => row.resume !== null)
+      .map(({ coverLetter: letter, resume }) => ({
+        ...letter,
+        resumeTitle: (resume as Resume | null)?.personalInfo.fullName || null,
+      }));
   }
 
   // Job operations

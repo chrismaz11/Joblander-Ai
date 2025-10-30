@@ -1,0 +1,77 @@
+/* Shared styles for all resume templates */
+.resume-template {
+  border: 1px solid #e0e0e0;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: sans-serif;
+  color: #333;
+}
+
+.resume-template h1, .resume-template h2 {
+  color: #111;
+}
+
+.resume-template header {
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+}
+
+.resume-template h1 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.resume-template header p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+
+.resume-template .modern-body, 
+.resume-template .minimalist-body,
+.resume-template .executive-body,
+.resume-template .creative-body,
+.resume-template .tech-body,
+.resume-template .sales-body,
+.resume-template .academic-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.resume-template section {
+  border-left: 4px solid #667eea;
+  padding-left: 1rem;
+}
+
+.resume-template h2 {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #667eea;
+}
+
+.resume-template .modern-item, 
+.resume-template .minimalist-item,
+.resume-template .executive-item,
+.resume-template .creative-item,
+.resume-template .tech-item,
+.resume-template .sales-item,
+.resume-template .academic-item {
+  margin-bottom: 0.75rem;
+}
+
+.resume-template ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.resume-template ul li {
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}

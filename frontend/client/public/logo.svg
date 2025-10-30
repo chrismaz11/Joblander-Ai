@@ -1,0 +1,13 @@
+<svg width="144" height="40" viewBox="0 0 144 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="20" fill="url(#paint0_linear)" />
+  <path d="M17.2 25.6L12 20.4L13.88 18.52L17.2 21.84L26.12 12.92L28 14.8L17.2 25.6Z" fill="white" />
+  <text x="48" y="26" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600">
+    JobLander
+  </text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="2" y1="4" x2="38" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB" />
+      <stop offset="1" stop-color="#7C3AED" />
+    </linearGradient>
+  </defs>
+</svg>

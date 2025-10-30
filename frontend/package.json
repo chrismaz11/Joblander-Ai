@@ -19,11 +19,6 @@
     "check": "tsc --project tsconfig.production.json",
     "check:strict": "tsc",
     "db:push": "drizzle-kit push",
-    "amplify:sandbox": "npx ampx sandbox",
-    "amplify:deploy": "npx ampx deploy",
-    "amplify:delete": "npx ampx delete",
-    "setup:blockchain": "tsx scripts/setup-blockchain-aws.ts",
-    "test:blockchain": "tsx scripts/test-blockchain-migration.ts",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
@@ -55,16 +50,6 @@
     "marketing:lint": "npm run lint --workspace apps/marketing-site"
   },
   "dependencies": {
-    "@aws-amplify/auth": "^6.16.0",
-    "@aws-amplify/backend": "^1.16.1",
-    "@aws-amplify/backend-cli": "^1.8.0",
-    "@aws-sdk/client-bedrock-runtime": "^3.908.0",
-    "@aws-sdk/client-cloudwatch": "^3.908.0",
-    "@aws-sdk/client-cloudwatch-logs": "^3.908.0",
-    "@aws-sdk/client-cognito-identity-provider": "^3.908.0",
-    "@aws-sdk/client-kms": "^3.908.0",
-    "@aws-sdk/client-secrets-manager": "^3.911.0",
-    "@aws-sdk/credential-providers": "^3.908.0",
     "@google/generative-ai": "^0.24.1",
     "@hookform/resolvers": "^3.10.0",
     "@jridgewell/trace-mapping": "^0.3.25",
@@ -103,8 +88,8 @@
     "@types/multer": "^2.0.0",
     "@types/pg": "^8.15.5",
     "@types/react-color": "^3.0.13",
+    "@vercel/analytics": "^1.5.0",
     "audit": "^0.0.6",
-    "aws-jwt-verify": "^5.1.1",
     "body-parser": "^2.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -145,7 +130,6 @@
     "react-icons": "^5.4.0",
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.15.2",
-    "serverless-http": "^4.0.0",
     "stripe": "^19.1.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
@@ -194,5 +178,8 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
+  },
+  "overrides": {
+    "@aws-sdk/types": "^3.821.0"
   }
 }

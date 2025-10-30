@@ -1,185 +1,353 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import React, { act } from 'react';
+import { describe, it, expect, vi } from 'vitest';
+import { createRoot } from 'react-dom/client';
 import { Input } from '@/components/ui/input';
 
-describe('Input Component', () => {
-  const user = userEvent.setup();
+function render(ui: React.ReactElement) {
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+  const root = createRoot(container);
 
+  act(() => {
+    root.render(ui);
+  });
+
+  return {
+    container,
+    rerender(next: React.ReactElement) {
+      act(() => {
+        root.render(next);
+      });
+    },
+    unmount() {
+      act(() => root.unmount());
+      container.remove();
+    },
+  };
+}
+
+function setValue(input: HTMLInputElement, value: string) {
+  act(() => {
+    const setter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      'value',
+    )?.set;
+    if (setter) {
+      setter.call(input, value);
+    } else {
+      // Fallback for environments without descriptor
+      input.value = value;
+    }
+    input.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));
+  });
+}
+
+function focusElement(element: HTMLElement) {
+  act(() => {
+    element.focus();
+  });
+}
+
+function blurElement(element: HTMLElement) {
+  act(() => {
+    element.blur();
+  });
+}
+
+describe('Input Component', () => {
   it('renders input element', () => {
-    render(<Input />);
-    
-    const input = screen.getByRole('textbox');
+    const { container, unmount } = render(<Input />);
+
+    const input = container.querySelector('input');
     expect(input).toBeInTheDocument();
+    unmount();
   });
 
   it('applies default classes', () => {
-    render(<Input />);
-    
-    const input = screen.getByRole('textbox');
+    const { container, unmount } = render(<Input />);
+
+    const input = container.querySelector('input');
     expect(input).toHaveClass(
-      'flex', 'h-9', 'w-full', 'rounded-md', 'border', 'border-input', 'bg-background', 'px-3', 'py-2'
+      'flex',
+      'h-9',
+      'w-full',
+      'rounded-md',
+      'border',
+      'border-input',
+      'bg-background',
+      'px-3',
+      'py-2',
     );
+    unmount();
   });
 
-  it('handles text input', async () => {
-    render(<Input placeholder="Enter text" />);
-    
-    const input = screen.getByPlaceholderText('Enter text');
-    
-    await user.type(input, 'Hello World');
+  it('handles text input', () => {
+    const { container, unmount } = render(<Input placeholder="Enter text" />);
+
+    const input = container.querySelector('input[placeholder="Enter text"]') as HTMLInputElement | null;
+    expect(input).not.toBeNull();
+    setValue(input!, 'Hello World');
     expect(input).toHaveValue('Hello World');
+    unmount();
   });
 
-  it('handles change events', async () => {
+  it('handles change events', () => {
     const handleChange = vi.fn();
-    
-    render(<Input onChange={handleChange} />);
-    
-    const input = screen.getByRole('textbox');
-    await user.type(input, 'test');
-    
+    const { container, unmount } = render(<Input onChange={handleChange} />);
+
+    const input = container.querySelector('input') as HTMLInputElement | null;
+    expect(input).not.toBeNull();
+    setValue(input!, 'test');
+
     expect(handleChange).toHaveBeenCalled();
+    unmount();
   });
 
   it('can be disabled', () => {
-    render(<Input disabled />);
-    
-    const input = screen.getByRole('textbox');
+    const { container, unmount } = render(<Input disabled />);
+
+    const input = container.querySelector('input');
     expect(input).toBeDisabled();
+    unmount();
   });
 
   it('supports different input types', () => {
-    const { rerender } = render(<Input type="email" />);
-    
-    let input = screen.getByRole('textbox');
+    const { container, rerender, unmount } = render(<Input type="email" />);
+
+    let input = container.querySelector('input');
     expect(input).toHaveAttribute('type', 'email');
-    
-    rerender(<Input type="password" />);
-    input = screen.getByDisplayValue('') as HTMLInputElement;
-    expect(input.type).toBe('password');
-    
-    rerender(<Input type="number" />);
-    input = screen.getByRole('spinbutton');
+
+    rerender(<Input type="password" defaultValue="" />);
+    input = container.querySelector('input');
+    expect(input).toHaveAttribute('type', 'password');
+
+    rerender(<Input type="number" defaultValue="0" />);
+    input = container.querySelector('input');
     expect(input).toHaveAttribute('type', 'number');
+    unmount();
   });
 
   it('forwards custom className', () => {
-    render(<Input className="custom-input" />);
-    
-    const input = screen.getByRole('textbox');
+    const { container, unmount } = render(<Input className="custom-input" />);
+
+    const input = container.querySelector('input');
     expect(input).toHaveClass('custom-input');
+    unmount();
   });
 
   it('supports placeholder text', () => {
-    render(<Input placeholder="Enter your email" />);
-    
-    const input = screen.getByPlaceholderText('Enter your email');
+    const { container, unmount } = render(<Input placeholder="Enter your email" />);
+
+    const input = container.querySelector('input[placeholder="Enter your email"]');
     expect(input).toBeInTheDocument();
+    unmount();
   });
 
   it('supports default value', () => {
-    render(<Input defaultValue="Default text" />);
-    
-    const input = screen.getByDisplayValue('Default text');
-    expect(input).toBeInTheDocument();
+    const { container, unmount } = render(<Input defaultValue="Default text" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveValue('Default text');
+    unmount();
   });
 
   it('supports controlled value', () => {
-    const { rerender } = render(<Input value="Controlled" onChange={() => {}} />);
-    
-    let input = screen.getByDisplayValue('Controlled');
-    expect(input).toBeInTheDocument();
-    
+    const { container, rerender, unmount } = render(<Input value="Controlled" onChange={() => {}} />);
+
+    let input = container.querySelector('input');
+    expect(input).toHaveValue('Controlled');
+
     rerender(<Input value="Updated" onChange={() => {}} />);
-    input = screen.getByDisplayValue('Updated');
-    expect(input).toBeInTheDocument();
+    input = container.querySelector('input');
+    expect(input).toHaveValue('Updated');
+    unmount();
   });
 
   it('supports required attribute', () => {
-    render(<Input required />);
-    
-    const input = screen.getByRole('textbox');
+    const { container, unmount } = render(<Input required />);
+
+    const input = container.querySelector('input');
     expect(input).toBeRequired();
+    unmount();
   });
 
   it('supports maxLength attribute', () => {
-    render(<Input maxLength={10} />);
-    
-    const input = screen.getByRole('textbox');
+    const { container, unmount } = render(<Input maxLength={10} />);
+
+    const input = container.querySelector('input');
     expect(input).toHaveAttribute('maxLength', '10');
+    unmount();
   });
 
   it('supports aria attributes', () => {
-    render(
-      <Input
-        aria-label="Email input"
-        aria-describedby="email-help"
-        aria-invalid={true}
-      />
+    const { container, unmount } = render(
+      <Input aria-label="Email input" aria-describedby="email-help" aria-invalid />,
     );
-    
-    const input = screen.getByRole('textbox');
+
+    const input = container.querySelector('input');
     expect(input).toHaveAttribute('aria-label', 'Email input');
     expect(input).toHaveAttribute('aria-describedby', 'email-help');
     expect(input).toHaveAttribute('aria-invalid', 'true');
+    unmount();
   });
 
   it('supports ref forwarding', () => {
     let inputRef: HTMLInputElement | null = null;
-    
-    render(
+
+    const { unmount } = render(
       <Input
         ref={(ref) => {
           inputRef = ref;
         }}
-      />
+      />,
     );
-    
+
     expect(inputRef).toBeInstanceOf(HTMLInputElement);
+    unmount();
   });
 
-  it('handles focus and blur events', async () => {
+  it('handles focus and blur events', () => {
     const handleFocus = vi.fn();
     const handleBlur = vi.fn();
-    
-    render(<Input onFocus={handleFocus} onBlur={handleBlur} />);
-    
-    const input = screen.getByRole('textbox');
-    
-    await user.click(input);
+
+    const { container, unmount } = render(<Input onFocus={handleFocus} onBlur={handleBlur} />);
+
+    const input = container.querySelector('input') as HTMLInputElement | null;
+    expect(input).not.toBeNull();
+    focusElement(input!);
     expect(handleFocus).toHaveBeenCalledOnce();
-    
-    await user.tab();
+
+    blurElement(input!);
     expect(handleBlur).toHaveBeenCalledOnce();
+    unmount();
   });
 
-  it('supports email validation', async () => {
-    render(<Input type="email" />);
-    
-    const input = screen.getByRole('textbox');
-    
-    await user.type(input, 'invalid-email');
+  it('supports email validation', () => {
+    const { container, unmount } = render(<Input type="email" />);
+
+    const input = container.querySelector('input') as HTMLInputElement | null;
+    expect(input).not.toBeNull();
+    setValue(input!, 'invalid-email');
     expect(input).toHaveValue('invalid-email');
-    
-    await user.clear(input);
-    await user.type(input, 'valid@example.com');
-    expect(input).toHaveValue('valid@example.com');
+
+    act(() => {
+      input!.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    expect(input!.checkValidity()).toBe(false);
+    unmount();
   });
 
-  it('maintains accessibility standards', () => {
-    render(
-      <Input
-        id="test-input"
-        name="testInput"
-        aria-label="Test input field"
-        placeholder="Type something..."
-      />
-    );
-    
-    const input = screen.getByRole('textbox');
-    expect(input).toHaveAttribute('id', 'test-input');
-    expect(input).toHaveAttribute('name', 'testInput');
-    expect(input).toHaveAccessibleName('Test input field');
+  it('supports custom data attributes', () => {
+    const { container, unmount } = render(<Input data-testid="custom-input" />);
+
+    const input = container.querySelector('[data-testid="custom-input"]');
+    expect(input).toBeInTheDocument();
+    unmount();
+  });
+
+  it('supports spellCheck attribute', () => {
+    const { container, unmount } = render(<Input spellCheck={false} />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('spellcheck', 'false');
+    unmount();
+  });
+
+  it('supports autoComplete attribute', () => {
+    const { container, unmount } = render(<Input autoComplete="email" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('autocomplete', 'email');
+    unmount();
+  });
+
+  it('supports autoFocus attribute', () => {
+    const { container, unmount } = render(<Input autoFocus />);
+
+    const input = container.querySelector('input');
+    expect(document.activeElement).toBe(input);
+    unmount();
+  });
+
+  it('supports pattern attribute', () => {
+    const { container, unmount } = render(<Input pattern="[A-Za-z]+" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('pattern', '[A-Za-z]+');
+    unmount();
+  });
+
+  it('supports min and max attributes', () => {
+    const { container, unmount } = render(<Input type="number" min={1} max={10} />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('min', '1');
+    expect(input).toHaveAttribute('max', '10');
+    unmount();
+  });
+
+  it('supports step attribute', () => {
+    const { container, unmount } = render(<Input type="number" step={2} />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('step', '2');
+    unmount();
+  });
+
+  it('supports multiple attribute', () => {
+    const { container, unmount } = render(<Input type="file" multiple />);
+
+    const input = container.querySelector('input[type="file"]');
+    expect(input).toHaveAttribute('multiple');
+    unmount();
+  });
+
+  it('supports readOnly attribute', () => {
+    const { container, unmount } = render(<Input readOnly />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('readonly');
+    unmount();
+  });
+
+  it('supports name attribute', () => {
+    const { container, unmount } = render(<Input name="email" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('name', 'email');
+    unmount();
+  });
+
+  it('supports autoCapitalize attribute', () => {
+    const { container, unmount } = render(<Input autoCapitalize="words" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('autocapitalize', 'words');
+    unmount();
+  });
+
+  it('supports inputMode attribute', () => {
+    const { container, unmount } = render(<Input inputMode="numeric" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('inputmode', 'numeric');
+    unmount();
+  });
+
+  it('supports list attribute', () => {
+    const { container, unmount } = render(<Input list="options" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('list', 'options');
+    unmount();
+  });
+
+  it('supports form attribute', () => {
+    const { container, unmount } = render(<Input form="user-form" />);
+
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('form', 'user-form');
+    unmount();
   });
 });

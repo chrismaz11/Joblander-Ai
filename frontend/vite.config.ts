@@ -47,6 +47,16 @@ export default defineConfig(({ command, mode }) => {
             theme_color: '#000000',
             icons: [
               {
+                src: 'logo.png',
+                sizes: '192x192',
+                type: 'image/png',
+              },
+              {
+                src: 'logo-512.png',
+                sizes: '512x512',
+                type: 'image/png',
+              },
+              {
                 src: 'icon-192x192.png',
                 sizes: '192x192',
                 type: 'image/png',
@@ -66,6 +76,9 @@ export default defineConfig(({ command, mode }) => {
           tailwindcss(),
           autoprefixer(),
         ],
+        options: {
+          from: undefined,
+        },
       },
       // Minify CSS in production
       minify: isProduction,
@@ -127,6 +140,7 @@ export default defineConfig(({ command, mode }) => {
       reportCompressedSize: isProduction,
     },
     optimizeDeps: {
+      force: true,
       exclude: ['canvas', 'qrcode'],
       include: [
         'react',
