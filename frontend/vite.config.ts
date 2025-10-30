@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const isProduction = mode === 'production';
-  const enablePWA = process.env.ENABLE_PWA === 'true';
+  const enablePWA = false; // Disabled to prevent deployment errors
   
   return {
     plugins: [
