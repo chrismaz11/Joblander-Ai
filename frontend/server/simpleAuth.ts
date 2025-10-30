@@ -95,6 +95,30 @@ export async function setupAuth(app: Express) {
     }
   });
 
+  app.patch("/api/profile", async (req, res) => {
+    try {
+      const userId = (req.session as any)?.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "Not authenticated" });
+      }
+
+      const updates = req.body || {};
+      const updated = await storage.upsertUser({
+        id: userId,
+        email: updates.email,
+        firstName: updates.firstName,
+        lastName: updates.lastName,
+        profileImageUrl: updates.profileImageUrl,
+        tier: updates.tier,
+      } as any);
+
+      res.json(updated);
+    } catch (error) {
+      console.error("Profile update error:", error);
+      res.status(500).json({ message: "Failed to update profile" });
+    }
+  });
+
   // Logout
   app.post("/api/logout", (req, res) => {
     req.session.destroy((err) => {

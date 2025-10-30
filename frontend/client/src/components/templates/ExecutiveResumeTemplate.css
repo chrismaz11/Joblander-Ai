@@ -1,0 +1,138 @@
+/* src/components/templates/ExecutiveResumeTemplate.css */
+.executive-resume {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  font-family: 'Times New Roman', serif;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+.executive-header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  padding: 50px 40px;
+  text-align: center;
+}
+
+.executive-name {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.executive-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.executive-contact {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+.executive-body {
+  padding: 40px;
+}
+
+.executive-summary {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.executive-summary h3 {
+  font-size: 1.8rem;
+  color: #1e3c72;
+  margin-bottom: 20px;
+}
+
+.executive-columns {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+.experience-section h3,
+.core-competencies h3 {
+  color: #1e3c72;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #1e3c72;
+  padding-bottom: 10px;
+}
+
+.experience-item {
+  margin-bottom: 30px;
+}
+
+.experience-item h4 {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.company-name {
+  color: #1e3c72;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.date-range {
+  color: #7f8c8d;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.achievements {
+  list-style: none;
+  padding: 0;
+}
+
+.achievements li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.achievements li:before {
+  content: "▶";
+  position: absolute;
+  left: 0;
+  color: #1e3c72;
+}
+
+.competency-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.competency-item {
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-left: 4px solid #1e3c72;
+  font-weight: 500;
+}
+
+ @media print {
+  .executive-resume {
+    max-width: none;
+  }
+}

@@ -1,0 +1,58 @@
+/* client/src/components/templates/CoverLetterTemplate.css */
+.cover-letter {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  background: white;
+  font-family: 'Georgia', serif;
+  line-height: 1.8;
+  color: #2c3e50;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.cover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #34495e;
+  padding-bottom: 20px;
+}
+
+.sender-info h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sender-info p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.date {
+  font-size: 1rem;
+  color: #7f8c8d;
+}
+
+.recipient-info {
+  margin-bottom: 30px;
+}
+
+.cover-body p {
+  margin-bottom: 20px;
+}
+
+.qualifications {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.signature {
+  margin-top: 40px;
+}
+
+.signature-name {
+  font-weight: bold;
+}

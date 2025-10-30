@@ -337,6 +337,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // List cover letters for authenticated user
+  app.get("/api/cover-letters", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const letters = await storage.getCoverLettersByUserId(userId);
+      res.json(letters);
+    } catch (error: any) {
+      console.error("List cover letters error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   // Verify resume on blockchain
   app.post("/api/verify-on-chain", upload.single("file"), async (req, res) => {
     try {
@@ -536,6 +548,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(stats);
     } catch (error: any) {
       console.error("Get job stats error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Create resume (protected)
+  app.post("/api/resumes", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const {
+        personalInfo,
+        experience = [],
+        education = [],
+        skills = [],
+        templateId = null,
+      } = req.body || {};
+
+      if (!personalInfo) {
+        return res.status(400).json({ error: "personalInfo is required" });
+      }
+
+      const resume = await storage.createResume({
+        userId,
+        personalInfo,
+        experience,
+        education,
+        skills,
+        templateId,
+      } as any);
+
+      await incrementUserUsage(userId, "resume_created");
+      res.status(201).json(resume);
+    } catch (error: any) {
+      console.error("Create resume error:", error);
       res.status(500).json({ error: error.message });
     }
   });
