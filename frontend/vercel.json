@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "buildCommand": "cd apps/marketing-site && npm run build",
-  "outputDirectory": "apps/marketing-site/.next",
-  "installCommand": "cd apps/marketing-site && npm install",
-  "framework": "nextjs"
-}
