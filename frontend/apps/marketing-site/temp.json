@@ -1,0 +1,129 @@
+{
+  "version": "4.0.0",
+  "name": "job-lander-v4",
+  "problems": [
+    "extraneous: @emnapi/runtime@1.6.0 /Users/christopher/Projects/JobLander/frontend/node_modules/@emnapi/runtime",
+    "invalid: react-dom@19.2.0 /Users/christopher/Projects/JobLander/frontend/apps/marketing-site/node_modules/react-dom",
+    "invalid: react@19.2.0 /Users/christopher/Projects/JobLander/frontend/apps/marketing-site/node_modules/react"
+  ],
+  "dependencies": {
+    "@emnapi/runtime": {
+      "version": "1.6.0",
+      "resolved": "https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.6.0.tgz",
+      "overridden": false,
+      "extraneous": true,
+      "problems": [
+        "extraneous: @emnapi/runtime@1.6.0 /Users/christopher/Projects/JobLander/frontend/node_modules/@emnapi/runtime"
+      ]
+    },
+    "resume-saas": {
+      "version": "0.1.0",
+      "resolved": "file:../apps/marketing-site",
+      "overridden": false,
+      "dependencies": {
+        "@react-pdf/renderer": {
+          "version": "4.3.1",
+          "resolved": "https://registry.npmjs.org/@react-pdf/renderer/-/renderer-4.3.1.tgz",
+          "overridden": false
+        },
+        "@stripe/stripe-js": {
+          "version": "8.1.0",
+          "resolved": "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-8.1.0.tgz",
+          "overridden": false
+        },
+        "@supabase/ssr": {
+          "version": "0.7.0",
+          "resolved": "https://registry.npmjs.org/@supabase/ssr/-/ssr-0.7.0.tgz",
+          "overridden": false
+        },
+        "@supabase/supabase-js": {
+          "version": "2.76.1",
+          "resolved": "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.76.1.tgz",
+          "overridden": false
+        },
+        "@tailwindcss/postcss": {
+          "version": "4.1.16",
+          "resolved": "https://registry.npmjs.org/@tailwindcss/postcss/-/postcss-4.1.16.tgz",
+          "overridden": false
+        },
+        "@types/node": {
+          "version": "20.19.23",
+          "resolved": "https://registry.npmjs.org/@types/node/-/node-20.19.23.tgz",
+          "overridden": false
+        },
+        "@types/react-dom": {
+          "version": "19.2.2",
+          "overridden": false
+        },
+        "@types/react": {
+          "version": "19.2.2",
+          "overridden": false
+        },
+        "eslint-config-next": {
+          "version": "16.0.0",
+          "resolved": "https://registry.npmjs.org/eslint-config-next/-/eslint-config-next-16.0.0.tgz",
+          "overridden": false
+        },
+        "eslint": {
+          "version": "9.38.0",
+          "resolved": "https://registry.npmjs.org/eslint/-/eslint-9.38.0.tgz",
+          "overridden": false
+        },
+        "next": {
+          "version": "16.0.0",
+          "resolved": "https://registry.npmjs.org/next/-/next-16.0.0.tgz",
+          "overridden": false
+        },
+        "react-dom": {
+          "version": "19.2.0",
+          "overridden": false,
+          "invalid": "\"^18.3.1\" from apps/marketing-site",
+          "problems": [
+            "invalid: react-dom@19.2.0 /Users/christopher/Projects/JobLander/frontend/apps/marketing-site/node_modules/react-dom"
+          ]
+        },
+        "react-hook-form": {
+          "version": "7.65.0",
+          "resolved": "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.65.0.tgz",
+          "overridden": false
+        },
+        "react": {
+          "version": "19.2.0",
+          "overridden": false,
+          "invalid": "\"^18.3.1\" from apps/marketing-site",
+          "problems": [
+            "invalid: react@19.2.0 /Users/christopher/Projects/JobLander/frontend/apps/marketing-site/node_modules/react"
+          ]
+        },
+        "stripe": {
+          "version": "19.1.0",
+          "resolved": "https://registry.npmjs.org/stripe/-/stripe-19.1.0.tgz",
+          "overridden": false
+        },
+        "tailwindcss": {
+          "version": "4.1.16",
+          "overridden": false
+        },
+        "typescript": {
+          "version": "5.6.3",
+          "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.6.3.tgz",
+          "overridden": false
+        },
+        "zod": {
+          "version": "4.1.12",
+          "overridden": false
+        },
+        "zustand": {
+          "version": "5.0.8",
+          "resolved": "https://registry.npmjs.org/zustand/-/zustand-5.0.8.tgz",
+          "overridden": false
+        }
+      }
+    }
+  },
+  "error": {
+    "code": "ELSPROBLEMS",
+    "summary": "extraneous: @emnapi/runtime@1.6.0 /Users/christopher/Projects/JobLander/frontend/node_modules/@emnapi/runtime\ninvalid: react-dom@19.2.0 /Users/christopher/Projects/JobLander/frontend/apps/marketing-site/node_modules/react-dom\ninvalid: react@19.2.0 /Users/christopher/Projects/JobLander/frontend/apps/marketing-site/node_modules/react",
+    "detail": ""
+  }
+}
