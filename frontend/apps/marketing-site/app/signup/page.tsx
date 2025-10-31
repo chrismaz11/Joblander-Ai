@@ -1,105 +1,31 @@
-'use client'
-
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useAuth } from '../../../../contexts/AuthContext'
+import Link from "next/link";
 
 export default function SignupPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [message, setMessage] = useState('')
-  
-  const { signUp } = useAuth()
-  const router = useRouter()
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
-    setMessage('')
-
-    const { data, error } = await signUp(email, password)
-    
-    if (error) {
-      setError(error.message)
-    } else if (data.user && !data.session) {
-      setMessage('Check your email for the confirmation link!')
-    } else {
-      router.push('/dashboard')
-    }
-    
-    setLoading(false)
-  }
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Create your JobLander account
-          </h2>
+    <main className="bg-slate-950 text-white">
+      <div className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center gap-10 px-6 py-24 lg:flex-row lg:items-center lg:px-12">
+        <div className="space-y-6">
+          <h1 className="text-4xl font-semibold tracking-tight">
+            Start your $1.99 trial
+          </h1>
+          <p className="text-base text-white/70">
+            Create an account to unlock premium templates, autosave to the
+            cloud, and prepare to export once you upgrade.
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition hover:text-white"
+          >
+            ← Back to homepage
+          </Link>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-              {error}
-            </div>
-          )}
-          
-          {message && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-              {message}
-            </div>
-          )}
-          
-          <div>
-            <label htmlFor="email" className="sr-only">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Email address"
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="password" className="sr-only">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Password (min 6 characters)"
-            />
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-            >
-              {loading ? 'Creating account...' : 'Sign up'}
-            </button>
-          </div>
-
-          <div className="text-center">
-            <a href="/login" className="text-indigo-600 hover:text-indigo-500">
-              Already have an account? Sign in
-            </a>
-          </div>
-        </form>
+        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8">
+          <p className="text-sm text-white/60">
+            Placeholder signup flow—connect Supabase Auth UI or a custom form
+            backed by Supabase client-side auth.
+          </p>
+        </div>
       </div>
-    </div>
-  )
+    </main>
+  );
 }
