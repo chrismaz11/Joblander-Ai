@@ -34,7 +34,7 @@ export function EmptyState({ type, onAction }: EmptyStateProps) {
     interviews: {
       icon: <Calendar className="w-16 h-16" />,
       title: 'No interviews scheduled',
-      description: 'When you schedule interviews, they'll appear here with preparation checklists and reminders.',
+      description: 'When you schedule interviews, they will appear here with preparation checklists and reminders.',
       action: 'Schedule Interview',
       illustration: '📅',
     },
@@ -48,7 +48,7 @@ export function EmptyState({ type, onAction }: EmptyStateProps) {
     search: {
       icon: <Search className="w-16 h-16" />,
       title: 'No results found',
-      description: 'Try adjusting your search terms or filters to find what you're looking for.',
+      description: 'Try adjusting your search terms or filters to find what you are looking for.',
       action: 'Clear Filters',
       illustration: '🔍',
     },

@@ -133,7 +133,7 @@ export const jobBoardTour: TourStep[] = [
   {
     target: 'wishlist-column',
     title: 'Wishlist',
-    description: 'Add jobs you're interested in but haven't applied to yet.',
+    description: 'Add jobs you are interested in but have not applied to yet.',
     position: 'right',
   },
   {
