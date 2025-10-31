@@ -133,39 +133,6 @@ export function LandingPage({
     },
   ];
 
-  const testimonials = [
-    {
-      name: "Alex Thompson",
-      role: "Software Engineer",
-      company: "Tech Company",
-      image: "👩‍💻",
-      quote:
-        "JobLander helped me land my dream role at Tech Company in just 6 weeks. The AI resume feature is a game-changer!",
-    },
-    {
-      name: "Michael Chen",
-      role: "Product Manager",
-      company: "Meta",
-      image: "👨‍💼",
-      quote:
-        "The analytics gave me insights I never had before. I improved my response rate by 45% in one month.",
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "UX Designer",
-      company: "Apple",
-      image: "👩‍🎨",
-      quote:
-        "Finally, a tool that actually helps organize the chaos of job searching. Highly recommended!",
-    },
-  ];
-
-  const stats = [
-    { value: "100+", label: "Active Users" },
-    { value: "500+", label: "Applications Tracked" },
-    { value: "10+", label: "Resume Templates" },
-    { value: "Free", label: "Forever Plan" },
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
