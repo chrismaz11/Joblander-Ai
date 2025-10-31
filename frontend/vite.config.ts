@@ -24,5 +24,6 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 600
-  }
+  },
+  envDir: './'
 })
