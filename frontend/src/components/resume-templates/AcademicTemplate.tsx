@@ -43,7 +43,7 @@ interface TemplateProps {
 export function AcademicTemplate({ data, isDark = false }: TemplateProps) {
   const mockData: ResumeData = data || {
     personalInfo: {
-      fullName: 'Dr. Sarah Johnson',
+      fullName: 'Dr. Alex Thompson',
       title: 'Assistant Professor of Computer Science',
       email: 'sarah.johnson@university.edu',
       phone: '+1 (555) 234-5678',

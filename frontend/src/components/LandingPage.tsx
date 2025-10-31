@@ -1,6 +1,8 @@
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { useState, useEffect } from "react";
+import { api, type Testimonial, type Stats } from "../lib/api";
 import {
   Check,
   Sparkles,
@@ -22,6 +24,27 @@ export function LandingPage({
   onNavigateToLogin,
   onNavigateToSignup,
 }: LandingPageProps) {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [stats, setStats] = useState<Stats[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [testimonialsData, statsData] = await Promise.all([
+          api.getTestimonials(),
+          api.getStats()
+        ]);
+        setTestimonials(testimonialsData);
+        setStats(statsData);
+      } catch (error) {
+        console.error('Failed to load data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
   const features = [
     {
       icon: <FileText className="w-6 h-6" />,
@@ -112,12 +135,12 @@ export function LandingPage({
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Alex Thompson",
       role: "Software Engineer",
-      company: "Google",
+      company: "Tech Company",
       image: "👩‍💻",
       quote:
-        "JobLander helped me land my dream role at Google in just 6 weeks. The AI resume feature is a game-changer!",
+        "JobLander helped me land my dream role at Tech Company in just 6 weeks. The AI resume feature is a game-changer!",
     },
     {
       name: "Michael Chen",
@@ -138,8 +161,8 @@ export function LandingPage({
   ];
 
   const stats = [
-    { value: "2,500+", label: "Active Users" },
-    { value: "15,000+", label: "Applications Tracked" },
+    { value: "100+", label: "Active Users" },
+    { value: "500+", label: "Applications Tracked" },
     { value: "10+", label: "Resume Templates" },
     { value: "Free", label: "Forever Plan" },
   ];
@@ -210,8 +233,8 @@ export function LandingPage({
             <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg lg:text-xl max-w-2xl mx-auto">
               JobLander helps you organize applications,
               generate AI-powered resumes, and track your job
-              search with powerful analytics. Join 50,000+
-              successful job seekers.
+              search with powerful analytics. Join professionals
+              who are landing their dream jobs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -413,7 +436,7 @@ export function LandingPage({
             Ready to land your dream job?
           </h2>
           <p className="text-blue-100 mb-8 text-lg">
-            Join 50,000+ professionals who are already using
+            Join professionals professionals who are already using
             JobLander to accelerate their career.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

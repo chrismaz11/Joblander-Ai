@@ -34,7 +34,7 @@ export function LoginPage({ onNavigateToSignup, onLogin }: LoginPageProps) {
             <div className="mt-4 flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/20"></div>
               <div>
-                <p className="text-white">Sarah Johnson</p>
+                <p className="text-white">Alex Thompson</p>
                 <p className="text-indigo-200">Software Engineer at Tech Corp</p>
               </div>
             </div>
