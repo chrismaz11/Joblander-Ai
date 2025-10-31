@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import { LandingPage } from './components/LandingPage';
 import { Dashboard } from './components/Dashboard';
 import { JobSearch } from './components/JobSearch';
@@ -68,30 +69,15 @@ export type PageType =
   | 'settings' 
   | 'billing';
 
-function App() {
+function AppContent() {
+  const { user, loading, signOut } = useAuth();
   const [currentPage, setCurrentPage] = useState<PageType>('landing');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
   const [hasUploadedResume, setHasUploadedResume] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-    if (!hasCompletedOnboarding) {
-      setCurrentPage('onboarding');
-    } else {
-      setCurrentPage('dashboard');
-    }
-  };
-
-  const handleSignup = () => {
-    setIsAuthenticated(true);
-    setCurrentPage('onboarding');
-  };
-
   const handleOnboardingComplete = () => {
     setHasCompletedOnboarding(true);
-    // After onboarding, prompt to upload resume
     setCurrentPage('resume-parser');
   };
 
@@ -104,8 +90,8 @@ function App() {
     setCurrentPage('dashboard');
   };
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
+  const handleLogout = async () => {
+    await signOut();
     setHasCompletedOnboarding(false);
     setHasUploadedResume(false);
     setCurrentPage('landing');
@@ -115,29 +101,50 @@ function App() {
     setCurrentPage(page);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   // Landing, Login, Signup - No sidebar
-  if (!isAuthenticated) {
+  if (!user) {
     if (currentPage === 'signup') {
-      return <SignupPage onNavigateToLogin={() => setCurrentPage('login')} onSignup={handleSignup} />;
+      return <SignupPage onNavigateToLogin={() => setCurrentPage('login')} />;
     }
     if (currentPage === 'login') {
-      return <LoginPage onNavigateToLogin={() => setCurrentPage('signup')} onLogin={handleLogin} />;
+      return <LoginPage onNavigateToSignup={() => setCurrentPage('signup')} />;
     }
     return <LandingPage onNavigateToLogin={() => setCurrentPage('login')} onNavigateToSignup={() => setCurrentPage('signup')} />;
   }
 
   // Onboarding Flow
-  if (isAuthenticated && !hasCompletedOnboarding && currentPage === 'onboarding') {
+  if (user && !hasCompletedOnboarding && currentPage === 'onboarding') {
     return <Onboarding onComplete={handleOnboardingComplete} />;
   }
 
   // Resume Parser (post-onboarding)
-  if (isAuthenticated && hasCompletedOnboarding && !hasUploadedResume && currentPage === 'resume-parser') {
+  if (user && hasCompletedOnboarding && !hasUploadedResume && currentPage === 'resume-parser') {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <ResumeParser onParsed={handleResumeUpload} onSkip={handleSkipResume} />
       </div>
     );
+  }
+
+  // Auto-redirect to onboarding for new users
+  if (user && !hasCompletedOnboarding && currentPage === 'landing') {
+    setCurrentPage('onboarding');
+  }
+
+  // Auto-redirect to dashboard for authenticated users
+  if (user && hasCompletedOnboarding && currentPage === 'landing') {
+    setCurrentPage('dashboard');
   }
 
   const navigationItems = [
@@ -332,11 +339,18 @@ function App() {
                 className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-                  <span className="text-white">JD</span>
+                  <span className="text-white text-sm">
+                    {user?.user_metadata?.full_name ? 
+                      user.user_metadata.full_name.split(' ').map((n: string) => n[0]).join('').toUpperCase() : 
+                      user?.email?.charAt(0).toUpperCase() || 'U'
+                    }
+                  </span>
                 </div>
                 <div className="text-left hidden md:block">
-                  <p className="text-gray-900 dark:text-white">John Doe</p>
-                  <p className="text-gray-500 dark:text-gray-400">Free Plan</p>
+                  <p className="text-gray-900 dark:text-white text-sm">
+                    {user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'}
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs">Free Plan</p>
                 </div>
                 <ChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
               </button>
@@ -350,6 +364,14 @@ function App() {
         </main>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
