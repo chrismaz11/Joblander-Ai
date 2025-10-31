@@ -5,9 +5,7 @@
   "license": "PROPRIETARY",
   "author": "Christopher Mazzola",
   "copyright": "Copyright (c) 2024 Christopher Mazzola. All Rights Reserved.",
-  "workspaces": [
-    "apps/marketing-site"
-  ],
+
   "scripts": {
     "dev": "vite",
     "dev:frontend": "vite",
