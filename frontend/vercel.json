@@ -2,6 +2,6 @@
   "version": 2,
   "buildCommand": "cd apps/marketing-site && npm run build",
   "outputDirectory": "apps/marketing-site/.next",
-  "installCommand": "npm install && cd apps/marketing-site && npm install",
+  "installCommand": "cd apps/marketing-site && npm install",
   "framework": "nextjs"
 }
