@@ -20,7 +20,7 @@ export function JobBoard() {
     { id: '2', company: 'Meta', position: 'Frontend Developer', location: 'Menlo Park, CA', salary: '$160k - $220k', status: 'applied', appliedDate: 'Oct 27, 2025' },
     { id: '3', company: 'Apple', position: 'iOS Engineer', location: 'Cupertino, CA', salary: '$170k - $240k', status: 'offer', appliedDate: 'Oct 20, 2025' },
     { id: '4', company: 'Netflix', position: 'Full Stack Engineer', location: 'Los Gatos, CA', salary: '$190k - $280k', status: 'wishlist' },
-    { id: '5', company: 'Amazon', position: 'Backend Engineer', location: 'Seattle, WA', salary: '$150k - $210k', status: 'interview', appliedDate: 'Oct 22, 2025' },
+    { id: '5', company: 'TechCorp', position: 'Backend Engineer', location: 'Seattle, WA', salary: '$150k - $210k', status: 'interview', appliedDate: 'Oct 22, 2025' },
     { id: '6', company: 'Microsoft', position: 'Cloud Engineer', location: 'Redmond, WA', salary: '$155k - $215k', status: 'rejected', appliedDate: 'Oct 18, 2025' },
     { id: '7', company: 'Stripe', position: 'Backend Engineer', location: 'San Francisco, CA', salary: '$175k - $245k', status: 'wishlist' },
     { id: '8', company: 'Airbnb', position: 'Product Engineer', location: 'San Francisco, CA', salary: '$165k - $230k', status: 'applied', appliedDate: 'Oct 26, 2025' },
