@@ -15,7 +15,8 @@ A comprehensive job application management platform with AI-powered resume gener
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework**: Next.js 14+ with TypeScript
+- **Build Tool**: Vite
+- **Framework**: React with TypeScript
 - **UI**: React, Tailwind CSS
 - **State Management**: React Context/Zustand
 - **Authentication**: Supabase Auth
@@ -27,7 +28,9 @@ A comprehensive job application management platform with AI-powered resume gener
 - **File Storage**: Supabase Storage
 
 ### Infrastructure
-- **Deployment**: Vercel (Frontend), Railway/Render (Backend)
+- **Frontend**: Vercel deployment
+- **Backend**: Supabase (Database + Auth + Storage)
+- **Build Tool**: Vite
 - **Monitoring**: PostHog Analytics
 - **Payments**: Stripe Integration
 
@@ -35,11 +38,12 @@ A comprehensive job application management platform with AI-powered resume gener
 
 ```
 JobLander/
-├── frontend/           # Next.js application
-│   ├── apps/
-│   │   └── marketing-site/  # Main web application
-│   ├── components/     # Reusable UI components
-│   └── lib/           # Utilities and configurations
+├── frontend/           # Vite + React application
+│   ├── src/           # Source code
+│   │   ├── components/  # React components
+│   │   └── lib/        # Utilities and configurations
+│   ├── lib/           # Additional utilities
+│   └── contexts/      # React contexts
 ├── backend/           # Express.js API server
 │   ├── routes/        # API endpoints
 │   ├── models/        # Database models
@@ -48,66 +52,20 @@ JobLander/
 └── assets/           # Static assets and templates
 ```
 
-## 🚀 Quick Start
+## 🚀 Deployment
 
-### Prerequisites
-- Node.js 18+
-- PostgreSQL database
-- Supabase account
-- API keys for AI services
+This application is deployed and running on:
+- **Frontend**: Vercel (https://your-app.vercel.app)
+- **Database**: Supabase
+- **Authentication**: Supabase Auth
+- **Storage**: Supabase Storage
 
-### Installation
+### Environment Configuration
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/chrismaz11/joblander-v4.git
-   cd joblander-v4
-   ```
-
-2. **Install dependencies**
-   ```bash
-   # Frontend
-   cd frontend && npm install
-   
-   # Backend  
-   cd ../backend && npm install
-   ```
-
-3. **Environment Setup**
-   ```bash
-   # Copy example environment files
-   cp backend/.env.example backend/.env
-   cp frontend/apps/marketing-site/.env.example frontend/apps/marketing-site/.env.local
-   
-   # Edit with your actual values
-   ```
-
-4. **Database Setup**
-   ```bash
-   # Run migrations
-   cd backend && npm run migrate
-   ```
-
-5. **Start Development Servers**
-   ```bash
-   # Terminal 1 - Backend
-   cd backend && npm run dev
-   
-   # Terminal 2 - Frontend  
-   cd frontend && npm run dev
-   ```
-
-Visit `http://localhost:3000` to see the application.
-
-## 🔐 Security & Environment Variables
-
-**CRITICAL**: Never commit `.env` files containing real API keys. Use `.env.example` files as templates.
-
-Required environment variables:
-- `SUPABASE_URL` & `SUPABASE_ANON_KEY`
-- `OPENAI_API_KEY` or `GEMINI_API_KEY`  
-- `STRIPE_PUBLISHABLE_KEY` & `STRIPE_SECRET_KEY`
-- `NEXTAUTH_SECRET`
+The application uses the following environment variables:
+- `VITE_SUPABASE_URL` & `VITE_SUPABASE_ANON_KEY`
+- `VITE_GEMINI_API_KEY` or `VITE_OPENAI_API_KEY`  
+- `VITE_STRIPE_PUBLISHABLE_KEY` & `STRIPE_SECRET_KEY`
 
 ## 📄 License & Usage
 
