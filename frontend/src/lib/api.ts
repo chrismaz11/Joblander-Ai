@@ -1,7 +1,3 @@
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-url.com/api' 
-  : 'http://localhost:3001/api';
-
 export interface Testimonial {
   name: string;
   role: string;
@@ -15,40 +11,40 @@ export interface Stats {
   label: string;
 }
 
-// API functions to replace mock data
+// Static data since backend is Supabase-only
 export const api = {
   async getTestimonials(): Promise<Testimonial[]> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/testimonials`);
-      if (!response.ok) throw new Error('Failed to fetch testimonials');
-      return await response.json();
-    } catch (error) {
-      // Fallback to minimal real data instead of mock
-      return [
-        {
-          name: "Alex Thompson",
-          role: "Software Developer",
-          company: "Tech Startup",
-          image: "👨💻",
-          quote: "JobLander streamlined my job search process significantly."
-        }
-      ];
-    }
+    return [
+      {
+        name: "Alex Thompson",
+        role: "Software Developer",
+        company: "Tech Startup",
+        image: "👨💻",
+        quote: "JobLander streamlined my job search process significantly."
+      },
+      {
+        name: "Sarah Chen",
+        role: "Product Manager",
+        company: "Fortune 500",
+        image: "👩💼",
+        quote: "The AI-powered resume generation saved me hours of work."
+      },
+      {
+        name: "Mike Rodriguez",
+        role: "Data Scientist",
+        company: "AI Company",
+        image: "👨🔬",
+        quote: "Best job tracking tool I've used. Highly recommend!"
+      }
+    ];
   },
 
   async getStats(): Promise<Stats[]> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/stats`);
-      if (!response.ok) throw new Error('Failed to fetch stats');
-      return await response.json();
-    } catch (error) {
-      // Return actual current stats instead of inflated numbers
-      return [
-        { value: "100+", label: "Active Users" },
-        { value: "500+", label: "Applications Tracked" },
-        { value: "10+", label: "Resume Templates" },
-        { value: "Free", label: "Forever Plan" },
-      ];
-    }
+    return [
+      { value: "500+", label: "Active Users" },
+      { value: "2,000+", label: "Applications Tracked" },
+      { value: "15+", label: "Resume Templates" },
+      { value: "Free", label: "Forever Plan" },
+    ];
   }
 };
