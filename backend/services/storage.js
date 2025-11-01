@@ -79,6 +79,11 @@ export async function createResume(payload) {
     status: payload.status ?? "draft",
   };
 
+  // Require explicit userId to avoid anonymous / demo data leaking into production
+  if (!baseRecord.userId) {
+    throw new Error("createResume: userId is required");
+  }
+
   if (db) {
     const [record] = await db
       .insert(resumesTable)
@@ -149,16 +154,20 @@ export async function getResume(id) {
   return memoryStore.resumes.get(id) ?? null;
 }
 
-export async function listResumes() {
+export async function listResumes(userId) {
   const db = getDb();
   if (db) {
-    const records = await db
-      .select()
-      .from(resumesTable)
-      .orderBy(desc(resumesTable.updatedAt));
+    let query = db.select().from(resumesTable).orderBy(desc(resumesTable.updatedAt));
+    if (userId) {
+      query = query.where(eq(resumesTable.userId, userId));
+    }
+    const records = await query;
     return records.map(normalizeResume);
   }
-  return Array.from(memoryStore.resumes.values()).sort(
+
+  const values = Array.from(memoryStore.resumes.values());
+  const collection = userId ? values.filter((item) => item.userId === userId) : values;
+  return collection.sort(
     (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
   );
 }

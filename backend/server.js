@@ -23,6 +23,7 @@ import {
   canCreateCoverLetter,
   getTierLimits,
 } from "./services/tierService.js";
+import careerAIRoutes from "./server/routes/careerAI.js";
 
 dotenv.config();
 
@@ -230,6 +231,9 @@ app.get("/api/tier-limits/:userId", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch tier limits" });
   }
 });
+
+// AI career assistance routes
+app.use('/api/career-ai', careerAIRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
