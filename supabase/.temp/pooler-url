@@ -1,0 +1,4 @@
+# pooler URL removed for security. If you need a local pooler URL, set it in your
+# local environment as an environment variable (do NOT commit).
+# Example placeholder:
+# POSTGRES_POOLER_URL=postgresql://postgres:YOUR_PASSWORD@aws-1-us-east-1.pooler.supabase.com:5432/postgres
