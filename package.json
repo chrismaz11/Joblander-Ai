@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@jridgewell/sourcemap-codec": "^1.5.5",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -13,3 +14,4 @@
     "@testing-library/dom": "^10.4.1"
   }
 }
+
