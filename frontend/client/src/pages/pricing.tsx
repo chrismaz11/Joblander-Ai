@@ -10,23 +10,39 @@ const plans = [
     id: 'free',
     name: 'Free',
     price: 0,
-    description: 'Get started with basic features',
-    features: ['1 resume/month', 'Basic templates', 'Watermarked PDFs', 'Community support'],
+    description: 'Get started with AI-powered job hunting',
+    features: [
+      '2 AI resume generations/month',
+      '3 cover letter generations/month',
+      'Basic templates',
+      'Job search (manual refresh)',
+      'Basic ATS scoring',
+      'Community support'
+    ],
     popular: false,
     tier: 'free'
   },
   {
-    id: 'basic',
-    name: 'Basic Pro',
-    price: 4.95,
-    priceId: 'price_basic_monthly',
-    description: 'Perfect for job seekers',
-    features: ['5 resumes/month', 'All templates', 'PDF export', 'Email support'],
+    id: 'pro',
+    name: 'Professional',
+    price: 19.95,
+    priceId: 'price_pro_monthly',
+    description: 'Unlock full AI guidance and automation',
+    features: [
+      'Unlimited AI resume generations',
+      'Unlimited cover letter generations',
+      'Premium templates',
+      'AI job matching with daily alerts',
+      'Advanced ATS optimization',
+      'Interview prep with AI feedback',
+      'Salary negotiation tools',
+      'Priority support'
+    ],
     popular: true,
-    tier: 'basic'
+    tier: 'pro'
   },
   {
-    id: 'professional',
+    id: 'enterprise',
     name: 'Professional',
     price: 9.95,
     priceId: 'price_professional_monthly',

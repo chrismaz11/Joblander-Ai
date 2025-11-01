@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
@@ -6,54 +8,84 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Sparkles, TrendingUp, AlertCircle, Lightbulb, CheckCircle2, Circle } from 'lucide-react';
 
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+  priority: 'high' | 'medium' | 'low';
+}
+
+interface Stat {
+  label: string;
+  value: string;
+  change: string;
+  trend: 'up' | 'down';
+  color: string;
+}
+
 export function Dashboard() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Follow up with Google recruiter', completed: false, priority: 'high' },
-    { id: 2, text: 'Prepare for Meta technical interview', completed: false, priority: 'high' },
-    { id: 3, text: 'Update resume for Apple position', completed: true, priority: 'medium' },
-    { id: 4, text: 'Send thank you email to Amazon', completed: false, priority: 'medium' },
-    { id: 5, text: 'Research Netflix company culture', completed: false, priority: 'low' },
-  ]);
+  const { user, isAuthenticated } = useAuth();
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  const stats = [
-    { label: 'Total Applications', value: '24', change: '+3 this week', trend: 'up', color: 'blue' },
-    { label: 'Active Interviews', value: '8', change: '+2 this week', trend: 'up', color: 'purple' },
-    { label: 'Response Rate', value: '68%', change: '+5%', trend: 'up', color: 'green' },
-    { label: 'Avg. Time to Interview', value: '12 days', change: '-2 days', trend: 'up', color: 'orange' },
-  ];
+  const { data: todosData } = useQuery<Todo[]>({
+    queryKey: ['/api/todos'],
+    enabled: isAuthenticated,
+  });
 
-  const aiSuggestions = [
-    {
-      icon: '🎯',
-      title: 'Optimize your resume for ATS',
-      description: 'Your resume may be missing key keywords for Software Engineer roles',
-      action: 'Optimize Now',
-    },
-    {
-      icon: '📧',
-      title: 'Follow up on 3 applications',
-      description: 'You haven\'t heard back in over a week. A follow-up could help.',
-      action: 'Send Follow-ups',
-    },
-    {
-      icon: '💼',
-      title: 'New jobs match your profile',
-      description: '15 new Senior Engineer positions posted in the last 24 hours',
-      action: 'View Jobs',
-    },
-  ];
+  const { data: statsData } = useQuery<Stat[]>({
+    queryKey: ['/api/job-stats'],
+    enabled: isAuthenticated,
+  });
 
-  const recentApplications = [
-    { company: 'Google', position: 'Senior Software Engineer', status: 'Interview', date: '2 days ago', logo: '🔵' },
-    { company: 'Meta', position: 'Frontend Developer', status: 'Applied', date: '3 days ago', logo: '🔷' },
-    { company: 'Apple', position: 'iOS Engineer', status: 'Offer', date: '5 days ago', logo: '⚫' },
-    { company: 'Amazon', position: 'Full Stack Developer', status: 'Interview', date: '1 week ago', logo: '🟠' },
-  ];
+  useEffect(() => {
+    if (todosData) {
+      setTodos(todosData);
+    }
+  }, [todosData]);
 
-  const upcomingInterviews = [
-    { company: 'Google', position: 'Senior Software Engineer', type: 'Technical', date: 'Tomorrow, 2:00 PM', urgent: true },
-    { company: 'Amazon', position: 'Full Stack Developer', type: 'System Design', date: 'Nov 2, 10:00 AM', urgent: false },
-  ];
+  const stats = statsData || [];
+
+  interface AiSuggestion {
+    icon: string;
+    title: string;
+    description: string;
+    action: string;
+  }
+
+  interface Application {
+    company: string;
+    position: string;
+    status: string;
+    date: string;
+    logo: string;
+  }
+
+  interface Interview {
+    company: string;
+    position: string;
+    type: string;
+    date: string;
+    urgent: boolean;
+  }
+
+  const { data: aiSuggestionsData } = useQuery<AiSuggestion[]>({
+    queryKey: ['/api/ai-suggestions'],
+    enabled: isAuthenticated,
+  });
+
+  const { data: recentApplicationsData } = useQuery<Application[]>({
+    queryKey: ['/api/applications/recent'],
+    enabled: isAuthenticated,
+  });
+
+  const { data: upcomingInterviewsData } = useQuery<Interview[]>({
+    queryKey: ['/api/interviews/upcoming'],
+    enabled: isAuthenticated,
+  });
+
+  const aiSuggestions = aiSuggestionsData || [];
+  const recentApplications = recentApplicationsData || [];
+  const upcomingInterviews = upcomingInterviewsData || [];
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -81,7 +113,7 @@ export function Dashboard() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-gray-900 dark:text-white mb-2">Welcome back, John! 👋</h1>
+            <h1 className="text-gray-900 dark:text-white mb-2">Welcome back, {user?.name || user?.email || 'there'}! 👋</h1>
             <p className="text-gray-600 dark:text-gray-400">Here's what's happening with your job search today.</p>
           </div>
           <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
@@ -93,7 +125,7 @@ export function Dashboard() {
 
       {/* Stats Grid - Simplified */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        {stats.map((stat, index) => (
+        {stats.map((stat: Stat, index: number) => (
           <Card key={index} className="p-4">
             <div className="flex items-center justify-between mb-1">
               <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
@@ -120,7 +152,7 @@ export function Dashboard() {
             </Badge>
           </div>
           <div className="space-y-3">
-            {aiSuggestions.map((suggestion, index) => (
+            {aiSuggestions.map((suggestion: AiSuggestion, index: number) => (
               <div key={index} className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-lg border border-blue-200 dark:border-blue-800">
                 <div className="flex items-start gap-3">
                   <span className="text-2xl">{suggestion.icon}</span>
@@ -185,7 +217,7 @@ export function Dashboard() {
             <Button variant="ghost" size="sm">View all</Button>
           </div>
           <div className="space-y-3">
-            {upcomingInterviews.map((interview, index) => (
+            {upcomingInterviews.map((interview: Interview, index: number) => (
               <div key={index} className={`p-4 rounded-lg border ${interview.urgent ? 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/10' : 'border-gray-200 dark:border-gray-700'}`}>
                 <div className="flex items-start justify-between mb-2">
                   <div>
@@ -254,7 +286,7 @@ export function Dashboard() {
           <Button variant="ghost" size="sm">View all</Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {recentApplications.map((app, index) => (
+          {recentApplications.map((app: Application, index: number) => (
             <div key={index} className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors cursor-pointer">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl">

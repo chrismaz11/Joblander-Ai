@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import fetch from "cross-fetch";
 import type { AppConfig } from "../config/env.js";
 import type { PrismaClient } from "@prisma/client";
+import { z } from "zod";
 
 export interface ResumePayload {
   userId: string;
@@ -46,7 +47,16 @@ export class AiService {
       `Return JSON with keys: summary, sections (array of { heading, bullets }), and keywords.`;
 
     const result = await this.invokeModel(prompt);
-    const document = typeof result === "string" ? JSON.parse(result) : result;
+    const document = this.safeParseJson(result, {
+      summary: z.string().optional(),
+      sections: z.array(
+        z.object({
+          heading: z.string(),
+          bullets: z.array(z.string()),
+        }),
+      ).optional(),
+      keywords: z.array(z.string()).optional(),
+    });
 
     const htmlContent = this.toHtml(document);
 
@@ -71,7 +81,13 @@ export class AiService {
       ` Return JSON with keys: greeting, opening, body (array of paragraphs), closing, signature.`;
 
     const result = await this.invokeModel(prompt);
-    const document = typeof result === "string" ? JSON.parse(result) : result;
+    const document = this.safeParseJson(result, {
+      greeting: z.string().optional(),
+      opening: z.string().optional(),
+      body: z.array(z.string()).optional(),
+      closing: z.string().optional(),
+      signature: z.string().optional(),
+    });
     const htmlContent = this.coverLetterToHtml(document);
 
     const record = await prisma.coverLetter.create({
@@ -97,7 +113,8 @@ export class AiService {
         ],
       });
       const text = completion.output_text ?? "{}";
-      return JSON.parse(text);
+      // Return raw text for downstream parsing; avoid throwing here so fallback logic can run.
+      return text;
     } catch (error) {
       if (!this.config.OLLAMA_HOST) throw error;
       const response = await fetch(`${this.config.OLLAMA_HOST}/api/generate`, {
@@ -110,7 +127,37 @@ export class AiService {
         }),
       });
       const data = await response.json();
-      return JSON.parse(data.response ?? "{}");
+      return data.response ?? "{}";
+    }
+  }
+
+  /**
+   * Safely parse and validate JSON model output. Accepts either an object or a string.
+   * If parsing/validation fails, logs the error and returns a safe default object.
+   */
+  private safeParseJson(raw: any, schemaShape: any) {
+    const schema = z.object(schemaShape);
+    let parsed: any = raw;
+    if (typeof raw === "string") {
+      try {
+        parsed = JSON.parse(raw);
+      } catch (err) {
+        console.error("AI response JSON.parse failed:", err, "raw:", raw?.slice?.(0, 100) ?? raw);
+        parsed = {};
+      }
+    }
+
+    try {
+      const validated = schema.parse(parsed ?? {});
+      return validated;
+    } catch (err) {
+      console.error("AI response validation failed:", err, "parsed:", parsed);
+      // Return a minimal safe structure matching expected keys to avoid crashes downstream
+      const safe: any = {};
+      Object.keys(schemaShape).forEach((k) => {
+        safe[k] = undefined;
+      });
+      return safe;
     }
   }
 
