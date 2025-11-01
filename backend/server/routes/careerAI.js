@@ -1,5 +1,5 @@
 import express from 'express';
-import { isAuthenticated } from '../simpleAuth.js';
+import verifyJwtDual from '../../middleware/verifyJwtDual.js';
 import { checkUserUsage, incrementUserUsage } from '../services/tierEnforcement.js';
 import {
   analyzeJobFit,
@@ -12,7 +12,10 @@ import {
 const router = express.Router();
 
 // Analyze job fit and get improvement suggestions
-router.post('/analyze-job-fit', isAuthenticated, async (req, res) => {
+// Use JWT dual-verification middleware to support rotation grace periods.
+const authMiddleware = verifyJwtDual(process.env.JWT_SECRET, process.env.LEGACY_JWT_SECRET);
+
+router.post('/analyze-job-fit', authMiddleware, async (req, res) => {
   try {
     const { resume, jobDescription } = req.body;
     
@@ -33,7 +36,7 @@ router.post('/analyze-job-fit', isAuthenticated, async (req, res) => {
 });
 
 // Generate salary negotiation strategy
-router.post('/salary-negotiation', isAuthenticated, async (req, res) => {
+router.post('/salary-negotiation', authMiddleware, async (req, res) => {
   try {
     const canUseAI = await checkUserUsage(req.user.id, 'aiGenerations');
     if (!canUseAI) {
@@ -51,7 +54,7 @@ router.post('/salary-negotiation', isAuthenticated, async (req, res) => {
 });
 
 // Generate personalized job search strategy
-router.post('/job-search-strategy', isAuthenticated, async (req, res) => {
+router.post('/job-search-strategy', authMiddleware, async (req, res) => {
   try {
     const canUseAI = await checkUserUsage(req.user.id, 'aiGenerations');
     if (!canUseAI) {
@@ -69,7 +72,7 @@ router.post('/job-search-strategy', isAuthenticated, async (req, res) => {
 });
 
 // Enhance job application materials
-router.post('/enhance-application', isAuthenticated, async (req, res) => {
+router.post('/enhance-application', authMiddleware, async (req, res) => {
   try {
     const canUseAI = await checkUserUsage(req.user.id, 'aiGenerations');
     if (!canUseAI) {
@@ -87,7 +90,7 @@ router.post('/enhance-application', isAuthenticated, async (req, res) => {
 });
 
 // Generate interview preparation materials
-router.post('/interview-prep', isAuthenticated, async (req, res) => {
+router.post('/interview-prep', authMiddleware, async (req, res) => {
   try {
     const canUseAI = await checkUserUsage(req.user.id, 'aiGenerations');
     if (!canUseAI) {
