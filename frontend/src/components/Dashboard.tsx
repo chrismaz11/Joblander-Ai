@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 import { useQuery } from '@tanstack/react-query';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -103,7 +103,7 @@ export function Dashboard() {
   };
 
   const toggleTodo = (id: number) => {
-    setTodos(todos.map(todo => 
+    setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     ));
   };
@@ -126,7 +126,7 @@ export function Dashboard() {
       {/* Stats Grid - Simplified */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {stats.map((stat: Stat, index: number) => (
-          <Card key={index} className="p-4">
+          <Card className="p-4" key={index}>
             <div className="flex items-center justify-between mb-1">
               <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
               {stat.trend === 'up' && (
@@ -153,7 +153,7 @@ export function Dashboard() {
           </div>
           <div className="space-y-3">
             {aiSuggestions.map((suggestion: AiSuggestion, index: number) => (
-              <div key={index} className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-lg border border-blue-200 dark:border-blue-800">
+              <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-lg border border-blue-200 dark:border-blue-800" key={index}>
                 <div className="flex items-start gap-3">
                   <span className="text-2xl">{suggestion.icon}</span>
                   <div className="flex-1">
@@ -179,19 +179,16 @@ export function Dashboard() {
           </div>
           <div className="space-y-3 mb-4">
             {todos.slice(0, 5).map((todo) => (
-              <div
-                key={todo.id}
-                className={`flex items-start gap-3 p-3 rounded-lg transition-colors ${
+              <div key={todo.id} className={`flex items-start gap-3 p-3 rounded-lg transition-colors ${
                   todo.completed ? 'bg-gray-50 dark:bg-gray-900' : 'hover:bg-gray-50 dark:hover:bg-gray-800'
-                }`}
-              >
+                }`}>
                 <Checkbox
                   checked={todo.completed}
                   onCheckedChange={() => toggleTodo(todo.id)}
                   className="mt-0.5"
                 />
                 <div className="flex-1">
-                  <span className={`text-gray-700 dark:text-gray-300 ${todo.completed ? 'line-through opacity-60' : ''}`}>
+                  <span className="text-gray-700 dark:text-gray-300">
                     {todo.text}
                   </span>
                   {todo.priority === 'high' && !todo.completed && (
@@ -203,7 +200,7 @@ export function Dashboard() {
               </div>
             ))}
           </div>
-          <Button variant="outline" size="sm" className="w-full">
+          <Button className="w-full" size="sm" variant="outline">
             + Add Task
           </Button>
         </Card>
@@ -214,11 +211,11 @@ export function Dashboard() {
         <Card className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-gray-900 dark:text-white">Upcoming Interviews</h3>
-            <Button variant="ghost" size="sm">View all</Button>
+            <Button size="sm" variant="ghost">View all</Button>
           </div>
           <div className="space-y-3">
             {upcomingInterviews.map((interview: Interview, index: number) => (
-              <div key={index} className={`p-4 rounded-lg border ${interview.urgent ? 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/10' : 'border-gray-200 dark:border-gray-700'}`}>
+              <div key={index} className="p-4 rounded-lg border dark:border-gray-700">
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <p className="text-gray-900 dark:text-white">{interview.company}</p>
@@ -249,28 +246,28 @@ export function Dashboard() {
                 <span className="text-gray-700 dark:text-gray-300">Wishlist</span>
                 <span className="text-gray-600 dark:text-gray-400">6 jobs</span>
               </div>
-              <Progress value={25} className="h-2" />
+              <Progress className="h-2" value={25} />
             </div>
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-700 dark:text-gray-300">Applied</span>
                 <span className="text-gray-600 dark:text-gray-400">12 jobs</span>
               </div>
-              <Progress value={50} className="h-2" />
+              <Progress className="h-2" value={50} />
             </div>
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-700 dark:text-gray-300">Interview</span>
                 <span className="text-gray-600 dark:text-gray-400">8 jobs</span>
               </div>
-              <Progress value={33} className="h-2" />
+              <Progress className="h-2" value={33} />
             </div>
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-700 dark:text-gray-300">Offer</span>
                 <span className="text-gray-600 dark:text-gray-400">2 jobs</span>
               </div>
-              <Progress value={8} className="h-2" />
+              <Progress className="h-2" value={8} />
             </div>
           </div>
           <Button className="w-full mt-4" variant="outline">
@@ -283,11 +280,11 @@ export function Dashboard() {
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-gray-900 dark:text-white">Recent Applications</h3>
-          <Button variant="ghost" size="sm">View all</Button>
+          <Button size="sm" variant="ghost">View all</Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {recentApplications.map((app: Application, index: number) => (
-            <div key={index} className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors cursor-pointer">
+            <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors cursor-pointer" key={index}>
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl">
                   {app.logo}
