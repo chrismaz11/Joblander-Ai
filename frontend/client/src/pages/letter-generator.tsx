@@ -35,9 +35,7 @@ export default function LetterGenerator() {
   const [isExporting, setIsExporting] = useState(false);
   const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
 
-  const remainingLetters = limits.coverLettersPerMonth - (usage?.coverLettersThisMonth || 0);
-  const isNearLimit = remainingLetters <= 1 && limits.coverLettersPerMonth !== -1;
-  const isAtLimit = remainingLetters <= 0 && limits.coverLettersPerMonth !== -1;
+
 
   useEffect(() => {
     TemplateService.loadTemplates()
@@ -53,16 +51,6 @@ export default function LetterGenerator() {
 
   async function handleGenerate(e: React.FormEvent) {
     e.preventDefault();
-    
-    if (requiresUpgrade('cover_letters')) {
-      setShowUpgradePrompt(true);
-      toast({
-        title: "🚀 Upgrade to Generate More Letters",
-        description: "Unlock unlimited AI-powered cover letters with our Professional plan. Save hours of writing time!",
-        variant: "destructive"
-      });
-      return;
-    }
 
     setLoading(true);
     setHtml(null);
@@ -99,10 +87,10 @@ export default function LetterGenerator() {
   async function handleExportPDF() {
     if (!html) return;
     
-    if (requiresUpgrade('no_watermark')) {
+    if (requiresUpgrade('downloads')) {
       toast({
-        title: "Upgrade for PDF Export",
-        description: "PDF export without watermark requires a Basic plan or higher.",
+        title: "Download for $2.95",
+        description: "Free users can download for $2.95 or upgrade to Basic Pro for unlimited downloads.",
         variant: "destructive"
       });
       return;
@@ -174,17 +162,7 @@ export default function LetterGenerator() {
         {/* Usage Tracking & Upgrade Prompts */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
-            {isNearLimit && !hasFeature('unlimited_cover_letters') && (
-              <Alert className="mb-6 border-yellow-200 bg-yellow-50">
-                <AlertTriangle className="h-4 w-4 text-yellow-600" />
-                <AlertDescription className="text-yellow-800">
-                  <strong>Almost at your limit!</strong> You have {remainingLetters} cover letter{remainingLetters !== 1 ? 's' : ''} remaining this month.
-                  <Button variant="link" className="p-0 h-auto ml-2 text-yellow-800 underline">
-                    Upgrade for unlimited letters →
-                  </Button>
-                </AlertDescription>
-              </Alert>
-            )}
+
             
             {showUpgradePrompt && (
               <Card className="mb-6 border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50">

@@ -3,36 +3,31 @@ import { useState, useEffect } from 'react';
 
 export const TIER_LIMITS = {
   free: {
-    resumesPerMonth: 1,
-    coverLettersPerMonth: 3,
-    templatesAccess: 'basic',
+    resumesPerMonth: -1, // unlimited
+    coverLettersPerMonth: -1, // unlimited
+    templatesAccess: 'all',
     coverLetters: true,
     watermark: true,
+    downloads: false, // pay-per-download
     support: 'community'
   },
   basic: {
-    resumesPerMonth: 10,
-    coverLettersPerMonth: 10,
+    resumesPerMonth: -1, // unlimited
+    coverLettersPerMonth: -1, // unlimited
     templatesAccess: 'all',
     coverLetters: true,
     watermark: false,
+    downloads: true, // unlimited downloads
     support: 'email'
   },
   professional: {
     resumesPerMonth: -1, // unlimited
     coverLettersPerMonth: -1, // unlimited
-    templatesAccess: 'premium',
+    templatesAccess: 'all',
     coverLetters: true,
     watermark: false,
+    downloads: true, // unlimited downloads
     support: 'priority'
-  },
-  enterprise: {
-    resumesPerMonth: -1, // unlimited
-    coverLettersPerMonth: -1, // unlimited
-    templatesAccess: 'premium',
-    coverLetters: true,
-    watermark: false,
-    support: 'dedicated'
   }
 };
 
@@ -114,6 +109,9 @@ export function useTierLimits() {
       case 'no_watermark':
       case 'noWatermark':
         return limits.watermark;
+      case 'downloads':
+      case 'unlimited_downloads':
+        return !limits.downloads;
       case 'unlimited_resumes':
         return limits.resumesPerMonth !== -1;
       case 'unlimited_cover_letters':

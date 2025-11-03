@@ -3,10 +3,10 @@ import { users, usageTracking } from '../../shared/schema';
 import { eq, and, gte } from 'drizzle-orm';
 
 const TIER_LIMITS = {
-  free: { resumesPerMonth: 1, templatesAccess: 'basic', coverLetters: false, watermark: true },
-  basic: { resumesPerMonth: 5, templatesAccess: 'all', coverLetters: true, watermark: false },
-  professional: { resumesPerMonth: -1, templatesAccess: 'premium', coverLetters: true, watermark: false },
-  enterprise: { resumesPerMonth: -1, templatesAccess: 'premium', coverLetters: true, watermark: false }
+  free: { resumesPerMonth: -1, templatesAccess: 'all', coverLetters: true, watermark: true, downloads: false },
+  basic: { resumesPerMonth: -1, templatesAccess: 'all', coverLetters: true, watermark: false, downloads: true },
+  professional: { resumesPerMonth: -1, templatesAccess: 'all', coverLetters: true, watermark: false, downloads: true },
+  enterprise: { resumesPerMonth: -1, templatesAccess: 'all', coverLetters: true, watermark: false, downloads: true }
 };
 
 export function getTierLimits(tier: string) {
