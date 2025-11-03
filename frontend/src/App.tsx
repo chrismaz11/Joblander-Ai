@@ -210,7 +210,7 @@ function AppContent() {
         {/* Logo */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-3">
-            <img src="/assets/branding/joblander-logo-isolated.jpg" alt="JobLander Logo" className="h-10 flex-shrink-0" />
+            <img src="/assets/branding/vector/isolated-monochrome-black.svg" alt="JobLander Logo" className="h-10 flex-shrink-0" />
             {!sidebarCollapsed && (
               <div>
                 <h1 className="text-gray-900 dark:text-white">JobLander</h1>
