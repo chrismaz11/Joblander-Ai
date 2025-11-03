@@ -14,7 +14,7 @@ export function Logo({ className = '', size = 'md' }: LogoProps) {
 
   return (
     <img
-      src="/logo.png"
+      src="/assets/branding/joblander-logo.png"
       alt="JobLander"
       className={`${sizeClasses[size]} ${className} dark:brightness-0 dark:invert`}
     />
