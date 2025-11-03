@@ -141,12 +141,7 @@ export function LandingPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-gray-900 dark:text-white">
-                JobLander
-              </span>
+              <img src="/assets/branding/vector/default-monochrome-black.svg" alt="JobLander Logo" className="h-8" />
             </div>
             <div className="hidden md:flex items-center gap-8">
               <a
@@ -581,10 +576,7 @@ export function LandingPage({
           </div>
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
-              <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-white">JobLander</span>
+              <img src="/assets/branding/vector/default-monochrome-white.svg" alt="JobLander Logo" className="h-6" />
             </div>
             <p>© 2025 JobLander. All rights reserved.</p>
           </div>

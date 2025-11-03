@@ -80,8 +80,7 @@ export function LoginPage({ onNavigateToSignup }: LoginPageProps) {
       {/* Left Side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 to-purple-700 p-12 flex-col justify-between">
         <div>
-          <h1 className="text-white mb-2">JobLander</h1>
-          <p className="text-indigo-100">Your career journey starts here</p>
+          <img src="/assets/branding/vector/default-monochrome-white.svg" alt="JobLander Logo" className="h-12" />
         </div>
         
         <div className="space-y-6">
