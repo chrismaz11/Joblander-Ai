@@ -88,6 +88,20 @@ export default function Login() {
             >
               {loading ? "Signing in…" : "Log In"}
             </Button>
+            
+            <div className="text-center pt-4 border-t">
+              <p className="text-sm text-muted-foreground mb-3">
+                New to JobLander?
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => setLocation('/signup')}
+              >
+                Create Account - Start Free Trial
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

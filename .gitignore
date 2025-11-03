@@ -86,3 +86,5 @@ archive/Job-Lander-v4.0-git/
 archive/
 .vercel
 test.js
+.env*.local
+.env

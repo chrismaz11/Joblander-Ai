@@ -1,0 +1,76 @@
+/* Neptune - The Deep Professional */
+:root {
+  --main-bg: #f8f8ff;
+  --accent-bg: #e6f3ff;
+  --accent-color: #4682b4;
+  --highlight-bg: #b0c4de;
+  --text-main: #2f4f4f;
+  --text-accent: #4682b4;
+  --heading-font: 'Montserrat', Arial, sans-serif;
+  --body-font: 'Montserrat', Arial, sans-serif;
+  --section-spacing: 34px;
+  --border-radius: 10px;
+}
+.resume-neptune-deep {
+  background: var(--main-bg);
+  color: var(--text-main);
+  font-family: var(--body-font);
+  padding: 2.1rem;
+  border-radius: var(--border-radius);
+}
+.resume-header {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  text-align: left;
+  padding: 1.6rem 2rem 1rem 2rem;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-family: var(--heading-font);
+}
+.resume-title {
+  font-size: 2.05rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+.resume-subtitle {
+  font-size: 1.08rem;
+  color: var(--text-accent);
+  margin-bottom: 0.75rem;
+}
+.resume-section {
+  margin-top: var(--section-spacing);
+  border-left: 4px solid var(--accent-color);
+  background: var(--highlight-bg);
+  padding-left: 1.05rem;
+}
+.resume-section-title {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  font-family: var(--heading-font);
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+}
+.resume-body {
+  font-size: 1.01rem;
+  color: var(--text-main);
+}
+.resume-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+.resume-skill {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  border-radius: var(--border-radius);
+  padding: 0.36em 1em;
+  font-size: 0.97em;
+  margin-bottom: 0.16em;
+  font-family: var(--body-font);
+}
+.resume-footer {
+  margin-top: var(--section-spacing);
+  font-size: 0.91em;
+  color: var(--text-accent);
+  text-align: right;
+}

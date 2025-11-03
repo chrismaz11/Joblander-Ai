@@ -10,56 +10,76 @@ const plans = [
     id: 'free',
     name: 'Free',
     price: 0,
-    description: 'Get started with AI-powered job hunting',
+    description: 'Try JobLander risk-free',
     features: [
-      '2 AI resume generations/month',
+      '1 AI resume generation/month',
       '3 cover letter generations/month',
       'Basic templates',
-      'Job search (manual refresh)',
-      'Basic ATS scoring',
-      'Community support'
+      'Manual job search',
+      'Community support',
+      'Watermarked exports'
     ],
     popular: false,
-    tier: 'free'
+    tier: 'free',
+    cta: 'Start Free'
   },
   {
-    id: 'pro',
+    id: 'basic',
+    name: 'Basic',
+    price: 9.95,
+    priceId: 'price_basic_monthly',
+    description: 'Essential tools for job hunting',
+    features: [
+      '10 AI resume generations/month',
+      '10 cover letter generations/month',
+      'All templates',
+      'PDF export without watermark',
+      'Email support',
+      'ATS optimization'
+    ],
+    popular: false,
+    tier: 'basic',
+    cta: 'Choose Basic'
+  },
+  {
+    id: 'professional',
     name: 'Professional',
     price: 19.95,
-    priceId: 'price_pro_monthly',
-    description: 'Unlock full AI guidance and automation',
+    priceId: 'price_professional_monthly',
+    description: 'Perfect for active job seekers',
     features: [
       'Unlimited AI resume generations',
       'Unlimited cover letter generations',
       'Premium templates',
-      'AI job matching with daily alerts',
-      'Advanced ATS optimization',
+      'AI job matching with alerts',
       'Interview prep with AI feedback',
-      'Salary negotiation tools',
-      'Priority support'
+      'Priority support',
+      'Advanced ATS scoring',
+      'Salary negotiation tools'
     ],
     popular: true,
-    tier: 'pro'
-  },
-  {
-    id: 'enterprise',
-    name: 'Professional',
-    price: 9.95,
-    priceId: 'price_professional_monthly',
-    description: 'For serious professionals',
-    features: ['Unlimited resumes', 'Premium templates', 'Cover letters', 'Priority support'],
-    popular: false,
-    tier: 'professional'
+    tier: 'professional',
+    cta: 'Go Professional'
   },
   {
     id: 'enterprise',
     name: 'Enterprise',
-    price: 29.95,
+    price: 49.95,
     priceId: 'price_enterprise_monthly',
     description: 'For teams and organizations',
-    features: ['Everything in Pro', 'Team management', 'API access', 'Custom branding'],
+    features: [
+      'Everything in Professional',
+      'Team management dashboard',
+      'API access',
+      'Custom branding',
+      'Dedicated account manager',
+      'Custom integrations',
+      'Advanced analytics',
+      'SLA guarantee'
+    ],
     popular: false,
-    tier: 'enterprise'
+    tier: 'enterprise',
+    cta: 'Contact Sales'
   }
 ];
 
@@ -94,7 +114,7 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {plans.map((plan) => (
             <Card key={plan.id} className={`relative ${plan.popular ? 'ring-2 ring-blue-500' : ''}`}>
               {plan.popular && (
@@ -137,10 +157,8 @@ export default function Pricing() {
                     'Processing...'
                   ) : user?.tier === plan.tier ? (
                     'Current Plan'
-                  ) : plan.price === 0 ? (
-                    'Get Started'
                   ) : (
-                    `Upgrade to ${plan.name}`
+                    plan.cta
                   )}
                 </Button>
               </CardFooter>

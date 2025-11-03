@@ -48,6 +48,14 @@ export function Header() {
           </Button>
           <Button
             asChild
+            variant={isActive("/letter-generator") ? "secondary" : "ghost"}
+            className="font-medium"
+            data-testid="link-letter-generator"
+          >
+            <Link href="/letter-generator">Letter Generator</Link>
+          </Button>
+          <Button
+            asChild
             variant={isActive("/templates") ? "secondary" : "ghost"}
             className="font-medium"
             data-testid="link-templates"

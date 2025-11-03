@@ -1,0 +1,78 @@
+/* Mars - The Bold Pioneer */
+:root {
+  --main-bg: #fff5f5;
+  --accent-bg: #ffe9e2;
+  --accent-color: #cd5c5c;
+  --highlight-bg: #eed3cd;
+  --text-main: #8b0000;
+  --text-accent: #cd5c5c;
+  --heading-font: 'Georgia', 'Montserrat', serif;
+  --body-font: 'Georgia', serif;
+  --section-spacing: 35px;
+  --border-radius: 10px;
+}
+.resume-mars-executive {
+  background: var(--main-bg);
+  color: var(--text-main);
+  font-family: var(--body-font);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+}
+.resume-header {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  text-align: center;
+  padding: 2rem 1.2rem 1.1rem 1.2rem;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-family: var(--heading-font);
+}
+.resume-title {
+  font-size: 2rem;
+  font-family: var(--heading-font);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+  color: var(--accent-color);
+}
+.resume-subtitle {
+  font-size: 1.07rem;
+  color: var(--text-accent);
+  margin-bottom: 0.8rem;
+}
+.resume-section {
+  margin-top: var(--section-spacing);
+  border-left: 5px solid var(--accent-color);
+  background: var(--highlight-bg);
+  padding-left: 1.2rem;
+}
+.resume-section-title {
+  font-size: 1.21rem;
+  color: var(--accent-color);
+  font-family: var(--heading-font);
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+}
+.resume-body {
+  font-size: 1rem;
+  color: var(--text-main);
+}
+.resume-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.resume-skill {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  border-radius: var(--border-radius);
+  padding: 0.35em 1em;
+  font-size: 0.97em;
+  margin-bottom: 0.17em;
+  font-family: var(--body-font);
+}
+.resume-footer {
+  margin-top: var(--section-spacing);
+  font-size: 0.91em;
+  color: var(--text-accent);
+  text-align: right;
+}

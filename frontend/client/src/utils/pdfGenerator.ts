@@ -45,9 +45,9 @@ export class PDFGenerator {
         blob: pdf.output('blob'),
         filename
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('PDF generation failed:', error);
-      throw new Error(`PDF generation failed: ${error.message}`);
+      throw new Error(`PDF generation failed: ${error?.message || 'Unknown error'}`);
     }
   }
 
@@ -60,6 +60,50 @@ export class PDFGenerator {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+  }
+
+  static async downloadPDF(element: HTMLElement, filename: string, config: any) {
+    const { blob } = await this.generateFromElement(element, filename);
+    this.downloadBlob(blob, filename);
+  }
+
+  static async previewPDF(element: HTMLElement, config: any) {
+    const { blob } = await this.generateFromElement(element, 'preview.pdf');
+    const url = URL.createObjectURL(blob);
+    const newWindow = window.open(url, '_blank');
+    if (newWindow) {
+      newWindow.addEventListener('beforeunload', () => {
+        URL.revokeObjectURL(url);
+      });
+      // Cleanup after 30 seconds as fallback
+      setTimeout(() => {
+        try {
+          URL.revokeObjectURL(url);
+        } catch (e) {
+          // URL already revoked
+        }
+      }, 30000);
+    } else {
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  static async generateMultipleFormats(element: HTMLElement, baseFilename: string) {
+    const formats = [];
+    
+    try {
+      // PDF format
+      const { blob: pdfBlob } = await this.generateFromElement(element, `${baseFilename}.pdf`);
+      formats.push({ blob: pdfBlob, filename: `${baseFilename}.pdf` });
+      
+      // HTML format
+      const htmlBlob = new Blob([element.outerHTML], { type: 'text/html' });
+      formats.push({ blob: htmlBlob, filename: `${baseFilename}.html` });
+      
+      return formats;
+    } catch (error: any) {
+      throw new Error(`Failed to generate multiple formats: ${error?.message || 'Unknown error'}`);
+    }
   }
 }
 

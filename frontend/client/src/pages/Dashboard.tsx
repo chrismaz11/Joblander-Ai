@@ -20,7 +20,10 @@ import {
   Target,
   Zap,
   ArrowRight,
+  Brain,
 } from "lucide-react";
+import { AIBadge } from '@/components/ai/AIBadge';
+import { AIFeaturesShowcase } from '@/components/ai/AIFeaturesShowcase';
 import type { Resume, CoverLetter } from "@shared/schema";
 
 type CoverLetterSummary = CoverLetter & { resumeTitle?: string | null };
@@ -179,22 +182,22 @@ export default function Dashboard() {
 
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-6 h-6" />
-              <Badge className="bg-white/20 text-white border-white/30">
+              <Brain className="w-6 h-6" />
+              <AIBadge variant="feature" size="lg">
                 {(user?.tier || "FREE").toUpperCase()} PLAN
-              </Badge>
+              </AIBadge>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold mb-3">
               Hello, {user?.firstName || user?.email || "Job Seeker"}! 👋
             </h1>
             <p className="text-lg text-white/90 mb-6 max-w-2xl">
-              Ready to land your dream job? Let's craft an outstanding resume, tailor your outreach, and track the best opportunities together.
+              Ready to land your dream job? Choose from professional templates and let AI enhance your content for maximum impact.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/resume-builder">
                 <Button size="lg" className="bg-white text-blue-600 hover:bg-white/90 shadow-lg">
-                  <Plus className="w-5 h-5 mr-2" />
-                  Create New Resume
+                  <Brain className="w-5 h-5 mr-2" />
+                  Build Professional Resume
                 </Button>
               </Link>
               <Link href="/jobs">
@@ -475,6 +478,12 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         )}
+
+        {/* AI Features Showcase */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-center mb-8">Discover AI-Powered Features</h2>
+          <AIFeaturesShowcase compact={true} showTierBadges={false} />
+        </div>
       </div>
     </div>
   );

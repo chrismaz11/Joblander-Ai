@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './styles/sidebar-animations.css';
+
 /* LIGHT MODE - Clean & Readable Theme */
 :root {
   --button-outline: rgba(59, 130, 246, .15);

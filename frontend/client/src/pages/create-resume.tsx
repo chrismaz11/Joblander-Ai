@@ -283,9 +283,9 @@ export default function CreateResume() {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Create Your Resume</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Build Your Professional Resume</h1>
           <p className="text-xl text-muted-foreground">
-            Upload your existing resume or create a new one from scratch
+            Choose from expert templates and enhance your content with AI assistance
           </p>
         </div>
 
@@ -308,7 +308,7 @@ export default function CreateResume() {
                   <div className="text-center">
                     <h2 className="text-2xl font-bold mb-4">Upload Your Resume</h2>
                     <p className="text-muted-foreground mb-6">
-                      Upload an existing resume for AI parsing, or skip to create from scratch
+                      Upload an existing resume for smart parsing, or skip to build from scratch
                     </p>
                   </div>
 

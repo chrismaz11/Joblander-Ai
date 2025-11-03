@@ -2,34 +2,42 @@ import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface WatermarkOverlayProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   text?: string;
 }
 
 export function WatermarkOverlay({ children, text = 'JOB-LANDER FREE' }: WatermarkOverlayProps) {
-  const { user, shouldShowAds } = useAuth();
+  const { shouldShowAds } = useAuth();
   
   if (!shouldShowAds()) {
-    return <>{children}</>;
+    return children ? <>{children}</> : null;
   }
 
-  return (
-    <div className="relative">
-      {children}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-        <div 
-          className="text-gray-300 text-6xl font-bold opacity-20 transform rotate-45 select-none"
-          style={{
-            textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
-            fontFamily: 'Arial, sans-serif',
-            letterSpacing: '0.1em'
-          }}
-        >
-          {text}
-        </div>
+  const overlay = (
+    <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-10">
+      <div 
+        className="text-gray-300 text-6xl font-bold opacity-20 transform rotate-45 select-none"
+        style={{
+          textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+          fontFamily: 'Arial, sans-serif',
+          letterSpacing: '0.1em'
+        }}
+      >
+        {text}
       </div>
     </div>
   );
+
+  if (children) {
+    return (
+      <div className="relative">
+        {children}
+        {overlay}
+      </div>
+    );
+  }
+
+  return overlay;
 }
 
 export function PDFWatermark({ enabled = true, text = 'JOB-LANDER FREE' }: { enabled?: boolean; text?: string }) {

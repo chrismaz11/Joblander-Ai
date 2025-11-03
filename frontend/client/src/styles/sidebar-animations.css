@@ -1,0 +1,81 @@
+/* Sidebar Animation Styles */
+.sidebar-transition {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth width transitions for sidebar */
+[data-sidebar="sidebar"] {
+  transition: width 0.2s ease-linear;
+}
+
+/* Icon-only state animations */
+[data-collapsible="icon"] [data-sidebar="menu-button"] {
+  transition: all 0.2s ease-linear;
+}
+
+[data-collapsible="icon"] [data-sidebar="menu-button"] span:last-child {
+  opacity: 0;
+  transition: opacity 0.2s ease-linear;
+}
+
+[data-state="expanded"] [data-sidebar="menu-button"] span:last-child {
+  opacity: 1;
+  transition: opacity 0.2s ease-linear 0.1s;
+}
+
+/* Tooltip animations for collapsed state */
+[data-state="collapsed"] [data-sidebar="menu-button"]:hover {
+  background-color: hsl(var(--sidebar-accent));
+  color: hsl(var(--sidebar-accent-foreground));
+}
+
+/* Breadcrumb fade-in animation */
+.breadcrumb-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar trigger button animation */
+[data-sidebar="trigger"] {
+  transition: transform 0.2s ease-linear;
+}
+
+[data-sidebar="trigger"]:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile sidebar slide animations */
+@media (max-width: 768px) {
+  [data-mobile="true"] {
+    animation: slideInFromLeft 0.3s ease-out;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Content area smooth transitions */
+[data-slot="sidebar-inset"] {
+  transition: margin-left 0.2s ease-linear;
+}
+
+/* Header height transition for collapsed state */
+.group-has-\[data-collapsible\=icon\]\/sidebar-wrapper\:h-12 {
+  transition: height 0.2s ease-linear;
+}

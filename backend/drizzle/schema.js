@@ -46,6 +46,16 @@ export const userUsage = pgTable("user_usage", {
   lastUpdated: timestamp("last_updated", { withTimezone: true }),
 });
 
+export const authAudit = pgTable("auth_audit", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id"),
+  usedAt: timestamp("used_at", { withTimezone: true }).defaultNow(),
+  route: text("route"),
+  ip: text("ip"),
+  method: text("method"),
+  note: text("note"),
+});
+
 export const jobs = pgTable("jobs", {
   id: text("id").primaryKey(),
   title: text("title"),
@@ -69,5 +79,6 @@ export const schema = {
   resumes,
   coverLetters,
   userUsage,
+  authAudit,
   jobs,
 };

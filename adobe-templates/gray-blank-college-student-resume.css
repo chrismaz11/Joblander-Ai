@@ -1,0 +1,76 @@
+/* gray-blank-college-student-resume.css */
+:root {
+  --main-bg: #f8f9fa;
+  --accent-bg: #ebebeb;
+  --accent-color: #555;
+  --highlight-bg: #e0e0e0;
+  --text-main: #232323;
+  --text-accent: #777;
+  --heading-font: 'Montserrat', Arial, sans-serif;
+  --body-font: Arial, sans-serif;
+  --section-spacing: 36px;
+  --border-radius: 7px;
+}
+.resume-gray-college {
+  background: var(--main-bg);
+  color: var(--text-main);
+  font-family: var(--body-font);
+  padding: 2.2rem;
+  border-radius: var(--border-radius);
+}
+.resume-header {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  text-align: center;
+  padding: 1.7rem 1rem 1rem 1rem;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-family: var(--heading-font);
+}
+.resume-title {
+  font-size: 2.08rem;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+.resume-subtitle {
+  font-size: 1.08rem;
+  color: var(--text-accent);
+  margin-bottom: 0.7rem;
+}
+.resume-section {
+  margin-top: var(--section-spacing);
+  border-left: 4px solid var(--accent-color);
+  background: var(--highlight-bg);
+  padding-left: 1rem;
+}
+.resume-section-title {
+  font-size: 1.15rem;
+  color: var(--accent-color);
+  font-family: var(--heading-font);
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+}
+.resume-body {
+  font-size: 0.99rem;
+  color: var(--text-main);
+}
+.resume-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.resume-skill {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  border-radius: var(--border-radius);
+  padding: 0.32em 0.9em;
+  font-size: 0.97em;
+  margin-bottom: 0.17em;
+  font-family: var(--body-font);
+}
+.resume-footer {
+  margin-top: var(--section-spacing);
+  font-size: 0.91em;
+  color: var(--text-accent);
+  text-align: right;
+}

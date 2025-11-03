@@ -24,8 +24,34 @@ import {
   getTierLimits,
 } from "./services/tierService.js";
 import careerAIRoutes from "./server/routes/careerAI.js";
+import protectedRoutes from "./routes/protected.js";
+import lettersRoutes from "./routes/letters.js";
+import usageRoutes from "./routes/usage.js";
+import aiSuggestionsRoutes from "./server/routes/aiSuggestions.js";
 
 dotenv.config();
+
+// Environment fallbacks for convenience during local development and to handle
+// cases where Vercel wrote client-prefixed vars (NEXT_PUBLIC_SUPABASE_URL) but
+// server code expects SUPABASE_URL. These are safe no-ops in production when
+// the correct server-only envs are set.
+if (!process.env.SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  process.env.SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  console.log('[env] SUPABASE_URL not set — falling back to NEXT_PUBLIC_SUPABASE_URL');
+}
+
+// Ensure a JWT secret is present for token verification. Prefer JWT_SECRET,
+// otherwise fall back to LEGACY_JWT_SECRET (temporary) or a dev default.
+if (!process.env.JWT_SECRET) {
+  if (process.env.LEGACY_JWT_SECRET) {
+    process.env.JWT_SECRET = process.env.LEGACY_JWT_SECRET;
+    console.log('[env] JWT_SECRET not set — falling back to LEGACY_JWT_SECRET (temporary)');
+  } else {
+    // Provide a dev-only default so local dev flows work; never use in production.
+    process.env.JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
+    console.log('[env] JWT_SECRET not set — using dev default (do not use in production)');
+  }
+}
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -231,6 +257,18 @@ app.get("/api/tier-limits/:userId", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch tier limits" });
   }
 });
+
+// Protected routes with Supabase auth
+app.use('/api', protectedRoutes);
+
+// Usage tracking routes
+app.use('/api/usage', usageRoutes);
+
+// Letter generation routes (cover letters, thank-you notes)
+app.use('/api/letters', lettersRoutes);
+
+// AI suggestions for jobs based on uploaded resume
+app.use('/api/ai-suggestions', aiSuggestionsRoutes);
 
 // AI career assistance routes
 app.use('/api/career-ai', careerAIRoutes);

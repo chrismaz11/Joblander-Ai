@@ -1,0 +1,76 @@
+/* beige-marketing-resume.css */
+:root {
+  --main-bg: #f9f6ee;
+  --accent-bg: #f7eedb;
+  --accent-color: #ca9957;
+  --highlight-bg: #f1e4c7;
+  --text-main: #6b4423;
+  --text-accent: #b67634;
+  --heading-font: 'Montserrat', 'Georgia', serif;
+  --body-font: 'Montserrat', 'Arial', sans-serif;
+  --section-spacing: 36px;
+  --border-radius: 9px;
+}
+.resume-beige-marketing {
+  background: var(--main-bg);
+  color: var(--text-main);
+  font-family: var(--body-font);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+}
+.resume-header {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  text-align: center;
+  padding: 1.8rem 1rem 1.1rem 1rem;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-family: var(--heading-font);
+}
+.resume-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+}
+.resume-subtitle {
+  font-size: 1.12rem;
+  color: var(--text-accent);
+  margin-bottom: 0.9rem;
+}
+.resume-section {
+  margin-top: var(--section-spacing);
+  border-left: 4px solid var(--accent-color);
+  background: var(--highlight-bg);
+  padding-left: 1.1rem;
+}
+.resume-section-title {
+  font-size: 1.23rem;
+  color: var(--accent-color);
+  font-family: var(--heading-font);
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+}
+.resume-body {
+  font-size: 1rem;
+  color: var(--text-main);
+}
+.resume-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.resume-skill {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  border-radius: var(--border-radius);
+  padding: 0.35em 1em;
+  font-size: 0.97em;
+  margin-bottom: 0.17em;
+  font-family: var(--body-font);
+}
+.resume-footer {
+  margin-top: var(--section-spacing);
+  font-size: 0.92em;
+  color: var(--text-accent);
+  text-align: right;
+}

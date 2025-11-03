@@ -153,7 +153,7 @@ export default function Templates() {
           
           <p className="body-lg max-w-2xl mx-auto mb-8">
             Select from our collection of professionally designed, ATS-optimized resume templates. 
-            Each template is crafted to help you stand out and get noticed by hiring managers.
+            Choose your template first, then let AI enhance your content for maximum impact.
           </p>
           
           {/* Stats */}

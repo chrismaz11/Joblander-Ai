@@ -399,10 +399,10 @@ export default function ResumeBuilder() {
               </h1>
               <p className="text-gray-600">
                 {currentStep === "edit"
-                  ? "Refine your resume and tailor it to each opportunity."
+                  ? "Choose a professional template and let AI enhance your content."
                   : currentStep === "upload"
                   ? "Upload your existing resume to get started quickly."
-                  : "Create ATS-optimized resumes with AI assistance."}
+                  : "Build professional resumes with expert templates and AI content enhancement."}
               </p>
             </div>
           </div>

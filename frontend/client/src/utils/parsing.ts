@@ -14,35 +14,42 @@ export interface ParsedResumeData {
 }
 
 export const parseResumeClient = async (file: File): Promise<ParsedResumeData> => {
-  console.log('🔍 Starting client-side parsing for:', file.name);
+  // Validate file size and type
+  if (file.size > 10 * 1024 * 1024) {
+    throw new Error('File size too large. Maximum 10MB allowed.');
+  }
+  
+  const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+  if (!allowedTypes.includes(file.type) && !file.name.endsWith('.docx')) {
+    throw new Error('Unsupported file type. Only PDF, DOCX, and TXT files are allowed.');
+  }
   
   try {
     let text = '';
     
     // Extract text based on file type
     if (file.type === 'application/pdf') {
-      // Simple PDF text extraction for browser
       text = await extractPDFText(file);
     } else if (file.type.includes('word') || file.name.endsWith('.docx')) {
-      // Simple DOCX text extraction
       text = await extractDOCXText(file);
     } else if (file.type === 'text/plain') {
       text = await file.text();
     } else {
-      throw new Error(`Unsupported file type: ${file.type}`);
+      throw new Error('Unsupported file type');
     }
     
-    console.log('📝 Extracted text length:', text.length);
+    // Sanitize extracted text
+    text = sanitizeText(text);
     
-    // Parse structured data
+    if (text.length > 50000) {
+      text = text.substring(0, 50000);
+    }
+    
     const parsedData = extractResumeData(text);
-    console.log('✅ Parsing complete:', parsedData);
-    
     return parsedData;
     
-  } catch (error) {
-    console.error('❌ Parsing failed:', error);
-    throw new Error(`Failed to parse resume: ${error.message}`);
+  } catch (error: any) {
+    throw new Error('Failed to parse resume: Invalid file format or corrupted file');
   }
 };
 
@@ -127,23 +134,32 @@ const extractResumeData = (text: string): ParsedResumeData => {
   };
 };
 
+const sanitizeText = (text: string): string => {
+  // Remove potential XSS vectors and normalize
+  return text
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .replace(/javascript:/gi, '') // Remove javascript: URLs
+    .replace(/on\w+\s*=/gi, '') // Remove event handlers
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '') // Remove control characters
+    .trim();
+};
+
 const extractName = (text: string, lines: string[]): string => {
-  // Try first non-empty line
   const firstLine = lines[0];
-  if (firstLine && /^[A-Z][a-z]+ [A-Z][a-z]+/.test(firstLine)) {
-    return firstLine;
+  if (firstLine && /^[A-Za-z][a-z]+ [A-Za-z][a-z]+/.test(firstLine) && firstLine.length < 50) {
+    return sanitizeText(firstLine);
   }
   
-  // Try pattern matching
-  const namePattern = /^([A-Z][a-z]+ [A-Z][a-z]+(?:\s[A-Z][a-z]+)?)/m;
+  const namePattern = /^([A-Za-z][a-z]+ [A-Za-z][a-z]+(?:\s[A-Za-z][a-z]+)?)/m;
   const match = text.match(namePattern);
-  return match ? match[1].trim() : '';
+  return match ? sanitizeText(match[1].trim().substring(0, 50)) : '';
 };
 
 const extractEmail = (text: string): string => {
-  const emailPattern = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/;
+  const emailPattern = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/;
   const match = text.match(emailPattern);
-  return match ? match[1] : '';
+  const email = match ? match[1] : '';
+  return email.length < 100 ? sanitizeText(email) : '';
 };
 
 const extractPhone = (text: string): string => {
@@ -166,8 +182,8 @@ const extractSummary = (text: string): string => {
   
   for (const pattern of summaryPatterns) {
     const match = text.match(pattern);
-    if (match && match[1].trim().length > 20) {
-      return match[1].trim().substring(0, 300);
+    if (match && match[1].trim().length > 20 && match[1].trim().length < 1000) {
+      return sanitizeText(match[1].trim().substring(0, 300));
     }
   }
   
@@ -181,12 +197,11 @@ const extractSkills = (text: string): string[] => {
   if (match) {
     return match[1]
       .split(/[,\n•·-]/)
-      .map(skill => skill.trim())
-      .filter(skill => skill.length > 1 && skill.length < 30)
+      .map(skill => sanitizeText(skill.trim()))
+      .filter(skill => skill.length > 1 && skill.length < 30 && /^[A-Za-z0-9\s.+-]+$/.test(skill))
       .slice(0, 15);
   }
   
-  // Fallback: detect common skills
   const commonSkills = [
     'JavaScript', 'Python', 'React', 'Node.js', 'HTML', 'CSS', 'SQL', 'Java', 'C++',
     'AWS', 'Docker', 'Git', 'MongoDB', 'PostgreSQL', 'TypeScript', 'Vue.js', 'Angular'
@@ -206,13 +221,15 @@ const extractExperience = (text: string): string[] => {
   const experienceText = match[1];
   const experiences: string[] = [];
   
-  // Split by common job separators
   const jobSections = experienceText.split(/\n(?=[A-Z][a-z].*(?:Engineer|Developer|Manager|Analyst|Specialist|Coordinator))/);
   
   jobSections.forEach(section => {
     const lines = section.split('\n').filter(line => line.trim());
     if (lines.length >= 2) {
-      experiences.push(lines.join(' ').trim());
+      const experience = sanitizeText(lines.join(' ').trim());
+      if (experience.length < 500) {
+        experiences.push(experience);
+      }
     }
   });
   
@@ -228,12 +245,14 @@ const extractEducation = (text: string): string[] => {
   const educationText = match[1];
   const education: string[] = [];
   
-  // Look for degree patterns
   const degreePattern = /(Bachelor|Master|PhD|Associate).*?(?:in|of)\s+([^,\n]+)/gi;
   let degreeMatch;
   
-  while ((degreeMatch = degreePattern.exec(educationText)) !== null) {
-    education.push(degreeMatch[0]);
+  while ((degreeMatch = degreePattern.exec(educationText)) !== null && education.length < 3) {
+    const degree = sanitizeText(degreeMatch[0]);
+    if (degree.length < 200) {
+      education.push(degree);
+    }
   }
   
   return education.slice(0, 3);

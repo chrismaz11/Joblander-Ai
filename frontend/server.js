@@ -38,15 +38,6 @@ app.post("/api/checkout", async (req, res) => {
   }
 });
 
-// ✅ Cognito login redirect (Hosted UI)
-app.get("/auth/login", (req, res) => {
-  const authDomain = process.env.COGNITO_JWKS_URL.split("/.well")[0];
-  const clientId = process.env.COGNITO_CLIENT_ID;
-  const redirect = encodeURIComponent("https://joblander.org/auth/callback");
-  const loginUrl = `${authDomain}/login?response_type=code&client_id=${clientId}&redirect_uri=${redirect}`;
-  res.redirect(loginUrl);
-});
-
 // ✅ Health check
 app.get("/health", (req, res) => {
   res.json({
@@ -60,13 +51,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ JobLander API running at http://localhost:${PORT}`);
 });
-import serverless from "serverless-http";
 
-const PORT = process.env.PORT || 3000;
-
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Running at http://localhost:${PORT}`));
-
-// Export for Lambda
+// Export for Lambda if needed
 export const handler = serverless(app);
