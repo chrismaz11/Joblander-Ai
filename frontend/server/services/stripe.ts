@@ -5,23 +5,23 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
 });
 
 export const PRICING_PLANS = {
+  download: {
+    priceId: 'price_download_onetime',
+    amount: 295, // $2.95
+    name: 'One-Time Download',
+    features: ['Single document download', 'PDF format', 'Valid for 24 hours']
+  },
   basic: {
     priceId: 'price_basic_monthly',
-    amount: 495, // $4.95
+    amount: 1495, // $14.95
     name: 'Basic Pro',
-    features: ['5 resumes/month', 'Basic templates', 'PDF export', 'Email support']
+    features: ['Unlimited downloads', 'All templates', 'No watermarks', 'Email support']
   },
   professional: {
     priceId: 'price_professional_monthly', 
-    amount: 995, // $9.95
+    amount: 1995, // $19.95
     name: 'Professional',
-    features: ['Unlimited resumes', 'Premium templates', 'Cover letters', 'Priority support']
-  },
-  enterprise: {
-    priceId: 'price_enterprise_monthly',
-    amount: 2995, // $29.95
-    name: 'Enterprise',
-    features: ['Everything in Pro', 'Team management', 'API access', 'Custom branding']
+    features: ['Everything in Basic', 'Custom branding', 'Priority support', 'Advanced analytics']
   }
 };
 
@@ -42,12 +42,27 @@ export async function createSubscription(customerId: string, priceId: string) {
   });
 }
 
-export async function createPaymentIntent(amount: number, customerId: string) {
+export async function createPaymentIntent(amount: number, customerId: string, metadata?: Record<string, string>) {
   return await stripe.paymentIntents.create({
     amount,
     currency: 'usd',
     customer: customerId,
     automatic_payment_methods: { enabled: true },
+    metadata: metadata || {},
+  });
+}
+
+export async function createDownloadPayment(customerId: string, documentId: string, documentType: string) {
+  return await stripe.paymentIntents.create({
+    amount: PRICING_PLANS.download.amount,
+    currency: 'usd',
+    customer: customerId,
+    automatic_payment_methods: { enabled: true },
+    metadata: {
+      type: 'download',
+      documentId,
+      documentType,
+    },
   });
 }
 
