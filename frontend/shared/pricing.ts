@@ -16,8 +16,6 @@ export interface PricingTier {
   maxCoverLetters: number | 'unlimited';
   maxTemplates: number | 'unlimited';
   aiGenerations: number | 'unlimited';
-  blockchainVerifications: number | 'unlimited';
-  portfolios: number | 'unlimited';
   customBranding: boolean;
   prioritySupport: boolean;
   downloadFormats: string[];
@@ -38,21 +36,9 @@ export interface PricingLimitation {
 // 🔥 COMPETITIVE ADVANTAGE FEATURES
 export const COMPETITIVE_ADVANTAGES = [
   {
-    id: 'blockchain',
-    name: '🔒 Blockchain Verification',
-    description: 'Crypto-proof authenticity verification on Polygon network',
-    uniqueTo: 'Job-Lander'
-  },
-  {
     id: 'ai-powered',
     name: '🤖 Advanced AI Parsing',
     description: 'Gemini AI with confidence scoring and OCR fallback',
-    uniqueTo: 'Job-Lander'
-  },
-  {
-    id: 'portfolio-generation',
-    name: '🌐 Portfolio Website Generation',
-    description: 'Deploy-ready portfolio websites from resume data',
     uniqueTo: 'Job-Lander'
   },
   {
@@ -69,7 +55,7 @@ export const COMPETITIVE_ADVANTAGES = [
   }
 ];
 
-// 💰 PRICING TIERS - Designed to CRUSH Resume.io and CV-Lite
+// 💰 PRICING TIERS - Competitive Pay-Per-Use + Subscription Model
 export const PRICING_TIERS: PricingTier[] = [
   {
     id: 'free',
@@ -83,8 +69,6 @@ export const PRICING_TIERS: PricingTier[] = [
     maxCoverLetters: 'unlimited',
     maxTemplates: 'unlimited',
     aiGenerations: 'unlimited',
-    blockchainVerifications: 0,
-    portfolios: 0,
     customBranding: false,
     prioritySupport: false,
     downloadFormats: [],
@@ -124,9 +108,7 @@ export const PRICING_TIERS: PricingTier[] = [
       }
     ],
     limitations: [
-      { feature: 'Downloads', limit: '$2.95 per download' },
-      { feature: 'Blockchain Verification', limit: 'Not available' },
-      { feature: 'Portfolio Generation', limit: 'Not available' }
+      { feature: 'Downloads', limit: '$2.95 per download' }
     ]
   },
 
@@ -142,8 +124,6 @@ export const PRICING_TIERS: PricingTier[] = [
     maxCoverLetters: 'unlimited',
     maxTemplates: 'unlimited',
     aiGenerations: 'unlimited',
-    blockchainVerifications: 5,
-    portfolios: 1,
     customBranding: false,
     prioritySupport: false,
     downloadFormats: ['PDF', 'DOCX'],
@@ -161,18 +141,6 @@ export const PRICING_TIERS: PricingTier[] = [
         highlight: true
       },
       {
-        name: '5 Blockchain Verifications',
-        description: 'Verify resume authenticity on the blockchain',
-        included: true,
-        highlight: true
-      },
-      {
-        name: '1 Portfolio Website',
-        description: 'Generate a professional portfolio website',
-        included: true,
-        highlight: true
-      },
-      {
         name: 'No Ads',
         description: 'Clean, distraction-free experience',
         included: true
@@ -183,10 +151,7 @@ export const PRICING_TIERS: PricingTier[] = [
         included: true
       }
     ],
-    limitations: [
-      { feature: 'Blockchain Verifications', limit: '5 per month' },
-      { feature: 'Portfolio Websites', limit: '1 active' }
-    ]
+    limitations: []
   },
 
   {
@@ -202,8 +167,6 @@ export const PRICING_TIERS: PricingTier[] = [
     maxCoverLetters: 'unlimited',
     maxTemplates: 'unlimited',
     aiGenerations: 'unlimited',
-    blockchainVerifications: 'unlimited',
-    portfolios: 'unlimited',
     customBranding: true,
     prioritySupport: true,
     downloadFormats: ['PDF', 'DOCX', 'HTML'],
@@ -217,18 +180,6 @@ export const PRICING_TIERS: PricingTier[] = [
       {
         name: 'Unlimited Everything',
         description: 'No limits on any features',
-        included: true,
-        highlight: true
-      },
-      {
-        name: 'Unlimited Blockchain Verification',
-        description: 'Verify all your resumes on the blockchain',
-        included: true,
-        highlight: true
-      },
-      {
-        name: 'Unlimited Portfolio Websites',
-        description: 'Create multiple professional portfolios',
         included: true,
         highlight: true
       },
@@ -259,168 +210,6 @@ export const PRICING_TIERS: PricingTier[] = [
       }
     ],
     limitations: []
-  },
-
-  {
-    id: 'enterprise',
-    name: 'Enterprise',
-    price: 2995, // $29.95/month - For agencies, recruiters, and teams
-    yearlyPrice: 28752, // $287.52/year (20% discount)
-    yearlyDiscount: 20,
-    description: 'For agencies, recruiters, and large teams',
-    adSupported: false,
-    maxResumes: 'unlimited',
-    maxCoverLetters: 'unlimited',
-    maxTemplates: 'unlimited',
-    aiGenerations: 'unlimited',
-    blockchainVerifications: 'unlimited',
-    portfolios: 'unlimited',
-    customBranding: true,
-    prioritySupport: true,
-    downloadFormats: ['PDF', 'DOCX', 'HTML', 'PNG', 'JSON'],
-    cta: 'Contact Sales',
-    features: [
-      {
-        name: 'Everything in Professional',
-        description: 'All Professional tier features included',
-        included: true
-      },
-      {
-        name: 'Team Management',
-        description: 'Manage multiple users and permissions',
-        included: true,
-        highlight: true
-      },
-      {
-        name: 'White-Label Solution',
-        description: 'Completely customize branding for your agency',
-        included: true,
-        highlight: true
-      },
-      {
-        name: 'API Access',
-        description: 'Integrate with your existing systems',
-        included: true,
-        highlight: true
-      },
-      {
-        name: 'Bulk Operations',
-        description: 'Process hundreds of resumes at once',
-        included: true
-      },
-      {
-        name: 'Custom Templates',
-        description: 'Create custom templates for your brand',
-        included: true
-      },
-      {
-        name: 'Advanced Integrations',
-        description: 'ATS integrations, CRM connections, and more',
-        included: true
-      },
-      {
-        name: 'Dedicated Account Manager',
-        description: 'Personal support for your enterprise needs',
-        included: true
-      },
-      {
-        name: 'SLA Guarantee',
-        description: '99.9% uptime guarantee with support SLA',
-        included: true
-      }
-    ],
-    limitations: []
-  }
-];
-
-// 📊 ADVERTISING REVENUE MODEL
-export interface AdConfig {
-  position: string;
-  format: string;
-  cpm: number; // Expected CPM in cents
-  frequency: string;
-}
-
-export const AD_PLACEMENTS: AdConfig[] = [
-  {
-    position: 'sidebar-resume-builder',
-    format: '300x250 Medium Rectangle',
-    cpm: 200, // $2.00 CPM
-    frequency: 'Always visible during resume building'
-  },
-  {
-    position: 'between-templates',
-    format: '728x90 Leaderboard',
-    cpm: 150, // $1.50 CPM
-    frequency: 'Every 4 templates in grid'
-  },
-  {
-    position: 'post-download',
-    format: '320x50 Mobile Banner',
-    cpm: 100, // $1.00 CPM
-    frequency: 'After each resume download'
-  },
-  {
-    position: 'jobs-page-top',
-    format: '970x250 Billboard',
-    cpm: 300, // $3.00 CPM
-    frequency: 'Top of job search results'
-  }
-];
-
-// 💡 REVENUE PROJECTIONS
-export const REVENUE_MODEL = {
-  // Free tier monetization through ads
-  freeUser: {
-    monthlyPageViews: 50, // Conservative estimate
-    averageCPM: 175, // $1.75 average across all ad placements
-    monthlyAdRevenue: 8.75, // $0.0875 per user per month
-    conversionRate: 15 // 15% of free users upgrade within 6 months
-  },
-  
-  // Subscription revenue targets
-  subscriptionTargets: {
-    year1: {
-      freeUsers: 10000,
-      basicUsers: 500,   // 5% conversion
-      proUsers: 300,     // 3% conversion  
-      enterpriseUsers: 10 // 0.1% conversion
-    },
-    year2: {
-      freeUsers: 50000,
-      basicUsers: 3000,
-      proUsers: 2000,
-      enterpriseUsers: 50
-    }
-  }
-};
-
-// 🎯 CONVERSION STRATEGIES
-export const CONVERSION_TRIGGERS = [
-  {
-    trigger: 'resume_limit_reached',
-    message: 'You\'ve created your maximum of 2 resumes. Upgrade to create unlimited resumes!',
-    upgradeIncentive: '50% off first month'
-  },
-  {
-    trigger: 'template_locked',
-    message: 'This premium template is available with Basic Pro or higher.',
-    upgradeIncentive: 'Access all templates instantly'
-  },
-  {
-    trigger: 'ai_limit_reached',
-    message: 'You\'ve used your 5 AI enhancements this month. Upgrade for unlimited AI power!',
-    upgradeIncentive: 'Unlimited AI enhancements'
-  },
-  {
-    trigger: 'blockchain_interest',
-    message: 'Verify your resume authenticity with blockchain technology!',
-    upgradeIncentive: 'Stand out with crypto-verified credentials'
-  },
-  {
-    trigger: 'portfolio_interest',
-    message: 'Create a stunning portfolio website from your resume data!',
-    upgradeIncentive: 'Get noticed with a professional portfolio'
   }
 ];
 
