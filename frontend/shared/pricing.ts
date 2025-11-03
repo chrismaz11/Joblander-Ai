@@ -73,91 +73,32 @@ export const COMPETITIVE_ADVANTAGES = [
 export const PRICING_TIERS: PricingTier[] = [
   {
     id: 'free',
-    name: 'Free Forever',
+    name: 'Free Creation',
     price: 0,
     yearlyPrice: 0,
     yearlyDiscount: 0,
-    description: 'Perfect for getting started with basic resume building',
+    description: 'Create unlimited resumes and cover letters for free',
     adSupported: true,
-    maxResumes: 2,
-    maxCoverLetters: 1,
-    maxTemplates: 3,
-    aiGenerations: 5,
+    maxResumes: 'unlimited',
+    maxCoverLetters: 'unlimited',
+    maxTemplates: 'unlimited',
+    aiGenerations: 'unlimited',
     blockchainVerifications: 0,
     portfolios: 0,
     customBranding: false,
     prioritySupport: false,
-    downloadFormats: ['PDF'],
+    downloadFormats: [],
     cta: 'Start Free',
     features: [
       {
-        name: '2 Professional Resumes',
-        description: 'Create up to 2 resumes with our basic templates',
-        included: true
+        name: 'Unlimited Resume Creation',
+        description: 'Create as many resumes as you want with all templates',
+        included: true,
+        highlight: true
       },
       {
-        name: '1 Cover Letter',
-        description: 'Generate 1 cover letter per month',
-        included: true
-      },
-      {
-        name: '3 Basic Templates',
-        description: 'Access to our essential resume templates',
-        included: true
-      },
-      {
-        name: '5 AI Enhancements',
-        description: '5 AI-powered resume improvements per month',
-        included: true
-      },
-      {
-        name: 'PDF Downloads',
-        description: 'Download resumes as PDF files',
-        included: true
-      },
-      {
-        name: 'Ad-Supported Experience',
-        description: 'Help us keep the service free with relevant ads',
-        included: true
-      }
-    ],
-    limitations: [
-      { feature: 'Templates', limit: '3 basic only' },
-      { feature: 'Resumes', limit: '2 maximum' },
-      { feature: 'Cover Letters', limit: '1 per month' },
-      { feature: 'AI Generations', limit: '5 per month' },
-      { feature: 'Blockchain Verification', limit: 'Not available' },
-      { feature: 'Portfolio Generation', limit: 'Not available' }
-    ]
-  },
-
-  {
-    id: 'basic',
-    name: 'Basic Pro',
-    price: 495, // $4.95/month - BEATS Resume.io's $5.95!
-    yearlyPrice: 4752, // $47.52/year (20% discount)
-    yearlyDiscount: 20,
-    description: 'Everything you need for professional job applications',
-    adSupported: false,
-    maxResumes: 10,
-    maxCoverLetters: 25,
-    maxTemplates: 'unlimited',
-    aiGenerations: 50,
-    blockchainVerifications: 3,
-    portfolios: 1,
-    customBranding: false,
-    prioritySupport: false,
-    downloadFormats: ['PDF', 'DOCX'],
-    cta: 'Go Basic Pro',
-    features: [
-      {
-        name: '10 Professional Resumes',
-        description: 'Create up to 10 polished resumes',
-        included: true
-      },
-      {
-        name: '25 Cover Letters/Month',
-        description: 'Generate cover letters in 3 different tones',
+        name: 'Unlimited Cover Letters',
+        description: 'Generate unlimited cover letters in all 3 tones',
         included: true,
         highlight: true
       },
@@ -167,12 +108,60 @@ export const PRICING_TIERS: PricingTier[] = [
         included: true
       },
       {
-        name: '50 AI Enhancements/Month',
-        description: 'Advanced AI resume optimization and suggestions',
+        name: 'Unlimited AI Enhancements',
+        description: 'AI-powered resume optimization and suggestions',
         included: true
       },
       {
-        name: '3 Blockchain Verifications',
+        name: 'Preview & Edit Forever',
+        description: 'Edit and preview your documents anytime',
+        included: true
+      },
+      {
+        name: 'Pay-Per-Download',
+        description: 'Only pay $2.95 when you need to download',
+        included: true
+      }
+    ],
+    limitations: [
+      { feature: 'Downloads', limit: '$2.95 per download' },
+      { feature: 'Blockchain Verification', limit: 'Not available' },
+      { feature: 'Portfolio Generation', limit: 'Not available' }
+    ]
+  },
+
+  {
+    id: 'basic',
+    name: 'Basic Pro',
+    price: 1495, // $14.95/month
+    yearlyPrice: 14352, // $143.52/year (20% discount)
+    yearlyDiscount: 20,
+    description: 'Unlimited downloads plus premium features',
+    adSupported: false,
+    maxResumes: 'unlimited',
+    maxCoverLetters: 'unlimited',
+    maxTemplates: 'unlimited',
+    aiGenerations: 'unlimited',
+    blockchainVerifications: 5,
+    portfolios: 1,
+    customBranding: false,
+    prioritySupport: false,
+    downloadFormats: ['PDF', 'DOCX'],
+    cta: 'Go Basic Pro',
+    features: [
+      {
+        name: 'Everything in Free',
+        description: 'All free features included',
+        included: true
+      },
+      {
+        name: 'Unlimited Downloads',
+        description: 'Download as many times as you want',
+        included: true,
+        highlight: true
+      },
+      {
+        name: '5 Blockchain Verifications',
         description: 'Verify resume authenticity on the blockchain',
         included: true,
         highlight: true
@@ -195,9 +184,7 @@ export const PRICING_TIERS: PricingTier[] = [
       }
     ],
     limitations: [
-      { feature: 'Resumes', limit: '10 maximum' },
-      { feature: 'AI Generations', limit: '50 per month' },
-      { feature: 'Blockchain Verifications', limit: '3 per month' },
+      { feature: 'Blockchain Verifications', limit: '5 per month' },
       { feature: 'Portfolio Websites', limit: '1 active' }
     ]
   },
@@ -205,10 +192,10 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     id: 'pro',
     name: 'Professional',
-    price: 995, // $9.95/month - COMPETITIVE with CV-Lite!
-    yearlyPrice: 9552, // $95.52/year (20% discount)
+    price: 1995, // $19.95/month
+    yearlyPrice: 19152, // $191.52/year (20% discount)
     yearlyDiscount: 20,
-    description: 'For serious job seekers and career professionals',
+    description: 'Everything included - the complete solution',
     popular: true,
     adSupported: false,
     maxResumes: 'unlimited',
@@ -216,31 +203,20 @@ export const PRICING_TIERS: PricingTier[] = [
     maxTemplates: 'unlimited',
     aiGenerations: 'unlimited',
     blockchainVerifications: 'unlimited',
-    portfolios: 5,
+    portfolios: 'unlimited',
     customBranding: true,
     prioritySupport: true,
     downloadFormats: ['PDF', 'DOCX', 'HTML'],
     cta: 'Go Professional',
     features: [
       {
-        name: 'Unlimited Resumes',
-        description: 'Create as many resumes as you need',
+        name: 'Everything in Basic Pro',
+        description: 'All Basic Pro features included',
         included: true
       },
       {
-        name: 'Unlimited Cover Letters',
-        description: 'Generate unlimited cover letters in all 3 tones',
-        included: true,
-        highlight: true
-      },
-      {
-        name: 'All Premium Templates + Early Access',
-        description: 'Get new templates before anyone else',
-        included: true
-      },
-      {
-        name: 'Unlimited AI Enhancements',
-        description: 'Unlimited AI-powered optimizations and suggestions',
+        name: 'Unlimited Everything',
+        description: 'No limits on any features',
         included: true,
         highlight: true
       },
@@ -251,7 +227,7 @@ export const PRICING_TIERS: PricingTier[] = [
         highlight: true
       },
       {
-        name: '5 Portfolio Websites',
+        name: 'Unlimited Portfolio Websites',
         description: 'Create multiple professional portfolios',
         included: true,
         highlight: true
@@ -274,6 +250,11 @@ export const PRICING_TIERS: PricingTier[] = [
       {
         name: 'Advanced Analytics',
         description: 'Track resume views and performance',
+        included: true
+      },
+      {
+        name: 'Early Access Features',
+        description: 'Get new features before anyone else',
         included: true
       }
     ],

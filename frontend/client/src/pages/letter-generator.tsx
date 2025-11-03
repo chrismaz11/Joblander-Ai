@@ -202,7 +202,7 @@ export default function LetterGenerator() {
                       <div className="flex gap-3">
                         <Button className="bg-blue-500 hover:bg-blue-600">
                           <Zap className="w-4 h-4 mr-2" />
-                          Upgrade Now - $19.95/month
+                          Upgrade Now - $14.95/month
                         </Button>
                         <Button variant="outline" onClick={() => setShowUpgradePrompt(false)}>
                           Maybe Later
