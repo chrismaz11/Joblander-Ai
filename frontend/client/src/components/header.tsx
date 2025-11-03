@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Logo } from "@/components/ui/Logo";
 import { Sparkles, User as UserIcon } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,10 +24,8 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-lg">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 hover-elevate rounded-lg px-3 py-2 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring" data-testid="link-home">
-          <img src="/logo.png" alt="JobLander" className="h-8 w-8 rounded-md object-cover" onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.display = "none";
-          }} />
-          <span className="text-xl font-bold">Job-Lander</span>
+          <Logo size="sm" />
+          <span className="text-xl font-bold">JobLander</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">

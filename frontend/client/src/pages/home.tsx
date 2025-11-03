@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Logo } from "@/components/ui/Logo";
 import { ArrowRight, Sparkles, FileText, Shield, Search, CheckCircle2, Upload, Wand2, Download, Star, Zap, Eye, TrendingUp } from "lucide-react";
 
 export default function Home() {
@@ -17,9 +18,13 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="container relative z-20 mx-auto px-4 md:px-6 text-center">
+          <div className="flex justify-center mb-8">
+            <Logo size="lg" className="h-20 w-auto" />
+          </div>
+          
           <Badge className="mb-6 bg-primary/20 text-primary border-primary/30 hover:bg-primary/30" data-testid="badge-hero">
             <Sparkles className="h-3 w-3 mr-1" />
-            AI-Powered & Blockchain Verified
+            AI-Powered Resume Builder
           </Badge>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
