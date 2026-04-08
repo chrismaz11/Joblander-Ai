@@ -77,7 +77,7 @@
     "cookie-parser": "^1.4.7",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.38.3",
+    "drizzle-orm": "^0.45.2",
     "embla-carousel-react": "^8.6.0",
     "express": "^4.21.1",
     "express-rate-limit": "^7.4.1",
